@@ -15,7 +15,9 @@ import 'package:medics/views/reset_password/reset_password_view.dart';
 import 'package:medics/views/sign_up/signup_binding.dart';
 import 'package:medics/views/sign_up/signup_view.dart';
 import 'package:medics/views/top_doctors/article_list_view.dart';
+import 'package:medics/views/top_doctors/drug_details_view.dart';
 import 'package:medics/views/top_doctors/find_doctors_view.dart';
+import 'package:medics/views/top_doctors/my_cart_view.dart';
 import 'package:medics/views/top_doctors/pharmacy_view.dart';
 import 'package:medics/views/top_doctors/top_doctors_view.dart';
 
@@ -97,9 +99,9 @@ class AppPages {
         name: Routes.dashboard,
         page: () => DashboardView(),
         binding: HomeBinding()),
-
     GetPage(name: Routes.pharmacy, page: () => PharmacyView()),
-
+    GetPage(name: Routes.drug_detail, page: () => DrugDetailsView()),
+    GetPage(name: Routes.my_cart, page: () => MyCartView()),
     GetPage(name: Routes.messages, page: () => MessagesView()),
     GetPage(name: Routes.schedule, page: () => ScheduleView()),
     GetPage(name: Routes.profile, page: () => ProfileView())

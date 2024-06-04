@@ -7,6 +7,7 @@ import '../../../styles/color_constants.dart';
 import '../../../styles/text_style.dart';
 import '../../config/app_assets.dart';
 import '../../custom_widgets/custom_textfield.dart';
+import '../../routes/app_pages.dart';
 import '../home/home_widgets.dart';
 
 class PharmacyView extends StatelessWidget {
@@ -29,7 +30,7 @@ class PharmacyView extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.shopping_cart_outlined),
             onPressed: () {
-              // Handle more options tap
+              Get.toNamed(Routes.my_cart);
             },
           ),
         ],
@@ -67,7 +68,9 @@ class PharmacyView extends StatelessWidget {
                       final medicine = controller.medicines[index];
                       return _buildPopularProductCard(
                         medicine,
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed(Routes.drug_detail, arguments: medicine);
+                        },
                       );
                     },
                   ),
@@ -89,7 +92,9 @@ class PharmacyView extends StatelessWidget {
                       final medicine = controller.medicines[index];
                       return _buildProductOnSaleCard(
                         medicine,
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed(Routes.drug_detail, arguments: medicine);
+                        },
                       );
                     },
                   ),

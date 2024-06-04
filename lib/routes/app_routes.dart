@@ -22,6 +22,9 @@ abstract class Routes {
 
   static const pharmacy = '/pharmacy';
 
+  static const drug_detail = '/drug_detail';
+
+  static const my_cart = '/my_cart';
   static const dashboard = '/dashboard';
   static const messages = '/messages';
   static const schedule = '/schedule';

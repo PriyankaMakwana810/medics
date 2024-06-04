@@ -231,7 +231,7 @@ Widget buildBannerAd(String title, String btnText, String imgPath) {
             ),
           ),
         ),
-        Image.asset(imgPath,),
+        Image.asset(imgPath),
       ],
     ),
   );

@@ -30,7 +30,8 @@ class TopDoctorsView extends StatelessWidget {
           ),
         ],
       ),
-      body: Obx(() {
+      body:
+      Obx(() {
         if (controller.doctors.isEmpty) {
           return Center(child: CircularProgressIndicator());
         }

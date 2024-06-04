@@ -23,6 +23,11 @@ class AppTextStyles {
       fontWeight: FontWeight.bold,
       color: textColor);
 
+  static const TextStyle smallTextStyle = TextStyle(
+      fontSize: Dimensions.fontSizeLarge,
+      fontWeight: FontWeight.bold,
+      color: textColor);
+
   static const TextStyle textButtonStyle = TextStyle(
       fontSize: Dimensions.fontSizeDefault,
       color: colorPrimary,

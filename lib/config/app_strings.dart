@@ -15,5 +15,6 @@ abstract class AppStrings {
   static const skip = "Skip";
 
   static const book_appointment = "Book Appointment";
+  static const buy_now = "Buy Now";
 
 }
