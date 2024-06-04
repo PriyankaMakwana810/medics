@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Dr. Marcus Horiz",
+    "designation": "Cardiologist",
+    "image": "assets/images/dr_marcus.png",
+    "rate": "4.7",
+    "distance": "800m away"
+  },
+  {
+    "name": "Dr. Maria Elena",
+    "designation": "Psychologist",
+    "image": "assets/images/dr_maria.png",
+    "rate": "4.9",
+    "distance": "1.5km away"
+  },
+  {
+    "name": "Dr. Stefi Jessi",
+    "designation": "Orthopedist",
+    "image": "assets/images/dr_stefi.png",
+    "rate": "4.7",
+    "distance": "2km away"
+  },
+  {
+    "name": "Dr. Gerty Cori",
+    "designation": "Orthopedist",
+    "image": "assets/images/dr_gerty.png",
+    "rate": "4.2",
+    "distance": "1km away"
+  },
+  {
+    "name": "Dr. Diandra",
+    "designation": "Psychologist",
+    "image": "assets/images/dr_diandra.png",
+    "rate": "4.2",
+    "distance": "800m away"
+  }
+]

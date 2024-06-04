@@ -1,0 +1,52 @@
+name: medics
+description: A new Flutter project for UI design.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.4 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  # state management getx
+  get: ^4.6.6
+  # store local storage
+  shared_preferences: ^2.2.2
+  # Flutter SVG
+  flutter_svg: ^2.0.7
+  # check internet connection
+  connectivity_plus: ^5.0.1
+  #introduction slider
+  introduction_slider: ^2.0.1
+  introduction_screen: ^3.1.12
+#  readmore text
+  readmore: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/svgs/
+    - assets/images/
+    - assets/data/
+    - assets/data/doctor_data.json
+    - assets/data/article_data.json
+  # To add assets to your application, add an assets section, like this:
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+

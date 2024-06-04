@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Panadol",
+    "quantity": "20pcs",
+    "image": "assets/images/medicine1.png",
+    "rate": "4.7",
+    "price": "15.99",
+    "discountedPrice": "15.99",
+    "description": "OBH COMBI  is a cough medicine containing, Paracetamol, Ephedrine HCl, and Chlorphenamine maleate which is used to relieve coughs accompanied by flu symptoms such as fever, headache, and sneezing... Read more"
+  },
+  {
+    "name": "Bodrex Herbal",
+    "quantity": "100ml",
+    "image": "assets/images/medicine2.png",
+    "rate": "4.2",
+    "price": "7.99",
+    "discountedPrice": "7.99",
+    "description": "OBH COMBI  is a cough medicine containing, Paracetamol, Ephedrine HCl, and Chlorphenamine maleate which is used to relieve coughs accompanied by flu symptoms such as fever, headache, and sneezing... Read more"
+  },
+  {
+    "name": "Konidin",
+    "quantity": "3pcs",
+    "image": "assets/images/medicine3.png",
+    "rate": "3.7",
+    "price": "5.99",
+    "discountedPrice": "5.99",
+    "description": "OBH COMBI  is a cough medicine containing, Paracetamol, Ephedrine HCl, and Chlorphenamine maleate which is used to relieve coughs accompanied by flu symptoms such as fever, headache, and sneezing... Read more"
+  },
+  {
+    "name": "OBH Combi",
+    "quantity": "75ml",
+    "image": "assets/images/medicine4.png",
+    "rate": "5.0",
+    "price": "9.99",
+    "discountedPrice": "10.99",
+    "description": "OBH COMBI  is a cough medicine containing, Paracetamol, Ephedrine HCl, and Chlorphenamine maleate which is used to relieve coughs accompanied by flu symptoms such as fever, headache, and sneezing... Read more"
+  },
+  {
+    "name": "Betadine",
+    "quantity": "50ml",
+    "image": "assets/images/medicine1.png",
+    "rate": "4.5",
+    "price": "6.99",
+    "discountedPrice": "8.99",
+    "description": "OBH COMBI  is a cough medicine containing, Paracetamol, Ephedrine HCl, and Chlorphenamine maleate which is used to relieve coughs accompanied by flu symptoms such as fever, headache, and sneezing... Read more"
+  },
+  {
+    "name": "Bodrexin",
+    "quantity": "75ml",
+    "image": "assets/images/medicine2.png",
+    "rate": "4.7",
+    "price": "7.99",
+    "discountedPrice": "8.99",
+    "description": "OBH COMBI  is a cough medicine containing, Paracetamol, Ephedrine HCl, and Chlorphenamine maleate which is used to relieve coughs accompanied by flu symptoms such as fever, headache, and sneezing... Read more"
+  }
+]
