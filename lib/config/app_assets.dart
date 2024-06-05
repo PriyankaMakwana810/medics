@@ -11,6 +11,8 @@ abstract class AppAssets {
   static const drStefi = 'assets/images/dr_stefi.png';
   static const drGerty = 'assets/images/dr_gerty.png';
   static const drDiandra = 'assets/images/dr_diandra.png';
+
+  static const emptyCart = 'assets/images/empty_cart.png';
 }
 
 abstract class SVGAssets {

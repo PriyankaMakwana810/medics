@@ -34,4 +34,9 @@ class DatabaseHelper {
     db.rawUpdate(
         "UPDATE $_tableCart SET  items = '$quantity' WHERE id = '$id'");
   }
+
+  Future<int> deleteFromCart(int id) async {
+    Database db = await _getDatabase();
+    return db.rawDelete("DELETE FROM $_tableCart  WHERE id = '$id'");
+  }
 }

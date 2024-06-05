@@ -32,6 +32,7 @@ class DrugDetailsView extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.shopping_cart_outlined),
             onPressed: () {
+              Get.toNamed(Routes.my_cart);
               // Handle more options tap
             },
           ),
@@ -150,7 +151,7 @@ class DrugDetailsView extends StatelessWidget {
                     trimCollapsedText: 'Read more',
                     trimExpandedText: 'Read less',
                     style: TextStyle(
-                      fontSize: 12.0,
+                      fontSize: 14.0,
                       color: Colors.grey,
                     ),
                   ),
@@ -177,7 +178,8 @@ class DrugDetailsView extends StatelessWidget {
                   child: CustomFilledButton(
                     label: AppStrings.buy_now,
                     onPressed: () {
-                      var id = controller.addItemToCart(medicine, controller.quantity.value);
+                      var id = controller.addItemToCart(
+                          medicine, controller.quantity.value);
                       print('$id $medicine');
                       Get.toNamed(Routes.my_cart);
                     },

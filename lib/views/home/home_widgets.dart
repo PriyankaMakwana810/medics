@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:medics/styles/color_constants.dart';
 
-import '../../config/app_assets.dart';
 import '../../models/article.dart';
 import '../../models/doctor.dart';
 import '../../styles/text_style.dart';
@@ -198,7 +197,6 @@ Widget buildCategoryIcon(String icon, String label,
 }
 
 Widget buildBannerAd(String title, String btnText, String imgPath) {
-
   return Container(
     width: double.infinity,
     decoration: BoxDecoration(
@@ -231,8 +229,11 @@ Widget buildBannerAd(String title, String btnText, String imgPath) {
             ),
           ),
         ),
-        Image.asset(imgPath),
+        Container(
+            constraints: BoxConstraints(maxWidth: 130),
+            child: Image.asset(imgPath)),
       ],
     ),
+
   );
 }
