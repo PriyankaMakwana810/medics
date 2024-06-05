@@ -1,5 +1,6 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
+import 'package:medics/map_views/map_ambulance_view.dart';
 import 'package:medics/views/home/home_binding.dart';
 import 'package:medics/views/home/home_view.dart';
 import 'package:medics/views/home/tabs/dashboard_Tab.dart';
@@ -102,6 +103,7 @@ class AppPages {
     GetPage(name: Routes.pharmacy, page: () => PharmacyView()),
     GetPage(name: Routes.drug_detail, page: () => DrugDetailsView()),
     GetPage(name: Routes.my_cart, page: () => MyCartView()),
+    GetPage(name: Routes.map_ambulance, page: () => MapAmbulanceView()),
     GetPage(name: Routes.messages, page: () => MessagesView()),
     GetPage(name: Routes.schedule, page: () => ScheduleView()),
     GetPage(name: Routes.profile, page: () => ProfileView())

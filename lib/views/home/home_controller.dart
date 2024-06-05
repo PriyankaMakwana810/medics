@@ -92,6 +92,9 @@ class HomeController extends BaseController {
     if (category == 'Doctor') {
       Get.toNamed(Routes.top_doctor);
     }
+    if (category == 'Ambulance') {
+      Get.toNamed(Routes.map_ambulance);
+    }
     print('Category tapped: $category');
   }
 

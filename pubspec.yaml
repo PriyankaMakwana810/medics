@@ -28,6 +28,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   sqflite: ^2.3.3+1
   path: ^1.9.0
+  google_maps_flutter: ^2.6.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
