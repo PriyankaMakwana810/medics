@@ -60,7 +60,7 @@ class AnimatedToggle extends StatelessWidget {
                             fontFamily: 'Rubik',
                             fontSize: Get.width * 0.045,
                             fontWeight: FontWeight.bold,
-                            color: textColor,
+                            color: textColorDisable,
                           ),
                         ),
                       ),

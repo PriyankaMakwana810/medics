@@ -87,7 +87,7 @@ class ResetPasswordController extends BaseController {
 
   void onLoginButtonTap() async {
     // await appPreferences.setOnboardDetails(true);
-    Get.toNamed(Routes.login);
+    Get.offAllNamed(Routes.login);
   }
 
   void onSendCodeTap() async {
