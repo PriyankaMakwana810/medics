@@ -42,7 +42,6 @@ class ChangePasswordView extends StatelessWidget {
                     fontWeight: FontWeight.normal),
                     onChanged: (value) => controller.password.value = value,
                 keyboardType:  TextInputType.visiblePassword,
-
                     decoration: InputDecoration(
                       hintText: 'Password',
                       hintStyle: const TextStyle(

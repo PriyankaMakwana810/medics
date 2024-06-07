@@ -14,6 +14,8 @@ const chipBorder = Color(0xFFB3D3CE);
 const whiteColor = Color(0xFFFFFFFF);
 const blackColor = Color(0xFF000000);
 
+const color5555 = Color(0xFF555555);
+
 MaterialColor appColor = const MaterialColor(
   0xFF12B2D5,
   <int, Color>{

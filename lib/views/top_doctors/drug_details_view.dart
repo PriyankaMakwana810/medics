@@ -159,34 +159,43 @@ class DrugDetailsView extends StatelessWidget {
                 ],
               ),
             ),
-            Row(
-              children: [
-                Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                      color: colorSecondary,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: colorSecondary, width: 1)),
-                  child: const Icon(
-                    Icons.shopping_cart_outlined,
-                    color: colorPrimary,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: CustomFilledButton(
-                    label: AppStrings.buy_now,
-                    onPressed: () {
-                      var id = controller.addItemToCart(
-                          medicine, controller.quantity.value);
-                      print('$id $medicine');
-                      Get.toNamed(Routes.my_cart);
-                    },
-                  ),
-                ),
-              ],
+            CustomFilledButton(
+              label: AppStrings.buy_now,
+              onPressed: () {
+                var id = controller.addItemToCart(
+                    medicine, controller.quantity.value);
+                print('$id $medicine');
+                Get.toNamed(Routes.my_cart);
+              },
             ),
+            // Row(
+            //   children: [
+            //     Container(
+            //       width: 50,
+            //       height: 50,
+            //       decoration: BoxDecoration(
+            //           color: colorSecondary,
+            //           borderRadius: BorderRadius.circular(20),
+            //           border: Border.all(color: colorSecondary, width: 1)),
+            //       child: const Icon(
+            //         Icons.shopping_cart_outlined,
+            //         color: colorPrimary,
+            //       ),
+            //     ),
+            //     const SizedBox(width: 10),
+            //     Expanded(
+            //       child: CustomFilledButton(
+            //         label: AppStrings.buy_now,
+            //         onPressed: () {
+            //           var id = controller.addItemToCart(
+            //               medicine, controller.quantity.value);
+            //           print('$id $medicine');
+            //           Get.toNamed(Routes.my_cart);
+            //         },
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),

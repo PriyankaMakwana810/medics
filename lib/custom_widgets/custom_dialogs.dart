@@ -114,7 +114,7 @@ class LogoutDialog extends StatelessWidget {
               'Are you sure to log out of your Account?',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 22,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),

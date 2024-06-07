@@ -37,6 +37,10 @@ abstract class SVGAssets {
   static const profile = "assets/svgs/profile.svg";
   static const profile_selected = "assets/svgs/profile_selected.svg";
 
+  static const icon_phone = 'assets/svgs/v_ic_phone.svg';
+  static const icon_video = 'assets/svgs/v_ic_video.svg';
+  static const icon_more = 'assets/svgs/v_ic_more.svg';
+
 //   home
   static const icon_doctor = 'assets/svgs/v_ic_doctor.svg';
   static const icon_pharmacy = 'assets/svgs/v_ic_pharmacy.svg';
@@ -54,4 +58,12 @@ abstract class SVGAssets {
   static const icon_heartbeat = 'assets/svgs/v_ic_heartbeat.svg';
   static const icon_fire = 'assets/svgs/v_ic_fire.svg';
   static const icon_barbell = 'assets/svgs/v_ic_barbell.svg';
+
+  static const icon_heart = 'assets/svgs/v_ic_heart.svg';
+  static const icon_chat = 'assets/svgs/chat.svg';
+  static const icon_appointment = 'assets/svgs/v_ic_document.svg';
+  static const icon_wallet = 'assets/svgs/v_ic_wallet.svg';
+
+  static const icon_read = 'assets/svgs/v_ic_check_all.svg';
+  static const icon_pin = 'assets/svgs/v_ic_paperclip.svg';
 }

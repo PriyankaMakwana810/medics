@@ -110,20 +110,20 @@ class ProfileView extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             SizedBox(height: 10),
-            _buildMenuItem(Icons.favorite, 'My Saved', () {}),
+            _buildMenuItem(SVGAssets.icon_heart, 'My Saved', () {}),
             Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Divider()),
             // Divider(),
-            _buildMenuItem(Icons.calendar_today, 'Appointment', () {}),
+            _buildMenuItem(SVGAssets.icon_appointment, 'Appointment', () {}),
             Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Divider()),
-            _buildMenuItem(Icons.payment, 'Payment Method', () {}),
+            _buildMenuItem(SVGAssets.icon_wallet, 'Payment Method', () {}),
             Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Divider()),
-            _buildMenuItem(Icons.help, 'FAQs', () {}),
+            _buildMenuItem(SVGAssets.chat_icon, 'FAQs', () {}),
             Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Divider()),
@@ -141,16 +141,12 @@ class ProfileView extends StatelessWidget {
     );
   }
 
-  Widget _buildMenuItem(IconData icon, String label, VoidCallback onTap) {
+  Widget _buildMenuItem(String icon, String label, VoidCallback onTap) {
     return ListTile(
       leading: CircleAvatar(
-        radius: 26,
-        backgroundColor: colorSecondary,
-        child: Icon(
-          icon,
-          color: colorPrimary,
-        ),
-      ),
+          radius: 26,
+          backgroundColor: colorSecondary,
+          child: SvgPicture.asset(icon)),
       title: Text(label,
           textAlign: TextAlign.start,
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),

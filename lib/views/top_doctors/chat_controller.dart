@@ -46,8 +46,18 @@ class ChatController extends GetxController {
       isSentByMe: true,
       timestamp: "Just now",
     ));
+    addReply();
+  }
+  void addReply(){
+    messages.add(ChatMessage(
+      sender: "Me",
+      message: 'This is static respose after adding message.',
+      isSentByMe: false,
+      timestamp: "Just now",
+    ));
   }
 }
+
 
 class ChatMessage {
   final String sender;

@@ -30,39 +30,49 @@ class HomeView extends GetView<HomeController> {
                   _pages[controller.currentIndex],
                 ],
               ),
-              bottomNavigationBar: BottomNavigationBar(
-                // selectedItemColor: colorPrimary,
-                // unselectedItemColor: colorGray,
-                backgroundColor: whiteColor,
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
-                type: BottomNavigationBarType.fixed,
-                currentIndex: controller.currentIndex,
-                onTap: (index) {
-                  controller.currentIndex = index;
-                  controller.update();
-                },
-                items: <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: SvgPicture.asset(SVGAssets.home),
-                    activeIcon: SvgPicture.asset(SVGAssets.home_selected),
-                    label: 'Home',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: SvgPicture.asset(SVGAssets.messages),
-                    activeIcon: SvgPicture.asset(SVGAssets.messages_selected),
-                    label: 'Chat',
-                  ),
-                  BottomNavigationBarItem(
-                      icon: SvgPicture.asset(SVGAssets.schedule),
-                      activeIcon: SvgPicture.asset(SVGAssets.schedule_selected),
-                      label: 'Schedule'),
-                  BottomNavigationBarItem(
-                    icon: SvgPicture.asset(SVGAssets.profile),
-                    activeIcon: SvgPicture.asset(SVGAssets.profile_selected),
-                    label: 'Profile',
-                  ),
-                ],
+              bottomNavigationBar: Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 10,
+                      offset: Offset(0, 5),
+                    ),
+                  ],
+                ),
+                child: BottomNavigationBar(
+                  backgroundColor: whiteColor,
+                  showSelectedLabels: false,
+                  showUnselectedLabels: false,
+                  elevation: 0,
+                  type: BottomNavigationBarType.fixed,
+                  currentIndex: controller.currentIndex,
+                  onTap: (index) {
+                    controller.currentIndex = index;
+                    controller.update();
+                  },
+                  items: <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
+                      icon: SvgPicture.asset(SVGAssets.home),
+                      activeIcon: SvgPicture.asset(SVGAssets.home_selected),
+                      label: 'Home',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: SvgPicture.asset(SVGAssets.messages),
+                      activeIcon: SvgPicture.asset(SVGAssets.messages_selected),
+                      label: 'Chat',
+                    ),
+                    BottomNavigationBarItem(
+                        icon: SvgPicture.asset(SVGAssets.schedule),
+                        activeIcon: SvgPicture.asset(SVGAssets.schedule_selected),
+                        label: 'Schedule'),
+                    BottomNavigationBarItem(
+                      icon: SvgPicture.asset(SVGAssets.profile),
+                      activeIcon: SvgPicture.asset(SVGAssets.profile_selected),
+                      label: 'Profile',
+                    ),
+                  ],
+                ),
               ));
         });
   }

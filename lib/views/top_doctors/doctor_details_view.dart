@@ -69,57 +69,64 @@ class DoctorDetailView extends StatelessWidget {
               const Divider(color: colorSecondary),
               const SizedBox(height: 20),
               _buildTimeSelector(),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: colorSecondary,
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: colorSecondary, width: 1)),
-                    child: const Icon(
-                      Icons.message,
-                      color: colorPrimary,
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: CustomFilledButton(
-                      label: AppStrings.book_appointment,
-                      onPressed: () {
-                        if (controller.selectedDateIndex.value == -1) {
-                          Get.snackbar(
-                            'Error',
-                            'Please select a date.',
-                            snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: Colors.red,
-                            colorText: Colors.white,
-                          );
-                          return;
-                        }
-
-                        if (controller.selectedTimeIndex.value == -1) {
-                          Get.snackbar(
-                            'Error',
-                            'Please select a time.',
-                            snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: Colors.red,
-                            colorText: Colors.white,
-                          );
-                          return;
-                        }
-
-                        controller.selectedDoctor.value = doctor;
-                        Get.toNamed(Routes.appointmentDetail);
-                      },
-                    ),
-                  ),
-                ],
-              ),
+              const SizedBox(height: 30),
             ],
           ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
+        child: Row(
+          children: [
+            InkWell(
+              onTap: () {
+                Get.toNamed(Routes.chat_doctor, arguments: doctor);
+              },
+              child: Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                    color: colorSecondary,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: colorSecondary, width: 1)),
+                child: const Icon(
+                  Icons.message,
+                  color: colorPrimary,
+                ),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: CustomFilledButton(
+                label: AppStrings.book_appointment,
+                onPressed: () {
+                  if (controller.selectedDateIndex.value == 0) {
+                    Get.snackbar(
+                      'Error',
+                      'Please select a date.',
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: Colors.red,
+                      colorText: Colors.white,
+                    );
+                    return;
+                  }
+
+                  if (controller.selectedTimeIndex.value == 0) {
+                    Get.snackbar(
+                      'Error',
+                      'Please select a time.',
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: Colors.red,
+                      colorText: Colors.white,
+                    );
+                    return;
+                  }
+                  controller.selectedDoctor.value = doctor;
+                  Get.toNamed(Routes.appointmentDetail);
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -196,15 +203,15 @@ class DoctorDetailView extends StatelessWidget {
                 ),
               ),
               // margin: const EdgeInsets.only(bottom: 10),
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
               child: Text(
                 time,
                 style: TextStyle(
                   color: isDisabled
                       ? borderColor
                       : controller.selectedTimeIndex.value == index
-                      ? whiteColor
-                      : textColor,
+                          ? whiteColor
+                          : textColor,
                 ),
               ),
             ),

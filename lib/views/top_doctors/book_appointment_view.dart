@@ -207,7 +207,8 @@ class AppointmentDetailView extends StatelessWidget {
                                 'Your payment has been successful, you can have a consultation session with your trusted doctor',
                             buttonText: 'Chat Doctor',
                             onPressed: () {
-                              Get.offNamed(Routes.chat_doctor);
+                              Get.offNamed(Routes.chat_doctor,
+                                  arguments: doctor);
                               // controller.onHomeClick();
                             },
                           );
