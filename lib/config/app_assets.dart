@@ -13,6 +13,7 @@ abstract class AppAssets {
   static const drDiandra = 'assets/images/dr_diandra.png';
 
   static const emptyCart = 'assets/images/empty_cart.png';
+  static const profileImage = 'assets/images/profile_img.png';
 }
 
 abstract class SVGAssets {
@@ -25,6 +26,7 @@ abstract class SVGAssets {
   static const edit_icon = 'assets/svgs/v_ic_edit.svg';
 
   static const bookmark = 'assets/svgs/bookmark.svg';
+
 //   bottom navigation
   static const home = "assets/svgs/home.svg";
   static const home_selected = "assets/svgs/home_selected.svg";
@@ -44,9 +46,12 @@ abstract class SVGAssets {
 //   find doctors
   static const icon_lungs = 'assets/svgs/v_ic_lungs.svg';
   static const icon_dentist = 'assets/svgs/v_ic_dentist.svg';
-  static const icon_psychiatrist  = 'assets/svgs/v_ic_psychiatrist.svg';
+  static const icon_psychiatrist = 'assets/svgs/v_ic_psychiatrist.svg';
   static const icon_covid = 'assets/svgs/v_ic_covid.svg';
   static const icon_surgeon = 'assets/svgs/v_ic_syringe.svg';
   static const icon_cardiologist = 'assets/svgs/v_ic_health.svg';
 
+  static const icon_heartbeat = 'assets/svgs/v_ic_heartbeat.svg';
+  static const icon_fire = 'assets/svgs/v_ic_fire.svg';
+  static const icon_barbell = 'assets/svgs/v_ic_barbell.svg';
 }

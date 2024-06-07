@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:medics/config/app_assets.dart';
+import 'package:medics/routes/app_pages.dart';
 import 'package:medics/views/home/home_controller.dart';
 
 import '../../../styles/color_constants.dart';
@@ -28,14 +29,6 @@ class AppointmentDetailView extends StatelessWidget {
           style: AppTextStyles.appBarStyle,
         ),
         centerTitle: true,
-        /*actions: [
-          IconButton(
-            icon: const Icon(Icons.more_vert),
-            onPressed: () {
-              // Handle more options tap
-            },
-          ),*/
-        // ],
       ),
       backgroundColor: whiteColor,
       body: SingleChildScrollView(
@@ -214,6 +207,7 @@ class AppointmentDetailView extends StatelessWidget {
                                 'Your payment has been successful, you can have a consultation session with your trusted doctor',
                             buttonText: 'Chat Doctor',
                             onPressed: () {
+                              Get.offNamed(Routes.chat_doctor);
                               // controller.onHomeClick();
                             },
                           );

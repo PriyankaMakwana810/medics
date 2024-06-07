@@ -5,18 +5,20 @@ import 'package:get/get.dart';
 import 'package:medics/controller/base_controller.dart';
 import 'package:medics/models/medicine.dart';
 
+import '../../config/app_preferences.dart';
 import '../../database/database_helper.dart';
 import '../../models/article.dart';
 import '../../models/doctor.dart';
 import '../../routes/app_pages.dart';
 
 class HomeController extends BaseController {
+  AppPreferences appPreferences = AppPreferences();
+
   var doctors = <Doctor>[].obs;
   var articles = <Article>[].obs;
   var medicines = <Medicine>[].obs;
   var currentIndex = 0;
   var isAboutTextExpanded = false.obs;
-
   var quantity = 1.obs;
 
   void onSignUpButtonTap() async {
@@ -137,6 +139,11 @@ class HomeController extends BaseController {
 
   void selectTime(int index) {
     selectedTimeIndex.value = index;
+  }
+
+  void onLogoutTap() {
+    appPreferences.setLogin(false);
+    Get.offAllNamed(Routes.intro);
   }
 
   void toggleAboutText() {
