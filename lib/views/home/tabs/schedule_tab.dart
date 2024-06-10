@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:medics/config/app_dimention.dart';
 import 'package:medics/styles/color_constants.dart';
 import 'package:medics/styles/text_style.dart';
 import 'package:medics/views/home/tabs/schedule_controller.dart';
@@ -22,7 +21,7 @@ class ScheduleView extends StatelessWidget {
         backgroundColor: whiteColor,
         appBar: AppBar(
           title: Padding(
-            padding: const EdgeInsets.only(top: 20.0,right: 20),
+            padding: const EdgeInsets.only(top: 20.0, right: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

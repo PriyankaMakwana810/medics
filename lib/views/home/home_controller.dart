@@ -147,6 +147,9 @@ class HomeController extends BaseController {
     Get.offAllNamed(Routes.intro);
   }
 
+  Doctor getDoctorData(String docName){
+    return doctors.firstWhere((m) => m.name == docName);
+  }
   void toggleAboutText() {
     // Add this method
     isAboutTextExpanded.value = !isAboutTextExpanded.value;

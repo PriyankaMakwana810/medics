@@ -66,4 +66,7 @@ abstract class SVGAssets {
 
   static const icon_read = 'assets/svgs/v_ic_check_all.svg';
   static const icon_pin = 'assets/svgs/v_ic_paperclip.svg';
+
+  static const icon_search_large = 'assets/svgs/v_ic_search_large.svg';
+  static const icon_chat_filled = 'assets/svgs/v_ic_filled_chat.svg';
 }

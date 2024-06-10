@@ -4,34 +4,39 @@
     "tag": "Covid-19",
     "time": "Jun 12,2021",
     "imageUrl": "assets/images/article1.png",
-    "timeToRead": "6 min"
+    "timeToRead": "6 min",
+    "isSaved": true
   },
   {
     "title": "The Horror Of The Second Wave Of COVID-19",
     "tag": "Covid-19",
     "time": "Jun 10,2021",
     "imageUrl": "assets/images/article2.png",
-    "timeToRead": "5 min"
+    "timeToRead": "5 min",
+    "isSaved": false
   },
   {
     "title": "The 25 Healthiest Fruits You Can Eat, According to a Nutritionist",
     "tag": "Covid-19",
     "time": "Jun 9,2021",
     "imageUrl": "assets/images/article3.png",
-    "timeToRead": "8 min"
+    "timeToRead": "8 min",
+    "isSaved": true
   },
   {
     "title": "Traditional Herbal Medicine Treatments for COVID-19",
     "tag": "Covid-19",
     "time": "Jun 5,2021",
     "imageUrl": "assets/images/article4.png",
-    "timeToRead": "11 min"
+    "timeToRead": "11 min",
+    "isSaved": false
   },
   {
     "title": "Beauty Tips For Face: 10 Dos and Don'ts for Naturally Beautiful Skin",
     "tag": "Covid-19",
     "time": "Jun 1,2021",
     "imageUrl": "assets/images/article5.png",
-    "timeToRead": "6 min"
+    "timeToRead": "6 min",
+    "isSaved": true
   }
 ]
