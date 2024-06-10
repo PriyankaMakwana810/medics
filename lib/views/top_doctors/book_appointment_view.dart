@@ -73,10 +73,17 @@ class AppointmentDetailView extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               const Divider(color: colorSecondary),
-              _buildSectionHeader('Reason'),
-              const Row(
+              _buildSectionHeader('Reason', onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const ChangeReasonDialog();
+                  },
+                );
+              }),
+              Row(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 26,
                     backgroundColor: colorSecondary,
                     child: Icon(
@@ -84,13 +91,17 @@ class AppointmentDetailView extends StatelessWidget {
                       color: colorPrimary,
                     ),
                   ),
-                  SizedBox(width: 10),
-                  Text(
-                    'Chest Pain',
-                    style: TextStyle(
-                        color: Color(0xFF555555),
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16.0),
+                  const SizedBox(width: 10),
+                  Obx(
+                    () {
+                      return Text(
+                        '${controller.reasonOfVisit}',
+                        style: const TextStyle(
+                            color: Color(0xFF555555),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16.0),
+                      );
+                    },
                   ),
                 ],
               ),

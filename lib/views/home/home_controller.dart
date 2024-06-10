@@ -2,13 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart'; // Add this import for date formatting
 import 'package:medics/controller/base_controller.dart';
 import 'package:medics/models/medicine.dart';
 
 import '../../config/app_preferences.dart';
 import '../../models/article.dart';
-
-import 'package:intl/intl.dart'; // Add this import for date formatting
 import '../../models/doctor.dart';
 import '../../routes/app_pages.dart';
 
@@ -29,14 +28,7 @@ class HomeController extends BaseController {
   var popularArticles =
       ['Covid-19', 'Diet', 'Fitness', 'Health', 'Doctors', 'Cancer'].obs;
   var dates = <Map<String, String>>[].obs; // Update this line
-  /*var dates = [
-    {'day': 'Mon', 'date': '21'},
-    {'day': 'Tue', 'date': '22'},
-    {'day': 'Wed', 'date': '23'},
-    {'day': 'Thu', 'date': '24'},
-    {'day': 'Fri', 'date': '25'},
-    {'day': 'Sat', 'date': '26'},
-  ].obs;*/
+
   List<int> disabledTimes = [1, 4, 6];
   var times = [
     '09:00 AM',
@@ -52,6 +44,7 @@ class HomeController extends BaseController {
 
   var selectedDateIndex = 2.obs;
   var selectedTimeIndex = 3.obs;
+  var reasonOfVisit = 'Chest Pain'.obs;
 
   @override
   void onInit() {
@@ -60,6 +53,7 @@ class HomeController extends BaseController {
     loadArticleData();
     generateCurrentWeekDates();
   }
+
   void generateCurrentWeekDates() {
     final now = DateTime.now();
     final startOfWeek = now.subtract(Duration(days: now.weekday - 1));
@@ -72,6 +66,7 @@ class HomeController extends BaseController {
       });
     }
   }
+
   Future<void> loadDoctorData() async {
     final String response =
         await rootBundle.loadString('assets/data/doctor_data.json');

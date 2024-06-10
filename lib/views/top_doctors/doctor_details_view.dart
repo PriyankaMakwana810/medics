@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:medics/utils/utility.dart';
 import 'package:medics/views/home/home_controller.dart';
 import 'package:readmore/readmore.dart';
 
@@ -101,24 +102,26 @@ class DoctorDetailView extends StatelessWidget {
                 label: AppStrings.book_appointment,
                 onPressed: () {
                   if (controller.selectedDateIndex.value == 0) {
-                    Get.snackbar(
+                    Utility.snackBar('Please select a date.', context);
+                    /*Get.snackbar(
                       'Error',
                       'Please select a date.',
                       snackPosition: SnackPosition.BOTTOM,
                       backgroundColor: Colors.red,
                       colorText: Colors.white,
-                    );
+                    );*/
                     return;
                   }
 
                   if (controller.selectedTimeIndex.value == 0) {
-                    Get.snackbar(
+                    Utility.snackBar('Please select a time.', context);
+                    /*Get.snackbar(
                       'Error',
                       'Please select a time.',
                       snackPosition: SnackPosition.BOTTOM,
                       backgroundColor: Colors.red,
                       colorText: Colors.white,
-                    );
+                    );*/
                     return;
                   }
                   controller.selectedDoctor.value = doctor;
@@ -131,8 +134,8 @@ class DoctorDetailView extends StatelessWidget {
       ),
     );
   }
-
 }
+
 Widget buildDateSelector() {
   final HomeController controller = Get.find();
   return Obx(() {
@@ -155,9 +158,7 @@ Widget buildDateSelector() {
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: colorSecondary),
               ),
-              padding:
-              const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Column(
                 children: [
                   Text(
@@ -212,15 +213,15 @@ Widget buildTimeSelector() {
               ),
             ),
             // margin: const EdgeInsets.only(bottom: 10),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 5),
             child: Text(
               time,
               style: TextStyle(
                 color: isDisabled
                     ? borderColor
                     : controller.selectedTimeIndex.value == index
-                    ? whiteColor
-                    : textColor,
+                        ? whiteColor
+                        : textColor,
               ),
             ),
           ),
