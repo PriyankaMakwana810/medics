@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:medics/config/app_assets.dart';
 import 'package:medics/views/reset_password/reset_password_controller.dart';
 
 import '../../config/app_dimention.dart';
@@ -36,23 +38,31 @@ class ChangePasswordView extends StatelessWidget {
               const SizedBox(height: 24),
               Obx(() => TextField(
                     obscureText: !controller.isPasswordVisible.value,
-                style: TextStyle(
-                    fontSize: Dimensions.fontSizeDefault,
-                    color: textColor,
-                    fontWeight: FontWeight.normal),
+                    style: TextStyle(
+                        fontSize: Dimensions.fontSizeDefault,
+                        color: textColor,
+                        fontWeight: FontWeight.normal),
                     onChanged: (value) => controller.password.value = value,
-                keyboardType:  TextInputType.visiblePassword,
+                    keyboardType: TextInputType.visiblePassword,
                     decoration: InputDecoration(
                       hintText: 'Password',
                       hintStyle: const TextStyle(
-                          fontSize: Dimensions.fontSizeDefault, color: textColorDisable),
+                          fontSize: Dimensions.fontSizeDefault,
+                          color: textColorDisable),
                       filled: true,
                       fillColor: textFieldFilled,
-                      prefixIcon: const Icon(Icons.lock),
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: SvgPicture.asset(SVGAssets.v_ic_password),
+                      ),
                       suffixIcon: IconButton(
-                        icon: Icon(controller.isPasswordVisible.value
+                        icon: controller.isPasswordVisible.value
+                            ? SvgPicture.asset(SVGAssets.v_ic_password_hide)
+                            : Icon(Icons.visibility_outlined,
+                                color: textColorDisable, size: 26),
+                        /*Icon(controller.isPasswordVisible.value
                             ? Icons.visibility
-                            : Icons.visibility_off),
+                            : Icons.visibility_off),*/
                         onPressed: controller.togglePasswordVisibility,
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -79,18 +89,26 @@ class ChangePasswordView extends StatelessWidget {
                         fontWeight: FontWeight.normal),
                     onChanged: (value) =>
                         controller.confirmPassword.value = value,
-                    keyboardType:  TextInputType.visiblePassword,
+                    keyboardType: TextInputType.visiblePassword,
                     decoration: InputDecoration(
                       hintText: 'Confirm Password',
                       hintStyle: const TextStyle(
-                          fontSize: Dimensions.fontSizeDefault, color: textColorDisable),
+                          fontSize: Dimensions.fontSizeDefault,
+                          color: textColorDisable),
                       filled: true,
                       fillColor: textFieldFilled,
-                      prefixIcon: const Icon(Icons.lock),
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: SvgPicture.asset(SVGAssets.v_ic_password),
+                      ),
                       suffixIcon: IconButton(
-                        icon: Icon(controller.isConfirmPasswordVisible.value
+                        icon: controller.isConfirmPasswordVisible.value
+                            ? SvgPicture.asset(SVGAssets.v_ic_password_hide)
+                            : Icon(Icons.visibility_outlined,
+                            color: textColorDisable, size: 26),
+                        /*Icon(controller.isPasswordVisible.value
                             ? Icons.visibility
-                            : Icons.visibility_off),
+                            : Icons.visibility_off),*/
                         onPressed: controller.toggleConfirmPasswordVisibility,
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -117,8 +135,7 @@ class ChangePasswordView extends StatelessWidget {
                       builder: (BuildContext context) {
                         return SuccessDialog(
                           title: 'Success',
-                          message:
-                              'You have successfully reset your password.',
+                          message: 'You have successfully reset your password.',
                           buttonText: 'Login',
                           onPressed: () {
                             controller.onLoginButtonTap();

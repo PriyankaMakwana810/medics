@@ -97,16 +97,16 @@ class LoginView extends GetView<LoginController> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Don't have an account?"),
+                        const Text("Don't have an account?",
+                            style: TextStyle(
+                                color: Color(0xFF717784), fontSize: 16)),
                         TextButton(
                           onPressed: () {
                             controller.onSignUpButtonTap();
-                            // Get.toNamed(Routes.sign_up);
-                            // Adjust according to your routes
                           },
                           child: const Text("Sign Up",
                               style: TextStyle(
-                                  fontSize: Dimensions.fontSizeDefault,
+                                  fontSize: Dimensions.fontSizeLarge,
                                   color: colorPrimary,
                                   fontWeight: FontWeight.normal)),
                         ),

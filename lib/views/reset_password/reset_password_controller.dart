@@ -8,13 +8,15 @@ import '../../routes/app_pages.dart';
 
 class ResetPasswordController extends BaseController {
   var hint = 'Enter Your Email'.obs;
-  var icon = SVGAssets.v_ic_email.obs;
+  var icon = SVGAssets.v_ic_email_primary.obs;
   var keyboardType = TextInputType.text.obs;
   var code = List.generate(4, (_) => ''.obs);
   var password = ''.obs;
   var confirmPassword = ''.obs;
   var isPasswordVisible = false.obs;
   var isConfirmPasswordVisible = false.obs;
+  var isEmail = true.obs;
+  TextEditingController emailOrPhoneController = TextEditingController();
 
   void togglePasswordVisibility() {
     isPasswordVisible.value = !isPasswordVisible.value;
@@ -26,12 +28,14 @@ class ResetPasswordController extends BaseController {
 
   bool createPassword() {
     if (password.value.isEmpty || confirmPassword.value.isEmpty) {
-      Get.snackbar('Error', 'Please fill in both fields');
+      Get.snackbar('Error', 'Please fill out both passwords.',
+          snackPosition: SnackPosition.BOTTOM);
       return false;
     }
 
     if (password.value != confirmPassword.value) {
-      Get.snackbar('Error', 'Passwords do not match');
+      Get.snackbar('Error', 'Passwords do not match',
+          snackPosition: SnackPosition.BOTTOM);
       return false;
     }
 
@@ -76,12 +80,15 @@ class ResetPasswordController extends BaseController {
     }
     if (value == 0) {
       hint.value = 'Enter your Email';
-      icon.value = SVGAssets.v_ic_email;
+      isEmail.value = true;
+      icon.value = SVGAssets.v_ic_email_primary;
+      keyboardType.value = TextInputType.emailAddress;
     } else {
+      isEmail.value = false;
       hint.value = 'Enter your Phone Number';
-      icon.value = SVGAssets.v_ic_password;
+      icon.value = SVGAssets.v_ic_call;
+      keyboardType.value = TextInputType.phone;
     }
-    update();
   }
 
   void onLoginButtonTap() async {
@@ -90,7 +97,29 @@ class ResetPasswordController extends BaseController {
   }
 
   void onSendCodeTap() async {
+    final input = emailOrPhoneController.text.trim();
+    if (isEmail.value) {
+      if (input.isEmpty) {
+        Get.snackbar('Error', 'Please enter your email',
+            snackPosition: SnackPosition.BOTTOM);
+        return;
+      } else if (!GetUtils.isEmail(input)) {
+        Get.snackbar('Error', 'Please enter a valid email',
+            snackPosition: SnackPosition.BOTTOM);
+        return;
+      }
+    } else {
+      if (input.isEmpty) {
+        Get.snackbar('Error', 'Please enter your phone number',
+            snackPosition: SnackPosition.BOTTOM);
+        return;
+      } else if (!GetUtils.isPhoneNumber(input)) {
+        Get.snackbar('Error', 'Please enter a valid phone number',
+            snackPosition: SnackPosition.BOTTOM);
+        return;
+      }
+    }
     // await appPreferences.setOnboardDetails(true);
-    Get.toNamed(Routes.verification_code);
+    Get.toNamed(Routes.verification_code, arguments: input);
   }
 }

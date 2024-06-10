@@ -43,7 +43,7 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
                       ]),
                       const SizedBox(height: 12.0),
                       AnimatedToggle(
-                        values: ['Email', 'Phone'],
+                        values: const ['Email', 'Phone'],
                         onToggleCallback: (value) {
                           // FocusManager.instance.primaryFocus?.unfocus();
                           controller.getHint(value);
@@ -53,12 +53,16 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
                         backgroundColor: textFieldFilled,
                       ),
                       const SizedBox(height: 12.0),
-                      CustomTextField(
-                        controller: TextEditingController(),
-                        hintText: controller.hint.value,
-                        icon: controller.icon.value,
-                        keyboardType: controller.keyboardType.value,
-                        // validator: controller.validateEmail,
+                      Obx(
+                        () {
+                          return CustomTextField(
+                            controller: controller.emailOrPhoneController,
+                            hintText: controller.hint.value,
+                            icon: controller.icon.value,
+                            keyboardType: controller.keyboardType.value,
+                            // validator: controller.validateEmail,
+                          );
+                        },
                       ),
                       const SizedBox(height: 30.0),
                       CustomFilledButton(
@@ -67,8 +71,7 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
                           if (_formKey.currentState!.validate()) {
                             controller.onSendCodeTap();
                             // Handle login
-                            Utility.snackBar(
-                                "Code has been sent Successfully!", context);
+
                           }
                         },
                       ),

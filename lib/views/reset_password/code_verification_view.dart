@@ -10,6 +10,9 @@ import '../../styles/text_style.dart';
 
 class VerificationCodeView extends StatelessWidget {
   final ResetPasswordController controller = Get.put(ResetPasswordController());
+  final String userData = Get.arguments as String;
+
+  VerificationCodeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +32,25 @@ class VerificationCodeView extends StatelessWidget {
               const Text("Enter Verification Code?",
                   style: AppTextStyles.heading1),
               const SizedBox(height: 12.0),
-              const Wrap(children: [
-                Text('Enter code that we have sent to your number 08528188***',
-                    style: AppTextStyles.heading2),
-              ]),
+              Text.rich(
+                TextSpan(
+                  children: [
+                    const TextSpan(
+                        text: 'Enter code that we have sent to your number',
+                        style: TextStyle(
+                            fontSize: Dimensions.fontSizeLarge,
+                            color: textColorDisable,
+                            fontWeight: FontWeight.normal)),
+                    TextSpan(
+                      text: ' $userData',
+                      style: const TextStyle(
+                          fontSize: Dimensions.fontSizeLarge,
+                          color: textColor,
+                          fontWeight: FontWeight.normal),
+                    ),
+                  ],
+                ),
+              ),
               const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

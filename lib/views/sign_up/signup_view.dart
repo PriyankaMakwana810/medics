@@ -142,16 +142,19 @@ class SignUpView extends GetView<SignUpController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text("Already have an account?",
-                              style: AppTextStyles.bodyHome),
+                              style: TextStyle(
+                                  color: Color(0xFF717784), fontSize: 16)),
                           const SizedBox(width: 5.0),
-                          InkWell(
-                            onTap: () => controller.onLoginButtonTap(),
+                          TextButton(
+                            onPressed: () {
+                              controller.onLoginButtonTap();
+                            },
                             child: const Text("Login",
                                 style: TextStyle(
-                                    fontSize: Dimensions.fontSizeDefault,
+                                    fontSize: Dimensions.fontSizeLarge,
                                     color: colorPrimary,
                                     fontWeight: FontWeight.normal)),
-                          )
+                          ),
                         ],
                       ),
                       const SizedBox(height: 16.0),

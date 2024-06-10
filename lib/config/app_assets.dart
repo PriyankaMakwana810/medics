@@ -29,9 +29,11 @@ abstract class SVGAssets {
   static const bookmark = 'assets/svgs/bookmark.svg';
 
   static const v_ic_email = 'assets/svgs/v_ic_email.svg';
+  static const v_ic_email_primary = 'assets/svgs/v_ic_email_primary.svg';
   static const v_ic_password = 'assets/svgs/v_ic_password.svg';
   static const v_ic_password_hide = 'assets/svgs/v_ic_eye_slash.svg';
   static const v_ic_user = 'assets/svgs/v_ic_user.svg';
+  static const v_ic_call = 'assets/svgs/v_ic_call.svg';
 
   static const v_ic_google = 'assets/svgs/v_ic_google.svg';
   static const v_ic_apple = 'assets/svgs/v_ic_apple.svg';
