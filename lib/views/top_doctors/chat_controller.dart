@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../../models/chat_message.dart';
+
 class ChatController extends GetxController {
   var messages = <ChatMessage>[].obs;
 
@@ -48,7 +50,8 @@ class ChatController extends GetxController {
     ));
     addReply();
   }
-  void addReply(){
+
+  void addReply() {
     messages.add(ChatMessage(
       sender: "Me",
       message: 'This is static respose after adding message.',
@@ -56,19 +59,4 @@ class ChatController extends GetxController {
       timestamp: "Just now",
     ));
   }
-}
-
-
-class ChatMessage {
-  final String sender;
-  final String message;
-  final bool isSentByMe;
-  final String timestamp;
-
-  ChatMessage({
-    required this.sender,
-    required this.message,
-    required this.isSentByMe,
-    required this.timestamp,
-  });
 }

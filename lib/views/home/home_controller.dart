@@ -7,6 +7,8 @@ import 'package:medics/models/medicine.dart';
 
 import '../../config/app_preferences.dart';
 import '../../models/article.dart';
+
+import 'package:intl/intl.dart'; // Add this import for date formatting
 import '../../models/doctor.dart';
 import '../../routes/app_pages.dart';
 
@@ -26,15 +28,15 @@ class HomeController extends BaseController {
 
   var popularArticles =
       ['Covid-19', 'Diet', 'Fitness', 'Health', 'Doctors', 'Cancer'].obs;
-
-  var dates = [
+  var dates = <Map<String, String>>[].obs; // Update this line
+  /*var dates = [
     {'day': 'Mon', 'date': '21'},
     {'day': 'Tue', 'date': '22'},
     {'day': 'Wed', 'date': '23'},
     {'day': 'Thu', 'date': '24'},
     {'day': 'Fri', 'date': '25'},
     {'day': 'Sat', 'date': '26'},
-  ].obs;
+  ].obs;*/
   List<int> disabledTimes = [1, 4, 6];
   var times = [
     '09:00 AM',
@@ -56,8 +58,20 @@ class HomeController extends BaseController {
     super.onInit();
     loadDoctorData();
     loadArticleData();
+    generateCurrentWeekDates();
   }
-
+  void generateCurrentWeekDates() {
+    final now = DateTime.now();
+    final startOfWeek = now.subtract(Duration(days: now.weekday - 1));
+    dates.clear(); // Clear previous dates
+    for (int i = 0; i < 7; i++) {
+      final date = startOfWeek.add(Duration(days: i));
+      dates.add({
+        'day': DateFormat('EEE').format(date),
+        'date': DateFormat('dd').format(date),
+      });
+    }
+  }
   Future<void> loadDoctorData() async {
     final String response =
         await rootBundle.loadString('assets/data/doctor_data.json');

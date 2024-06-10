@@ -10,6 +10,8 @@ import 'doctor_widgets.dart';
 class TopDoctorsView extends StatelessWidget {
   final HomeController controller = Get.put(HomeController());
 
+  TopDoctorsView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,17 +25,16 @@ class TopDoctorsView extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(Icons.more_vert),
+            icon: const Icon(Icons.more_vert),
             onPressed: () {
               // Handle more options tap
             },
           ),
         ],
       ),
-      body:
-      Obx(() {
+      body: Obx(() {
         if (controller.doctors.isEmpty) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         return Padding(
           padding: const EdgeInsets.all(12.0),
@@ -42,7 +43,7 @@ class TopDoctorsView extends StatelessWidget {
             itemBuilder: (context, index) {
               final doctor = controller.doctors[index];
               return Padding(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: buildDoctorListCard(doctor, onTap: () {
                   Get.toNamed(Routes.doctor_detail,
                       arguments: controller.doctors[index]);

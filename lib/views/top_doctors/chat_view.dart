@@ -6,6 +6,7 @@ import 'package:medics/styles/text_style.dart';
 
 import '../../config/app_assets.dart';
 import '../../config/app_dimention.dart';
+import '../../models/chat_message.dart';
 import '../../models/doctor.dart';
 import 'chat_controller.dart';
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medics/config/app_dimention.dart';
 import 'package:medics/views/home/home_controller.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../../styles/color_constants.dart';
 import '../../../styles/text_style.dart';
+import '../../config/app_dimention.dart';
 import '../../config/app_strings.dart';
 import '../../custom_widgets/button.dart';
 import '../../models/doctor.dart';
@@ -135,48 +135,57 @@ class DoctorDetailView extends StatelessWidget {
   Widget _buildDateSelector() {
     final HomeController controller = Get.find();
     return Obx(() {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(controller.dates.length, (index) {
-          final date = controller.dates[index];
-          return GestureDetector(
-            onTap: () => controller.selectDate(index),
-            child: Container(
-              decoration: BoxDecoration(
-                color: controller.selectedDateIndex.value == index
-                    ? colorPrimary
-                    : whiteColor,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: colorSecondary),
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: Column(
-                children: [
-                  Text(
-                    date['day']!,
-                    style: TextStyle(
-                      fontSize: Dimensions.fontSizeSmall,
-                      fontWeight: FontWeight.normal,
-                      color: controller.selectedDateIndex.value == index
-                          ? whiteColor
-                          : textColor,
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: List.generate(controller.dates.length, (index) {
+            final date = controller.dates[index];
+            return GestureDetector(
+              onTap: () {
+                controller.selectDate(index);
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                decoration: BoxDecoration(
+                  color: controller.selectedDateIndex.value == index
+                      ? colorPrimary
+                      : whiteColor,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: colorSecondary),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                // padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+
+                child: Column(
+                  children: [
+                    Text(
+                      date['day']!,
+                      style: TextStyle(
+                        fontSize: Dimensions.fontSizeSmall,
+                        fontWeight: FontWeight.normal,
+                        color: controller.selectedDateIndex.value == index
+                            ? whiteColor
+                            : textColorDisable,
+                      ),
                     ),
-                  ),
-                  Text(
-                    date['date']!,
-                    style: TextStyle(
-                      fontSize: Dimensions.fontSize18,
-                      fontWeight: FontWeight.bold,
-                      color: controller.selectedDateIndex.value == index
-                          ? whiteColor
-                          : textColor,
+                    Text(
+                      date['date']!,
+                      style: TextStyle(
+                        fontSize: Dimensions.fontSize18,
+                        fontWeight: FontWeight.bold,
+                        color: controller.selectedDateIndex.value == index
+                            ? whiteColor
+                            : textColor,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          );
-        }),
+            );
+          }),
+        ),
       );
     });
   }
