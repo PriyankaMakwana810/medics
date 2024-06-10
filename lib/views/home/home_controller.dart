@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart'; // Add this import for date formatting
 import 'package:medics/controller/base_controller.dart';
 import 'package:medics/models/medicine.dart';
+import 'package:medics/styles/color_constants.dart';
 
 import '../../config/app_preferences.dart';
 import '../../models/article.dart';
@@ -48,10 +49,16 @@ class HomeController extends BaseController {
 
   @override
   void onInit() {
+
     super.onInit();
     loadDoctorData();
     loadArticleData();
     generateCurrentWeekDates();
+    /*SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: whiteColor,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+    ));*/
   }
 
   void generateCurrentWeekDates() {

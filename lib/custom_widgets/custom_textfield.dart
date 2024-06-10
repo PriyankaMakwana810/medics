@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:medics/config/app_assets.dart';
 import 'package:medics/styles/color_constants.dart';
 
-import '../config/app_assets.dart';
 import '../config/app_dimention.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -11,7 +12,7 @@ class CustomTextField extends StatelessWidget {
   final bool isPassword;
   final String? Function(String?)? validator;
   final TextInputType keyboardType;
-  final IconData icon;
+  final String icon;
 
   CustomTextField({
     required this.controller,
@@ -24,43 +25,59 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      cursorColor: colorPrimary,
-      style: TextStyle(
-          fontSize: Dimensions.fontSizeDefault,
-          color: textColor,
-          fontWeight: FontWeight.normal),
-      obscureText: isPassword,
-      validator: validator,
-      keyboardType: keyboardType,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: textFieldFilled,
-        prefixIcon: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Icon(icon),
-        ),
-        hintText: hintText,
-        hintStyle: const TextStyle(
-            fontSize: Dimensions.fontSizeDefault, color: textColorDisable),
-        contentPadding: const EdgeInsets.symmetric(
-            vertical: Dimensions.kPaddingSizeDefault,
-            horizontal: Dimensions.kPaddingSizeLarge),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: const BorderSide(color: textColorDisable),
-        ),
-        // focusColor: colorOnPrimary,
-        border: OutlineInputBorder(
-          borderSide: const BorderSide(color: textColorDisable),
-          borderRadius: BorderRadius.circular(30),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: textColorDisable),
-          borderRadius: BorderRadius.circular(30),
-        ),
-      ),
+    var isPass = isPassword.obs;
+    return Obx(
+      () {
+        return TextFormField(
+          controller: controller,
+          cursorColor: colorPrimary,
+          style: TextStyle(
+              fontSize: Dimensions.fontSizeDefault,
+              color: textColor,
+              fontWeight: FontWeight.normal),
+          obscureText: isPass.value,
+          validator: validator,
+          keyboardType: keyboardType,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: textFieldFilled,
+            prefixIcon: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: SvgPicture.asset(icon),
+            ),
+            suffixIcon: isPassword
+                ? InkWell(
+                    onTap: () {
+                      isPass.value = !isPass.value;
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: SvgPicture.asset(SVGAssets.v_ic_password_hide),
+                    ),
+                  )
+                : SvgPicture.asset(''),
+            hintText: hintText,
+            hintStyle: const TextStyle(
+                fontSize: Dimensions.fontSizeDefault, color: textColorDisable),
+            contentPadding: const EdgeInsets.symmetric(
+                vertical: Dimensions.kPaddingSizeDefault,
+                horizontal: Dimensions.kPaddingSizeLarge),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: const BorderSide(color: textColorDisable),
+            ),
+            // focusColor: colorOnPrimary,
+            border: OutlineInputBorder(
+              borderSide: const BorderSide(color: textColorDisable),
+              borderRadius: BorderRadius.circular(30),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: textColorDisable),
+              borderRadius: BorderRadius.circular(30),
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -72,19 +89,19 @@ class CustomSearchTextField extends StatelessWidget {
   final bool enabled;
   final Function() onPressed;
 
-  const CustomSearchTextField({super.key,
-    required this.controller,
-    required this.hintText,
-    required this.assetName,
-    required this.enabled,
-    required this.onPressed
-  });
+  const CustomSearchTextField(
+      {super.key,
+      required this.controller,
+      required this.hintText,
+      required this.assetName,
+      required this.enabled,
+      required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if(!enabled){
+        if (!enabled) {
           onPressed();
         }
       },

@@ -76,6 +76,7 @@ class OnBoardingView extends GetView<OnboardingController> {
         backgroundColor: whiteColor,
         body: Stack(children: [
           IntroductionScreen(
+            globalBackgroundColor: Colors.white,
             pages: pageViewModelList,
             showSkipButton: false,
             showNextButton: true,

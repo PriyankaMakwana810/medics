@@ -35,7 +35,6 @@ class MyApp extends GetView {
       initialBinding: SplashBinding(),
       initialRoute: Routes.splash,
       getPages: AppPages.routes,
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }

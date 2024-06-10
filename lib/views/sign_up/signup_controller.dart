@@ -41,12 +41,12 @@ class SignUpController extends BaseController {
 
   void onLoginButtonTap() async {
     // await appPreferences.setOnboardDetails(true);
-    Get.toNamed(Routes.login);
+    Get.offNamed(Routes.login);
   }
 
   void toggleAgreement(bool? value) {
     isAgreed.value = value ?? false;
-    update();
+    // update();
   }
 
   void signUp() {

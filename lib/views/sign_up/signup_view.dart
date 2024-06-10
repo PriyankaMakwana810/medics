@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/views/sign_up/signup_controller.dart';
 
+import '../../config/app_assets.dart';
 import '../../config/app_dimention.dart';
 import '../../config/app_strings.dart';
 import '../../custom_widgets/button.dart';
@@ -13,6 +14,8 @@ import '../../styles/text_style.dart';
 
 class SignUpView extends GetView<SignUpController> {
   final _formKey = GlobalKey<FormState>();
+
+  SignUpView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,7 @@ class SignUpView extends GetView<SignUpController> {
                       CustomTextField(
                         controller: TextEditingController(),
                         hintText: 'Enter Your Name',
-                        icon: Icons.person,
+                        icon: SVGAssets.v_ic_user,
                         keyboardType: TextInputType.text,
                         validator: controller.validateName,
                       ),
@@ -49,7 +52,7 @@ class SignUpView extends GetView<SignUpController> {
                       CustomTextField(
                         controller: TextEditingController(),
                         hintText: 'Enter Your Email',
-                        icon: Icons.email,
+                        icon: SVGAssets.v_ic_email,
                         keyboardType: TextInputType.emailAddress,
                         validator: controller.validateEmail,
                       ),
@@ -57,40 +60,50 @@ class SignUpView extends GetView<SignUpController> {
                       CustomTextField(
                         controller: TextEditingController(),
                         hintText: 'Enter Your Password',
-                        icon: Icons.lock,
+                        icon: SVGAssets.v_ic_password,
                         isPassword: true,
                         validator: controller.validatePassword,
                       ),
                       const SizedBox(height: 16.0),
                       Row(
                         children: [
-                          Checkbox(
-                              checkColor: whiteColor,
-                              activeColor: colorPrimary,
-                              value: controller.isAgreed.value,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(4.0)),
-                                  side: BorderSide(
-                                      color: Color(0xFFD3D6DA), width: 1.5)),
-                              onChanged: controller.toggleAgreement),
+                          Obx(
+                            () {
+                              return Checkbox(
+                                  checkColor: whiteColor,
+                                  activeColor: colorPrimary,
+                                  value: controller.isAgreed.value,
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(4.0)),
+                                      side: BorderSide(
+                                          color: textColorDisable, width: 1)),
+                                  onChanged: controller.toggleAgreement);
+                            },
+                          ),
                           Expanded(
                             child: GestureDetector(
                               child: Text.rich(TextSpan(children: [
-                                TextSpan(text: 'I agree to the medidoc'),
+                                const TextSpan(
+                                    text: 'I agree to the medidoc',
+                                    style: AppTextStyles.bodyText),
                                 TextSpan(
                                   text: ' Terms of Service',
-                                  style: TextStyle(color: colorPrimary),
+                                  style: const TextStyle(
+                                      color: colorPrimary, fontSize: 14),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
                                       Get.snackbar('Terms of Service',
                                           'You tapped on Terms of Service');
                                     },
                                 ),
-                                TextSpan(text: ' and '),
+                                const TextSpan(
+                                    text: ' and ',
+                                    style: AppTextStyles.bodyText),
                                 TextSpan(
                                   text: 'Privacy Policy',
-                                  style: TextStyle(color: colorPrimary),
+                                  style: const TextStyle(
+                                      color: colorPrimary, fontSize: 14),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
                                       Get.snackbar('Privacy Policy',
@@ -124,23 +137,21 @@ class SignUpView extends GetView<SignUpController> {
                           }
                         },
                       ),
-                      const SizedBox(height: 14.0),
+                      const SizedBox(height: 20.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text("Already have an account?"),
-                          TextButton(
-                            onPressed: () {
-                              controller.onLoginButtonTap();
-                              // Get.toNamed(Routes.sign_up);
-                              // Adjust according to your routes
-                            },
+                          const Text("Already have an account?",
+                              style: AppTextStyles.bodyHome),
+                          const SizedBox(width: 5.0),
+                          InkWell(
+                            onTap: () => controller.onLoginButtonTap(),
                             child: const Text("Login",
                                 style: TextStyle(
                                     fontSize: Dimensions.fontSizeDefault,
                                     color: colorPrimary,
                                     fontWeight: FontWeight.normal)),
-                          ),
+                          )
                         ],
                       ),
                       const SizedBox(height: 16.0),

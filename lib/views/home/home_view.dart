@@ -25,10 +25,12 @@ class HomeView extends GetView<HomeController> {
         builder: (HomeController controller) {
           return Scaffold(
               backgroundColor: whiteColor,
-              body: IndexedStack(
-                children: [
-                  _pages[controller.currentIndex],
-                ],
+              body: SafeArea(
+                child: IndexedStack(
+                  children: [
+                    _pages[controller.currentIndex],
+                  ],
+                ),
               ),
               bottomNavigationBar: Container(
                 decoration: BoxDecoration(

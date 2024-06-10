@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:medics/config/app_assets.dart';
 import 'package:medics/styles/color_constants.dart';
 import 'package:medics/utils/utility.dart';
 import 'package:medics/views/login/login_controller.dart';
@@ -41,7 +42,7 @@ class LoginView extends GetView<LoginController> {
                     CustomTextField(
                       controller: TextEditingController(),
                       hintText: 'Enter Your Email',
-                      icon: Icons.email,
+                      icon: SVGAssets.v_ic_email,
                       keyboardType: TextInputType.emailAddress,
                       validator: controller.validateEmail,
                     ),
@@ -49,7 +50,7 @@ class LoginView extends GetView<LoginController> {
                     CustomTextField(
                       controller: TextEditingController(),
                       hintText: 'Enter Your Password',
-                      icon: Icons.lock,
+                      icon: SVGAssets.v_ic_password,
                       isPassword: true,
                       validator: controller.validatePassword,
                     ),
@@ -80,7 +81,7 @@ class LoginView extends GetView<LoginController> {
                               return SuccessDialog(
                                 title: 'Yeay! Welcome Back',
                                 message:
-                                'Once again you login successfully\n into medidoc app',
+                                    'Once again you login successfully\n into medidoc app',
                                 buttonText: 'Go to Home',
                                 onPressed: () {
                                   controller.onHomeClick();
@@ -125,7 +126,7 @@ class LoginView extends GetView<LoginController> {
                     const SizedBox(height: 16.0),
                     CustomOutlinedIconButton(
                       label: "Sign in with Google",
-                      icon: Icons.g_translate,
+                      icon: SVGAssets.v_ic_google,
                       onPressed: () {
                         Utility.snackBar("Signed in with Google", context);
                       },
@@ -133,7 +134,7 @@ class LoginView extends GetView<LoginController> {
                     const SizedBox(height: 8.0),
                     CustomOutlinedIconButton(
                       label: "Sign in with Apple",
-                      icon: Icons.apple,
+                      icon: SVGAssets.v_ic_apple,
                       onPressed: () {
                         Utility.snackBar("Signed in with Apple", context);
                         // Handle Google Sign In
@@ -142,7 +143,7 @@ class LoginView extends GetView<LoginController> {
                     const SizedBox(height: 8.0),
                     CustomOutlinedIconButton(
                       label: "Sign in with Facebook",
-                      icon: Icons.facebook,
+                      icon: SVGAssets.v_ic_facebook,
                       onPressed: () {
                         Utility.snackBar("Signed in with Facebook", context);
                         // Handle Google Sign In

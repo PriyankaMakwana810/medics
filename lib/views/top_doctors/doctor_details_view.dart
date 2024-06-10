@@ -33,9 +33,7 @@ class DoctorDetailView extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.more_vert),
-            onPressed: () {
-              // Handle more options tap
-            },
+            onPressed: () {},
           ),
         ],
       ),
@@ -103,25 +101,11 @@ class DoctorDetailView extends StatelessWidget {
                 onPressed: () {
                   if (controller.selectedDateIndex.value == 0) {
                     Utility.snackBar('Please select a date.', context);
-                    /*Get.snackbar(
-                      'Error',
-                      'Please select a date.',
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.red,
-                      colorText: Colors.white,
-                    );*/
                     return;
                   }
 
                   if (controller.selectedTimeIndex.value == 0) {
                     Utility.snackBar('Please select a time.', context);
-                    /*Get.snackbar(
-                      'Error',
-                      'Please select a time.',
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.red,
-                      colorText: Colors.white,
-                    );*/
                     return;
                   }
                   controller.selectedDoctor.value = doctor;
@@ -156,7 +140,10 @@ Widget buildDateSelector() {
                     ? colorPrimary
                     : whiteColor,
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: colorSecondary),
+                border: Border.all(
+                    color: controller.selectedDateIndex.value != index
+                        ? colorSecondary
+                        : Colors.transparent),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Column(
@@ -209,7 +196,11 @@ Widget buildTimeSelector() {
                   : whiteColor,
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: isDisabled ? borderColor : chipBorder,
+                color: isDisabled
+                    ? borderColor
+                    : controller.selectedTimeIndex.value == index
+                        ? Colors.transparent
+                        : chipBorder,
               ),
             ),
             // margin: const EdgeInsets.only(bottom: 10),

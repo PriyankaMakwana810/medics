@@ -1,14 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:medics/config/app_assets.dart';
 import 'package:medics/controller/base_controller.dart';
 
 import '../../routes/app_pages.dart';
 
 class ResetPasswordController extends BaseController {
   var hint = 'Enter Your Email'.obs;
-  var icon = Icons.email.obs;
-  var keyboardType = TextInputType.emailAddress.obs;
+  var icon = SVGAssets.v_ic_email.obs;
+  var keyboardType = TextInputType.text.obs;
   var code = List.generate(4, (_) => ''.obs);
   var password = ''.obs;
   var confirmPassword = ''.obs;
@@ -75,12 +76,10 @@ class ResetPasswordController extends BaseController {
     }
     if (value == 0) {
       hint.value = 'Enter your Email';
-      icon.value = Icons.email;
-      keyboardType.value = TextInputType.emailAddress;
+      icon.value = SVGAssets.v_ic_email;
     } else {
       hint.value = 'Enter your Phone Number';
-      icon.value = Icons.phone;
-      keyboardType.value = TextInputType.phone;
+      icon.value = SVGAssets.v_ic_password;
     }
     update();
   }

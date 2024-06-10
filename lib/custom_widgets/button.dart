@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:medics/styles/color_constants.dart';
 
 class CustomFilledButton extends StatelessWidget {
@@ -122,7 +123,7 @@ class CustomButton extends StatelessWidget {
 class CustomOutlinedIconButton extends StatelessWidget {
   final Function() onPressed;
   final String label;
-  final IconData icon;
+  final String icon;
   final double width;
   final double radius;
 
@@ -148,9 +149,8 @@ class CustomOutlinedIconButton extends StatelessWidget {
             border: Border.all(color: textColorDisable, width: 1)),
         child: Padding(
           padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Icon(icon),
+          child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+            SvgPicture.asset(icon),
             Expanded(
               child: Text(
                 label,
