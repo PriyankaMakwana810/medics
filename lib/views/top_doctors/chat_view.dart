@@ -46,7 +46,8 @@ class ChatView extends StatelessWidget {
                 reverse: true,
                 itemCount: _chatController.messages.length,
                 itemBuilder: (context, index) {
-                  final message = _chatController.messages.reversed.toList()[index];
+                  final message =
+                      _chatController.messages.reversed.toList()[index];
                   return _buildMessageItem(message);
                 },
               ),
@@ -174,7 +175,6 @@ class ChatView extends StatelessWidget {
 
   Widget _buildInputField() {
     final TextEditingController _messageController = TextEditingController();
-
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       color: Colors.white,
