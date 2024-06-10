@@ -31,4 +31,6 @@ abstract class Routes {
   static const schedule = '/schedule';
   static const profile = '/profile';
 
+  static const saved = '/saved';
+
 }

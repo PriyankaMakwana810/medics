@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
+import 'package:medics/controller/base_controller.dart';
 import 'package:medics/models/schedule.dart';
 
-class ScheduleController extends GetxController {
+class ScheduleController extends BaseController {
   var selectedTabIndex = 0.obs;
   var schedules = <Schedule>[].obs;
 

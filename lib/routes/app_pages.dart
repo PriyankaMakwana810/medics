@@ -30,6 +30,7 @@ import '../views/splash/splash_binding.dart';
 import '../views/splash/splash_view.dart';
 import '../views/top_doctors/book_appointment_view.dart';
 import '../views/top_doctors/doctor_details_view.dart';
+import '../views/top_doctors/saved_view.dart';
 
 part 'app_routes.dart';
 
@@ -108,6 +109,7 @@ class AppPages {
     GetPage(name: Routes.messages, page: () => MessagesView()),
     GetPage(name: Routes.schedule, page: () => ScheduleView()),
     GetPage(name: Routes.profile, page: () => ProfileView()),
-    GetPage(name: Routes.chat_doctor, page: () => ChatView())
+    GetPage(name: Routes.chat_doctor, page: () => ChatView()),
+    GetPage(name: Routes.saved, page: () => SavedView())
   ];
 }

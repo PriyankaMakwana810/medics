@@ -20,7 +20,7 @@ class ArticleListView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: whiteColor,
         title: const Text(
-          "Appointment",
+          "Articles",
           style: AppTextStyles.appBarStyle,
         ),
         centerTitle: true,

@@ -6,7 +6,6 @@ import 'package:medics/controller/base_controller.dart';
 import 'package:medics/models/medicine.dart';
 
 import '../../config/app_preferences.dart';
-import '../../database/database_helper.dart';
 import '../../models/article.dart';
 import '../../models/doctor.dart';
 import '../../routes/app_pages.dart';
@@ -19,7 +18,6 @@ class HomeController extends BaseController {
   var medicines = <Medicine>[].obs;
   var currentIndex = 0;
   var isAboutTextExpanded = false.obs;
-  var quantity = 1.obs;
 
   void onSignUpButtonTap() async {
     // await appPreferences.setOnboardDetails(true);
@@ -118,26 +116,6 @@ class HomeController extends BaseController {
     selectedDateIndex.value = index;
   }
 
-  void quanitiyUpdate(int value) {
-    quantity.value = value;
-  }
-
-  void incrementQuantity() {
-    quantity.value++;
-  }
-
-  void decrementQuantity() {
-    if (quantity.value > 0) {
-      quantity.value--;
-    }
-  }
-
-  Future<int> addItemToCart(Medicine medicine, int quantity) async {
-    medicine.items = quantity;
-    print(' $quantity');
-    return await DatabaseHelper().saveToCart(medicine);
-  }
-
   void selectTime(int index) {
     selectedTimeIndex.value = index;
   }
@@ -147,9 +125,10 @@ class HomeController extends BaseController {
     Get.offAllNamed(Routes.intro);
   }
 
-  Doctor getDoctorData(String docName){
+  Doctor getDoctorData(String docName) {
     return doctors.firstWhere((m) => m.name == docName);
   }
+
   void toggleAboutText() {
     // Add this method
     isAboutTextExpanded.value = !isAboutTextExpanded.value;

@@ -92,7 +92,8 @@ class FindDoctorsView extends StatelessWidget {
                     }
                     return buildDoctorListCard(controller.doctors.first,
                         onTap: () {
-                          Get.toNamed(Routes.doctor_detail, arguments: controller.doctors.first);
+                      Get.toNamed(Routes.doctor_detail,
+                          arguments: controller.doctors.first);
 
                       // controller.selectDoctor(controller.doctors.first);
                     });
@@ -113,7 +114,11 @@ class FindDoctorsView extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final doctor = controller.doctors[index];
                           return _buildRecentDoctorAvatar(
-                              doctor.image, doctor.name, onTap: () => controller.selectDoctor(doctor),);
+                            doctor.image,
+                            doctor.name,
+                            onTap: () => Get.toNamed(Routes.doctor_detail,
+                                arguments: doctor),
+                          );
                         },
                       ),
                     );
@@ -124,11 +129,11 @@ class FindDoctorsView extends StatelessWidget {
   }
 
   Widget _buildRecentDoctorAvatar(String imageUrl, String name,
-      {VoidCallback? onTap}) {
+      {required VoidCallback onTap}) {
     return Padding(
       padding: const EdgeInsets.only(right: 20),
       child: InkWell(
-        onTap: () => onTap,
+        onTap: () => onTap(),
         child: Column(
           children: [
             CircleAvatar(

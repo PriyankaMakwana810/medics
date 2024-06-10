@@ -135,22 +135,16 @@ Widget buildArticleCard(Article article, {VoidCallback? onTap}) {
                 ],
               ),
             ),
-            trailing: const Column(
+            trailing: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Icon(
-                  Icons.bookmark,
+                  article.isSaved ? Icons.bookmark : Icons.bookmark_border,
                   color: colorPrimary,
                 ),
               ],
-            )
-            /*Text(
-              description,
-              style: TextStyle(
-                  fontSize: 10, fontWeight: FontWeight.w500, color: colorGray),
-            ),*/
-            ),
+            )),
       ),
     ),
   );
@@ -234,6 +228,5 @@ Widget buildBannerAd(String title, String btnText, String imgPath) {
             child: Image.asset(imgPath)),
       ],
     ),
-
   );
 }

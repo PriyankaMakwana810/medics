@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:medics/config/app_strings.dart';
@@ -12,7 +13,6 @@ class OnBoardingView extends GetView<OnboardingController> {
   Widget build(BuildContext context) {
     const bodyStyle = TextStyle(fontSize: 19.0);
     const titleStyle = TextStyle(fontSize: 24.0, fontWeight: FontWeight.w700);
-
     const pageDecoration = PageDecoration(
       titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
       bodyTextStyle: bodyStyle,
@@ -26,7 +26,7 @@ class OnBoardingView extends GetView<OnboardingController> {
         bodyWidget: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/doctor1.png'),
+            Image.asset('assets/images/doctor1.png', width: 250, height: 450),
             SizedBox(height: 30),
             Text(
               AppStrings.onboardingText1,
@@ -42,7 +42,7 @@ class OnBoardingView extends GetView<OnboardingController> {
         bodyWidget: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/doctor2.png'),
+            Image.asset('assets/images/doctor2.png', width: 250, height: 450),
             SizedBox(height: 30),
             Text(
               AppStrings.onboardingText2,
@@ -58,7 +58,7 @@ class OnBoardingView extends GetView<OnboardingController> {
         bodyWidget: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/doctor3.png'),
+            Image.asset('assets/images/doctor3.png', width: 250, height: 450),
             SizedBox(height: 30),
             Text(
               AppStrings.onboardingText3,
@@ -70,51 +70,56 @@ class OnBoardingView extends GetView<OnboardingController> {
         decoration: pageDecoration,
       ),
     ];
-
     Dimensions.screenWidth = MediaQuery.of(context).size.width;
     Dimensions.screenHeight = MediaQuery.of(context).size.height;
     return GetBuilder(builder: (OnboardingController controller) {
-      return Stack(children: [
-        IntroductionScreen(
-          pages: pageViewModelList,
-          showSkipButton: false,
-          showNextButton: true,
-          next: const Icon(Icons.arrow_circle_right,
-              size: 50, color: colorPrimary),
-          done: const Icon(Icons.arrow_circle_right,
-              size: 50, color: colorPrimary),
-          onDone: () {
-            controller.setOnboarding();
-          },
-          // controlsMargin: const EdgeInsets.all(16),
-          // controlsPadding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
-          dotsDecorator: const DotsDecorator(
-            size: Size(8.0, 8.0),
-            color: textColorDisable,
-            activeColor: colorPrimary,
-            activeSize: Size(22.0, 8.0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(2.0)),
-            ),
-            activeShape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(2.0)),
-            ),
-          ),
-        ),
-        Positioned(
-          top: 30.0,
-          right: 16.0,
-          child: TextButton(
-            onPressed: () {
+      return Scaffold(
+        backgroundColor: whiteColor,
+        body: Stack(children: [
+          IntroductionScreen(
+            pages: pageViewModelList,
+            showSkipButton: false,
+            showNextButton: true,
+            next: const Icon(Icons.arrow_circle_right_rounded,
+                size: 50, color: colorPrimary),
+            done: const Icon(Icons.arrow_circle_right_rounded,
+                size: 50, color: colorPrimary),
+            nextStyle: TextButton.styleFrom(alignment: Alignment.bottomRight),
+            doneStyle: TextButton.styleFrom(alignment: Alignment.bottomRight),
+            onDone: () {
               controller.setOnboarding();
             },
-            child: const Text(
-              "Skip",
-              style: TextStyle(color: textColorDisable),
+
+            // controlsMargin: const EdgeInsets.all(16),
+            // controlsPadding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
+            dotsDecorator: const DotsDecorator(
+              size: Size(22.0, 4.0),
+              color: textColorDisable,
+              activeColor: colorPrimary,
+              activeSize: Size(22.0, 4.0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(2.0)),
+              ),
+              activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(2.0)),
+              ),
             ),
           ),
-        ),
-      ]);
+          Positioned(
+            top: 30.0,
+            right: 16.0,
+            child: TextButton(
+              onPressed: () {
+                controller.setOnboarding();
+              },
+              child: const Text(
+                "Skip",
+                style: TextStyle(color: textColorDisable),
+              ),
+            ),
+          ),
+        ]),
+      );
     });
   }
 }

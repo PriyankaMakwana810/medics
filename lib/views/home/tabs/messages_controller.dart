@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:medics/models/doctor.dart';
+import 'package:medics/controller/base_controller.dart';
 
 import '../../../models/message.dart';
 
-class MessageController extends GetxController {
+class MessageController extends BaseController {
   var messages = <Message>[].obs;
 
   @override
@@ -53,7 +53,7 @@ class MessageController extends GetxController {
   List<Message> getPrivateMessages() {
     return messages.where((m) => !m.isGroup).toList();
   }
-  /*Doctor getDoctorData(String docName){
+/*Doctor getDoctorData(String docName){
     return messages.firstWhere((m) => m.doctorName == docName);
   }*/
 }

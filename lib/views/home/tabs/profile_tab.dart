@@ -5,6 +5,7 @@ import 'package:medics/config/app_assets.dart';
 import 'package:medics/custom_widgets/custom_dialogs.dart';
 import 'package:medics/styles/color_constants.dart';
 
+import '../../../routes/app_pages.dart';
 import '../home_controller.dart';
 
 class ProfileView extends StatelessWidget {
@@ -110,7 +111,9 @@ class ProfileView extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             SizedBox(height: 10),
-            _buildMenuItem(SVGAssets.icon_heart, 'My Saved', () {}),
+            _buildMenuItem(SVGAssets.icon_heart, 'My Saved', () {
+              Get.toNamed(Routes.saved);
+            }),
             Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Divider()),
