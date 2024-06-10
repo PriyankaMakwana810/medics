@@ -42,7 +42,14 @@ class AppointmentDetailView extends StatelessWidget {
                 onTap: () {},
               ),
               const SizedBox(height: 10),
-              _buildSectionHeader('Date'),
+              _buildSectionHeader('Date', onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const DateTimeSelectionDialog();
+                  },
+                );
+              }),
               Row(
                 children: [
                   CircleAvatar(
@@ -51,13 +58,17 @@ class AppointmentDetailView extends StatelessWidget {
                     child: SvgPicture.asset(SVGAssets.schedule_selected),
                   ),
                   const SizedBox(width: 10),
-                  Text(
-                    '${controller.dates[selectedDateIndex]['day']}, Jun ${controller.dates[selectedDateIndex]['date']}, 2024 | ${controller.times[selectedTimeIndex]} ',
-                    style: const TextStyle(
-                        color: Color(0xFF555555),
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16.0),
-                  ),
+                  Obx(
+                    () {
+                      return Text(
+                        '${controller.dates[controller.selectedDateIndex.value]['day']}, Jun ${controller.dates[controller.selectedDateIndex.value]['date']}, 2024 | ${controller.times[controller.selectedTimeIndex.value]} ',
+                        style: const TextStyle(
+                            color: Color(0xFF555555),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16.0),
+                      );
+                    },
+                  )
                 ],
               ),
               const SizedBox(height: 10),

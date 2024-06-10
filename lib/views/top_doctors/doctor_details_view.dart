@@ -64,11 +64,11 @@ class DoctorDetailView extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              _buildDateSelector(),
+              buildDateSelector(),
               const SizedBox(height: 20),
               const Divider(color: colorSecondary),
               const SizedBox(height: 20),
-              _buildTimeSelector(),
+              buildTimeSelector(),
               const SizedBox(height: 30),
             ],
           ),
@@ -132,101 +132,100 @@ class DoctorDetailView extends StatelessWidget {
     );
   }
 
-  Widget _buildDateSelector() {
-    final HomeController controller = Get.find();
-    return Obx(() {
-      return SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: List.generate(controller.dates.length, (index) {
-            final date = controller.dates[index];
-            return GestureDetector(
-              onTap: () {
-                controller.selectDate(index);
-              },
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                decoration: BoxDecoration(
-                  color: controller.selectedDateIndex.value == index
-                      ? colorPrimary
-                      : whiteColor,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: colorSecondary),
-                ),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                // padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-
-                child: Column(
-                  children: [
-                    Text(
-                      date['day']!,
-                      style: TextStyle(
-                        fontSize: Dimensions.fontSizeSmall,
-                        fontWeight: FontWeight.normal,
-                        color: controller.selectedDateIndex.value == index
-                            ? whiteColor
-                            : textColorDisable,
-                      ),
-                    ),
-                    Text(
-                      date['date']!,
-                      style: TextStyle(
-                        fontSize: Dimensions.fontSize18,
-                        fontWeight: FontWeight.bold,
-                        color: controller.selectedDateIndex.value == index
-                            ? whiteColor
-                            : textColor,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }),
-        ),
-      );
-    });
-  }
-
-  Widget _buildTimeSelector() {
-    final HomeController controller = Get.find();
-    return Obx(() {
-      return Wrap(
-        spacing: 14.0, // Adjust spacing between items
-        runSpacing: 14.0, // Adjust spacing between rows
-        children: List.generate(controller.times.length, (index) {
-          final time = controller.times[index];
-          final bool isDisabled = controller.disabledTimes.contains(index);
+}
+Widget buildDateSelector() {
+  final HomeController controller = Get.find();
+  return Obx(() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: List.generate(controller.dates.length, (index) {
+          final date = controller.dates[index];
           return GestureDetector(
-            onTap: isDisabled ? null : () => controller.selectTime(index),
+            onTap: () {
+              controller.selectDate(index);
+            },
             child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 5.0),
               decoration: BoxDecoration(
-                color: controller.selectedTimeIndex.value == index
+                color: controller.selectedDateIndex.value == index
                     ? colorPrimary
                     : whiteColor,
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: isDisabled ? borderColor : chipBorder,
-                ),
+                border: Border.all(color: colorSecondary),
               ),
-              // margin: const EdgeInsets.only(bottom: 10),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              child: Text(
-                time,
-                style: TextStyle(
-                  color: isDisabled
-                      ? borderColor
-                      : controller.selectedTimeIndex.value == index
+              padding:
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+
+              child: Column(
+                children: [
+                  Text(
+                    date['day']!,
+                    style: TextStyle(
+                      fontSize: Dimensions.fontSizeSmall,
+                      fontWeight: FontWeight.normal,
+                      color: controller.selectedDateIndex.value == index
+                          ? whiteColor
+                          : textColorDisable,
+                    ),
+                  ),
+                  Text(
+                    date['date']!,
+                    style: TextStyle(
+                      fontSize: Dimensions.fontSize18,
+                      fontWeight: FontWeight.bold,
+                      color: controller.selectedDateIndex.value == index
                           ? whiteColor
                           : textColor,
-                ),
+                    ),
+                  ),
+                ],
               ),
             ),
           );
         }),
-      );
-    });
-  }
+      ),
+    );
+  });
+}
+
+Widget buildTimeSelector() {
+  final HomeController controller = Get.find();
+  return Obx(() {
+    return Wrap(
+      spacing: 14.0, // Adjust spacing between items
+      runSpacing: 14.0, // Adjust spacing between rows
+      children: List.generate(controller.times.length, (index) {
+        final time = controller.times[index];
+        final bool isDisabled = controller.disabledTimes.contains(index);
+        return GestureDetector(
+          onTap: isDisabled ? null : () => controller.selectTime(index),
+          child: Container(
+            decoration: BoxDecoration(
+              color: controller.selectedTimeIndex.value == index
+                  ? colorPrimary
+                  : whiteColor,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: isDisabled ? borderColor : chipBorder,
+              ),
+            ),
+            // margin: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            child: Text(
+              time,
+              style: TextStyle(
+                color: isDisabled
+                    ? borderColor
+                    : controller.selectedTimeIndex.value == index
+                    ? whiteColor
+                    : textColor,
+              ),
+            ),
+          ),
+        );
+      }),
+    );
+  });
 }

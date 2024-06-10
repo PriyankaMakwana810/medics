@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:medics/custom_widgets/button.dart';
 import 'package:medics/styles/color_constants.dart';
 
+import '../views/home/home_controller.dart';
+import '../views/top_doctors/doctor_details_view.dart';
+
 class SuccessDialog extends StatelessWidget {
   final String title;
   final String message;
@@ -138,4 +141,54 @@ class LogoutDialog extends StatelessWidget {
           ],
         ),
       );
+}
+
+class DateTimeSelectionDialog extends StatelessWidget {
+  const DateTimeSelectionDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final HomeController controller = Get.find();
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      elevation: 0,
+      backgroundColor: whiteColor,
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Select Date and Time',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text('Date', style: TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            buildDateSelector(),
+            // const DateSelector(),
+            const SizedBox(height: 20),
+            const Text('Time', style: TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            buildTimeSelector(),
+            const SizedBox(height: 20),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomButton(
+                  label: 'Confirm',
+                  onPressed: () => Get.back(),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
