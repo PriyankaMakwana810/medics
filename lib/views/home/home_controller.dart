@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart'; // Add this import for date formatting
 import 'package:medics/controller/base_controller.dart';
 import 'package:medics/models/medicine.dart';
-import 'package:medics/styles/color_constants.dart';
 
 import '../../config/app_preferences.dart';
+import '../../database/database_helper.dart';
 import '../../models/article.dart';
 import '../../models/doctor.dart';
 import '../../routes/app_pages.dart';
@@ -49,16 +49,10 @@ class HomeController extends BaseController {
 
   @override
   void onInit() {
-
     super.onInit();
     loadDoctorData();
     loadArticleData();
     generateCurrentWeekDates();
-    /*SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: whiteColor,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarBrightness: Brightness.light,
-    ));*/
   }
 
   void generateCurrentWeekDates() {
@@ -80,13 +74,42 @@ class HomeController extends BaseController {
     final data = await json.decode(response) as List;
     doctors.value = data.map((e) => Doctor.fromJson(e)).toList();
   }
-
   Future<void> loadArticleData() async {
+    final String response =
+    await rootBundle.loadString('assets/data/article_data.json');
+    final data = await json.decode(response) as List;
+    List<Article> jsonArticles = data.map((e) => Article.fromJson(e)).toList();
+
+    // Load saved articles from database
+    List<Article> savedArticles = await DatabaseHelper.getSavedArticles();
+    Map<int, Article> savedArticlesMap = {for (var article in savedArticles) article.id: article};
+
+    articles.value = jsonArticles.map((article) {
+      if (savedArticlesMap.containsKey(article.id)) {
+        article.isSaved = savedArticlesMap[article.id]!.isSaved;
+      }
+      return article;
+    }).toList();
+  }
+
+  /*Future<void> loadArticleData() async {
     final String response =
         await rootBundle.loadString('assets/data/article_data.json');
     final data = await json.decode(response) as List;
-    articles.value = data.map((e) => Article.fromJson(e)).toList();
-  }
+    List<Article> jsonArticles = data.map((e) => Article.fromJson(e)).toList();
+
+    // Load saved articles from database
+    List<Article> savedArticles = await DatabaseHelper.getSavedArticles();
+    Map<int, Article> savedArticlesMap = {for (var article in savedArticles) article.id: article};
+
+    articles.value = jsonArticles.map((article) {
+      if (savedArticlesMap.containsKey(article.id)) {
+        article.isSaved = true;
+      }
+      return article;
+    }).toList();
+
+  }*/
 
   Future<void> loadPharmacyData() async {
     final String response =
@@ -124,8 +147,10 @@ class HomeController extends BaseController {
     print('Doctor card tapped: $doctorName');
   }
 
-  void onArticleTap(String articleTitle) {
-    print('Article tapped: $articleTitle');
+  void onArticleTap(Article article, bool isSaved) {
+    saveArticle(article, isSaved);
+    loadArticleData();
+    print('Article tapped: ${article.title}');
   }
 
   void selectDate(int index) {
@@ -148,5 +173,11 @@ class HomeController extends BaseController {
   void toggleAboutText() {
     // Add this method
     isAboutTextExpanded.value = !isAboutTextExpanded.value;
+  }
+
+  Future<int> saveArticle(Article article, bool isSaved) async {
+    article.isSaved = isSaved;
+    print(' $isSaved');
+    return await DatabaseHelper().saveArticle(article);
   }
 }

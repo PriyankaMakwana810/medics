@@ -122,7 +122,7 @@ class DashboardView extends StatelessWidget {
                           article,
                           onTap: () {
                             print(article.time);
-                            controller.onArticleTap(article.title);
+                            controller.onArticleTap(article, !article.isSaved);
                           },
                         );
                       }).toList(),

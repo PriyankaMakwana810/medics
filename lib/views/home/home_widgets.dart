@@ -89,63 +89,63 @@ Widget buildDoctorCard(Doctor doctor, {required VoidCallback onTap}) {
 Widget buildArticleCard(Article article, {VoidCallback? onTap}) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 16.0),
-    child: InkWell(
-      onTap: () => onTap,
-      child: Container(
-        decoration: BoxDecoration(
-            color: whiteColor,
-            borderRadius: BorderRadius.circular(6),
-            border: Border.all(color: colorSecondary, width: 1)),
-        // margin: EdgeInsets.only(bottom: 10),
-        child: ListTile(
-            leading: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(article.imageUrl,
-                    width: 60, height: 60, fit: BoxFit.fill)),
-            title: Text(article.title,
-                style:
-                    const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-            subtitle: Padding(
-              padding: const EdgeInsets.only(top: 4.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    article.time,
-                    style: const TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500,
-                        color: colorGray),
-                  ),
-                  const Text(
-                    " • ",
-                    style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500,
-                        color: colorGray),
-                  ),
-                  Text(
-                    article.timeToRead,
-                    style: const TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500,
-                        color: colorPrimary),
-                  ),
-                ],
-              ),
-            ),
-            trailing: Column(
+    child: Container(
+      decoration: BoxDecoration(
+          color: whiteColor,
+          borderRadius: BorderRadius.circular(6),
+          border: Border.all(color: colorSecondary, width: 1)),
+      // margin: EdgeInsets.only(bottom: 10),
+      child: ListTile(
+          leading: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(article.imageUrl,
+                  width: 60, height: 60, fit: BoxFit.fill)),
+          title: Text(article.title,
+              style:
+                  const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+          subtitle: Padding(
+            padding: const EdgeInsets.only(top: 4.0),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(
-                  article.isSaved ? Icons.bookmark : Icons.bookmark_border,
-                  color: colorPrimary,
+                Text(
+                  article.time,
+                  style: const TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w500,
+                      color: colorGray),
+                ),
+                const Text(
+                  " • ",
+                  style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w500,
+                      color: colorGray),
+                ),
+                Text(
+                  article.timeToRead,
+                  style: const TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w500,
+                      color: colorPrimary),
                 ),
               ],
-            )),
-      ),
+            ),
+          ),
+          trailing: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              IconButton(
+                onPressed: onTap,
+                icon: Icon(
+                  article.isSaved ? Icons.bookmark : Icons.bookmark_outline,
+                  color: colorPrimary,
+                ),
+              )
+            ],
+          )),
     ),
   );
 }

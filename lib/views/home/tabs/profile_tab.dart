@@ -39,7 +39,7 @@ class ProfileView extends StatelessWidget {
 
   Widget _buildHeader(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
       child: Column(
         children: [
           const SizedBox(height: 30),

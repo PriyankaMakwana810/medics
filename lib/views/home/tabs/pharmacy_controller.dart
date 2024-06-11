@@ -37,7 +37,6 @@ class PharmacyController extends BaseController {
     }
   }
 
-
   Future<int> addItemToCart(Medicine medicine, int quantity) async {
     medicine.items = quantity;
     print(' $quantity');

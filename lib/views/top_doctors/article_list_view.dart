@@ -12,7 +12,7 @@ import '../home/home_widgets.dart';
 class ArticleListView extends StatelessWidget {
   ArticleListView({super.key});
 
-  final HomeController controller = Get.put(HomeController());
+  final HomeController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -104,13 +104,13 @@ class ArticleListView extends StatelessWidget {
                       article,
                       onTap: () {
                         print(article.time);
-                        controller.onArticleTap(article.title);
+                        controller.onArticleTap(article, !article.isSaved);
+                        // controller.onArticleTap(article.title);
                       },
                     );
                   }).toList(),
                 );
               }),
-
             ],
           ),
         ),

@@ -22,11 +22,7 @@ class CartController extends BaseController {
     totalSum.value = sum;
     medicines.assignAll(medicineList);
   }
-  /*Future<void> deleteItemFromCart(Medicine medicine) async {
-    await DatabaseHelper().deleteFromCart(medicine.id);
-    medicines.remove(medicine);
-    totalSum.value -= double.parse(medicine.price) * medicine.items;
-  }*/
+
   Future<bool> deleteItemFromCart(Medicine medicine) async {
     int result = await DatabaseHelper().deleteFromCart(medicine.id);
     if (result > 0) {

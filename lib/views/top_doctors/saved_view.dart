@@ -43,7 +43,8 @@ class SavedView extends StatelessWidget {
                       article,
                       onTap: () {
                         print(article.time);
-                        controller.onArticleTap(article.title);
+                        controller.onArticleTap(article, !article.isSaved);
+                        // controller.onArticleTap(article.title);
                       },
                     );
                   }).toList(),
