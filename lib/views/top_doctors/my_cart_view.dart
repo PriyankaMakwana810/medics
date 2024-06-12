@@ -38,7 +38,7 @@ class MyCartView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(AppAssets.emptyCart, width: 150, height: 150),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   const Text(
                     'Your cart is empty',
                     style: TextStyle(
@@ -95,7 +95,7 @@ class MyCartView extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Subtotal', style: AppTextStyles.tableRow1),
+                          const Text('Subtotal', style: AppTextStyles.tableRow1),
                           Text(
                               '\$${cartController.totalSum.value.toStringAsFixed(2)}'),
                         ],
@@ -112,14 +112,14 @@ class MyCartView extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Total',
+                          const Text('Total',
                               style: TextStyle(
                                   fontSize: 14.0,
                                   color: textColor,
                                   fontWeight: FontWeight.w600)),
                           Text(
                             '\$${(cartController.totalSum.value + 1.0).toStringAsFixed(2)}',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 14.0,
                                 color: colorPrimary,
                                 fontWeight: FontWeight.w600),
@@ -184,7 +184,7 @@ class MyCartView extends StatelessWidget {
         if (cartController.medicines.isNotEmpty) {
           // return const Center(child: CircularProgressIndicator());
           return Container(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             height: 70,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -248,7 +248,7 @@ class MyCartView extends StatelessWidget {
             ),
           );
         }
-        return Text('');
+        return const Text('');
       }),
     );
   }
@@ -297,7 +297,7 @@ class MyCartView extends StatelessWidget {
                       ),
                       IconButton(
                           onPressed: () => onDeleteTap(),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.delete_outline,
                             color: colorGray,
                           ))
@@ -323,7 +323,7 @@ class MyCartView extends StatelessWidget {
                           onPressed: () {
                             // Handle increment
                           },
-                          icon: Icon(Icons.add_box, color: colorPrimary),
+                          icon: const Icon(Icons.add_box, color: colorPrimary),
                           iconSize: 24),
                       const Spacer(),
                       Text('\$ ${medicine.price}',

@@ -63,10 +63,10 @@ class ProfileView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _buildStatItem('Heart rate', '215bpm', SVGAssets.icon_heartbeat),
-              Container(
+              const SizedBox(
                   height: 50, child: VerticalDivider(color: Colors.white)),
               _buildStatItem('Calories', '756cal', SVGAssets.icon_fire),
-              Container(
+              const SizedBox(
                   height: 50, child: VerticalDivider(color: Colors.white)),
               _buildStatItem('Weight', '103lbs', SVGAssets.icon_barbell),
             ],
@@ -110,26 +110,26 @@ class ProfileView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildMenuItem(SVGAssets.icon_heart, 'My Saved', () {
               Get.toNamed(Routes.saved);
             }),
             Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Divider()),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: const Divider()),
             // Divider(),
             _buildMenuItem(SVGAssets.icon_appointment, 'Appointment', () {}),
             Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Divider()),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: const Divider()),
             _buildMenuItem(SVGAssets.icon_wallet, 'Payment Method', () {}),
             Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Divider()),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: const Divider()),
             _buildMenuItem(SVGAssets.chat_icon, 'FAQs', () {}),
             Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Divider()),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: const Divider()),
             _buildLogoutMenuItem(Icons.logout, 'Logout', () {
               showDialog(
                 context: context,

@@ -15,6 +15,8 @@ import '../../styles/text_style.dart';
 class LoginView extends GetView<LoginController> {
   final _formKey = GlobalKey<FormState>();
 
+  LoginView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder(builder: (LoginController controller) {

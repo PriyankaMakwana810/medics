@@ -1,9 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/route_manager.dart';
-import 'package:medics/styles/color_constants.dart';
 
 import '../../config/app_dimention.dart';
 import '../../config/app_preferences.dart';

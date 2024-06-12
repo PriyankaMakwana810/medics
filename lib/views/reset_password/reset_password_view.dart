@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/styles/color_constants.dart';
-import 'package:medics/utils/utility.dart';
 import 'package:medics/views/reset_password/reset_password_controller.dart';
 
 import '../../config/app_strings.dart';
@@ -12,6 +11,8 @@ import '../../styles/text_style.dart';
 
 class ResetPasswordView extends GetView<ResetPasswordController> {
   final _formKey = GlobalKey<FormState>();
+
+  ResetPasswordView({super.key});
 
   @override
   Widget build(BuildContext context) {

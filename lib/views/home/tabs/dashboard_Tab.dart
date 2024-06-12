@@ -80,12 +80,12 @@ class DashboardView extends StatelessWidget {
                     Get.toNamed(Routes.top_doctor);
                     // Handle "See all" tap
                   }),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Obx(() {
                     if (controller.doctors.isEmpty) {
                       return const Center(child: CircularProgressIndicator());
                     }
-                    return Container(
+                    return SizedBox(
                       height: 180.0,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
@@ -105,16 +105,16 @@ class DashboardView extends StatelessWidget {
                       ),
                     );
                   }),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   buildSectionHeader('Health article', onTap: () {
                     Get.toNamed(Routes.articlesList);
                     // Handle "See all" tap
                   }),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   // _buildArticleList(),
                   Obx(() {
                     if (controller.articles.isEmpty) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     }
                     return Column(
                       children: controller.articles.map((article) {

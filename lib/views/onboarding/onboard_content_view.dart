@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:medics/styles/color_constants.dart';
 
-import '../../config/app_dimention.dart';
 
 class OnBoardContent extends StatelessWidget {
   final String image;
@@ -19,7 +18,7 @@ class OnBoardContent extends StatelessWidget {
       children: [
         // const Spacer(),
         Image.asset(image),
-        SizedBox(height: 30),
+        const SizedBox(height: 30),
         Text(
           heading,
           textAlign: TextAlign.center,

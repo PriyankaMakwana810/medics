@@ -12,7 +12,7 @@ import 'package:medics/styles/color_constants.dart';
 class MapController extends BaseController {
   final Completer<GoogleMapController> mapController =
       Completer<GoogleMapController>();
-  var currentPosition = LatLng(23.0225, 72.5714).obs;
+  var currentPosition = const LatLng(23.0225, 72.5714).obs;
   var address = 'Fetching address...'.obs;
   var markers = <Marker>[].obs;
   var circles = <Circle>[].obs;
@@ -57,14 +57,14 @@ class MapController extends BaseController {
     polylines.clear();
 
     markers.add(Marker(
-      markerId: MarkerId('currentLocation'),
+      markerId: const MarkerId('currentLocation'),
       position: position,
       icon: BitmapDescriptor.defaultMarkerWithHue(160.0),
       // icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-      infoWindow: InfoWindow(title: 'Current Location'),
+      infoWindow: const InfoWindow(title: 'Current Location'),
     ));
     circles.add(Circle(
-      circleId: CircleId('radius'),
+      circleId: const CircleId('radius'),
       center: position,
       radius: 500,
       fillColor: Colors.transparent,
@@ -72,7 +72,7 @@ class MapController extends BaseController {
       strokeWidth: 2,
     ));
     polylines.add(Polyline(
-      polylineId: PolylineId('radiusLine'),
+      polylineId: const PolylineId('radiusLine'),
       points: _createCirclePoints(position, 500),
       color: colorPrimary,
       width: 2,

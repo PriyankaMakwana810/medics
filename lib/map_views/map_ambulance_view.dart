@@ -49,11 +49,11 @@ class MapAmbulanceView extends StatelessWidget {
             left: 15,
             right: 15,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Colors.black12,
                     blurRadius: 10,
@@ -61,7 +61,7 @@ class MapAmbulanceView extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Row(
+              child: const Row(
                 children: [
                   Icon(Icons.search, color: Colors.grey),
                   SizedBox(width: 10),
@@ -82,11 +82,11 @@ class MapAmbulanceView extends StatelessWidget {
             left: 15,
             right: 15,
             child: Container(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Colors.black12,
                     blurRadius: 10,
@@ -97,19 +97,19 @@ class MapAmbulanceView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Confirm your address',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Obx(() => Text(
                         mapController.address.value,
-                        style: TextStyle(fontSize: 14),
+                        style: const TextStyle(fontSize: 14),
                       )),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   CustomFilledButton(onPressed: () {}, label: 'Confirm Location')
                   // ElevatedButton(
                   //   onPressed: () {

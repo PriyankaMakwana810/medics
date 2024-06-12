@@ -93,7 +93,7 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final bool isPrimary;
 
-  CustomButton({
+  const CustomButton({super.key, 
     required this.label,
     required this.onPressed,
     this.isPrimary = true,
@@ -109,12 +109,12 @@ class CustomButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
         ),
-        side: isPrimary ? null : BorderSide(color: colorPrimary),
-        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+        side: isPrimary ? null : const BorderSide(color: colorPrimary),
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
       ),
       child: Text(
         label,
-        style: TextStyle(fontSize: 18),
+        style: const TextStyle(fontSize: 18),
       ),
     );
   }

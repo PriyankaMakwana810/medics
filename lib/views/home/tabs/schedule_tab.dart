@@ -25,16 +25,16 @@ class ScheduleView extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Schedule', style: AppTextStyles.heading1),
+                const Text('Schedule', style: AppTextStyles.heading1),
                 SvgPicture.asset(SVGAssets.notification_icon),
               ],
             ),
           ),
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(70),
+            preferredSize: const Size.fromHeight(70),
             child: Container(
               height: 50,
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               // padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
               decoration: ShapeDecoration(
                   shape: RoundedRectangleBorder(
@@ -91,7 +91,7 @@ class ScheduleView extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: colorSecondary, width: 1),
         ),
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -104,14 +104,14 @@ class ScheduleView extends StatelessWidget {
                   children: [
                     Text(
                       schedule.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
                       schedule.designation,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         color: colorGray,
                       ),
@@ -124,27 +124,27 @@ class ScheduleView extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    Icon(Icons.calendar_today, size: 14, color: color5555),
-                    SizedBox(width: 5),
+                    const Icon(Icons.calendar_today, size: 14, color: color5555),
+                    const SizedBox(width: 5),
                     Text(
                       schedule.date,
-                      style: TextStyle(fontSize: 14, color: color5555),
+                      style: const TextStyle(fontSize: 14, color: color5555),
                     ),
                   ],
                 ),
                 Row(
                   children: [
-                    Icon(Icons.access_time, size: 14, color: color5555),
-                    SizedBox(width: 5),
+                    const Icon(Icons.access_time, size: 14, color: color5555),
+                    const SizedBox(width: 5),
                     Text(
                       schedule.time,
-                      style: TextStyle(fontSize: 14, color: color5555),
+                      style: const TextStyle(fontSize: 14, color: color5555),
                     ),
                   ],
                 ),
@@ -155,7 +155,7 @@ class ScheduleView extends StatelessWidget {
                         color: schedule.status == 'Confirmed'
                             ? Colors.green
                             : color5555),
-                    SizedBox(width: 5),
+                    const SizedBox(width: 5),
                     Text(
                       schedule.status == 'Completed'
                           ? 'Completed'
@@ -170,7 +170,7 @@ class ScheduleView extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -184,10 +184,10 @@ class ScheduleView extends StatelessWidget {
                       backgroundColor: colorSecondary,
                       elevation: 0,
                     ),
-                    child: Text('Cancel'),
+                    child: const Text('Cancel'),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {},
@@ -198,7 +198,7 @@ class ScheduleView extends StatelessWidget {
                       backgroundColor: colorPrimary,
                       elevation: 0,
                     ),
-                    child: Text('Reschedule'),
+                    child: const Text('Reschedule'),
                   ),
                 ),
               ],

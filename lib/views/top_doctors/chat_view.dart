@@ -175,7 +175,7 @@ class ChatView extends StatelessWidget {
   }
 
   Widget _buildInputField() {
-    final TextEditingController _messageController = TextEditingController();
+    final TextEditingController messageController = TextEditingController();
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       color: Colors.white,
@@ -183,7 +183,7 @@ class ChatView extends StatelessWidget {
         children: [
           Expanded(
             child: TextFormField(
-              controller: _messageController,
+              controller: messageController,
               cursorColor: colorPrimary,
               style: const TextStyle(
                   fontSize: Dimensions.fontSizeDefault,
@@ -214,12 +214,12 @@ class ChatView extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: 15),
+          const SizedBox(width: 15),
           InkWell(
             onTap: () {
-              if (_messageController.text.trim().isNotEmpty) {
-                _chatController.sendMessage(_messageController.text.trim());
-                _messageController.clear();
+              if (messageController.text.trim().isNotEmpty) {
+                _chatController.sendMessage(messageController.text.trim());
+                messageController.clear();
               }
             },
             child: Container(

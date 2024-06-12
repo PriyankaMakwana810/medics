@@ -45,7 +45,7 @@ class AnimatedToggle extends StatelessWidget {
                     color: backgroundColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(Get.width * 0.1),
-                      side: BorderSide(color: textColorDisable),
+                      side: const BorderSide(color: textColorDisable),
                     ),
                   ),
                   child: Row(
@@ -75,7 +75,7 @@ class AnimatedToggle extends StatelessWidget {
                     ? Alignment.centerLeft
                     : Alignment.centerRight,
                 child: Container(
-                  margin: EdgeInsets.all(4),
+                  margin: const EdgeInsets.all(4),
                   width: Get.width * 0.45,
                   height: Get.width * 0.12,
                   decoration: ShapeDecoration(

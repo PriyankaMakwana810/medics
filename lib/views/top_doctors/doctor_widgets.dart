@@ -21,24 +21,24 @@ Widget buildDoctorListCard(Doctor doctor, {required Function() onTap}) {
               child: Image.asset(doctor.image,
                   width: 100, height: 100, fit: BoxFit.cover),
             ),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(doctor.name,
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                          const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   Text(doctor.designation,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color: colorGray)),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Container(
                     // width: Dimensions.screenWidth/10,
                     padding:
-                        EdgeInsets.only(left: 4, right: 4, top: 1, bottom: 1),
+                        const EdgeInsets.only(left: 4, right: 4, top: 1, bottom: 1),
                     decoration: BoxDecoration(
                         color: colorSecondary,
                         borderRadius: BorderRadius.circular(6),
@@ -46,22 +46,22 @@ Widget buildDoctorListCard(Doctor doctor, {required Function() onTap}) {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.star_outlined,
+                        const Icon(Icons.star_outlined,
                             color: colorPrimary, size: 10),
-                        SizedBox(width: 2),
+                        const SizedBox(width: 2),
                         Text(
                           doctor.rate,
-                          style: TextStyle(color: colorPrimary, fontSize: 10),
+                          style: const TextStyle(color: colorPrimary, fontSize: 10),
                         )
                       ],
                     ),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Row(
                     children: [
-                      Icon(Icons.location_on, color: colorGray, size: 10),
+                      const Icon(Icons.location_on, color: colorGray, size: 10),
                       Text(doctor.distance,
-                          style: TextStyle(color: colorGray, fontSize: 10)),
+                          style: const TextStyle(color: colorGray, fontSize: 10)),
                     ],
                   ),
                 ],

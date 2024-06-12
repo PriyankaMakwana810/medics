@@ -216,7 +216,7 @@ Widget buildBannerAd(String title, String btnText, String imgPath) {
                       ElevatedButton.styleFrom(backgroundColor: colorPrimary),
                   child: Text(
                     btnText,
-                    style: TextStyle(color: whiteColor),
+                    style: const TextStyle(color: whiteColor),
                   ),
                 )
               ],
@@ -224,7 +224,7 @@ Widget buildBannerAd(String title, String btnText, String imgPath) {
           ),
         ),
         Container(
-            constraints: BoxConstraints(maxWidth: 130),
+            constraints: const BoxConstraints(maxWidth: 130),
             child: Image.asset(imgPath)),
       ],
     ),

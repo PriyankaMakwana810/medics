@@ -14,7 +14,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final String icon;
 
-  CustomTextField({
+  const CustomTextField({super.key, 
     required this.controller,
     required this.hintText,
     required this.icon,
@@ -31,7 +31,7 @@ class CustomTextField extends StatelessWidget {
         return TextFormField(
           controller: controller,
           cursorColor: colorPrimary,
-          style: TextStyle(
+          style: const TextStyle(
               fontSize: Dimensions.fontSizeDefault,
               color: textColor,
               fontWeight: FontWeight.normal),

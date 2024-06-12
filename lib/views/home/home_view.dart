@@ -18,6 +18,8 @@ class HomeView extends GetView<HomeController> {
     ProfileView(),
   ];
 
+  const HomeView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
@@ -33,7 +35,7 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
               bottomNavigationBar: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey,

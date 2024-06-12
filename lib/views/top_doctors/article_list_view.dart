@@ -76,7 +76,7 @@ class ArticleListView extends StatelessWidget {
                 if (controller.articles.isEmpty) {
                   return const Center(child: CircularProgressIndicator());
                 }
-                return Container(
+                return SizedBox(
                   height: 250.0,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
@@ -96,7 +96,7 @@ class ArticleListView extends StatelessWidget {
               const SizedBox(height: 20.0),
               Obx(() {
                 if (controller.articles.isEmpty) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
                 return Column(
                   children: controller.articles.map((article) {
@@ -213,7 +213,7 @@ class ArticleListView extends StatelessWidget {
         child: Center(
           child: Text(
             name,
-            style: TextStyle(color: whiteColor),
+            style: const TextStyle(color: whiteColor),
           ),
         ),
       ),

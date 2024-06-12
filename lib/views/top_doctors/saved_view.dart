@@ -34,7 +34,7 @@ class SavedView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(AppAssets.emptyCart, width: 150, height: 150),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   const Text(
                     'No Articles are Saved.',
                     style: TextStyle(

@@ -228,7 +228,7 @@ class ChangeReasonDialog extends StatelessWidget {
               },
               cursorColor: colorPrimary,
 
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: Dimensions.fontSizeDefault,
                   color: textColor,
                   fontWeight: FontWeight.normal),

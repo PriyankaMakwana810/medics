@@ -46,12 +46,12 @@ class AppPages {
         transition: Transition.downToUp),
     GetPage(
         name: Routes.onboarding,
-        page: () => OnBoardingView(),
+        page: () => const OnBoardingView(),
         binding: OnboardingBinding(),
         transition: Transition.fadeIn),
     GetPage(
         name: Routes.intro,
-        page: () => IntroView(),
+        page: () => const IntroView(),
         binding: OnboardingBinding(),
         transition: Transition.fadeIn),
     GetPage(
@@ -76,12 +76,12 @@ class AppPages {
         transition: Transition.fadeIn),
     GetPage(
         name: Routes.change_password,
-        page: () => ChangePasswordView(),
+        page: () => const ChangePasswordView(),
         binding: ResetPasswordBinding(),
         transition: Transition.fadeIn),
     GetPage(
         name: Routes.home,
-        page: () => HomeView(),
+        page: () => const HomeView(),
         binding: HomeBinding(),
         transition: Transition.fadeIn),
     GetPage(
@@ -92,7 +92,7 @@ class AppPages {
     GetPage(name: Routes.articlesList, page: () => ArticleListView()),
     GetPage(
       name: Routes.doctor_detail,
-      page: () => DoctorDetailView(),
+      page: () => const DoctorDetailView(),
     ),
     GetPage(
       name: Routes.appointmentDetail,

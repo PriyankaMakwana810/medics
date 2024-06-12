@@ -133,7 +133,7 @@ class DrugDetailsView extends StatelessWidget {
                                 onPressed: () {
                                   _pharmacyController.incrementQuantity();
                                 },
-                                icon: Icon(Icons.add_box, color: colorPrimary),
+                                icon: const Icon(Icons.add_box, color: colorPrimary),
                                 iconSize: 30),
                           ],
                         ),

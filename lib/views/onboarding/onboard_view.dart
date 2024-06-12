@@ -8,6 +8,8 @@ import 'package:medics/views/onboarding/onboarding_controller.dart';
 import '../../config/app_dimention.dart';
 
 class OnBoardingView extends GetView<OnboardingController> {
+  const OnBoardingView({super.key});
+
   @override
   Widget build(BuildContext context) {
     const bodyStyle = TextStyle(fontSize: 19.0);
@@ -26,8 +28,8 @@ class OnBoardingView extends GetView<OnboardingController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/images/doctor1.png', width: 250, height: 450),
-            SizedBox(height: 30),
-            Text(
+            const SizedBox(height: 30),
+            const Text(
               AppStrings.onboardingText1,
               style: titleStyle,
               textAlign: TextAlign.center,
@@ -42,8 +44,8 @@ class OnBoardingView extends GetView<OnboardingController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/images/doctor2.png', width: 250, height: 450),
-            SizedBox(height: 30),
-            Text(
+            const SizedBox(height: 30),
+            const Text(
               AppStrings.onboardingText2,
               style: titleStyle,
               textAlign: TextAlign.center,
@@ -58,8 +60,8 @@ class OnBoardingView extends GetView<OnboardingController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/images/doctor3.png', width: 250, height: 450),
-            SizedBox(height: 30),
-            Text(
+            const SizedBox(height: 30),
+            const Text(
               AppStrings.onboardingText3,
               style: titleStyle,
               textAlign: TextAlign.center,
