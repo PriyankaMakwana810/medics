@@ -24,6 +24,7 @@ import 'package:medics/views/top_doctors/pharmacy_view.dart';
 import 'package:medics/views/top_doctors/top_doctors_view.dart';
 import 'package:medics/views/zegoChat/chat_list.dart';
 import 'package:medics/views/zegoChat/chat_list_binding.dart';
+import 'package:medics/views/zegoChat/chat_screen_view.dart';
 
 import '../views/onboarding/onboard_view.dart';
 import '../views/onboarding/onboarding_binding.dart';
@@ -116,6 +117,11 @@ class AppPages {
     GetPage(
         name: Routes.chat_list,
         page: () => ChatListView(),
+        binding: ChatListBinding(),
+        transition: Transition.fadeIn),
+    GetPage(
+        name: Routes.chat_screen_view,
+        page: () => ChatScreenView(),
         binding: ChatListBinding(),
         transition: Transition.fadeIn),
   ];

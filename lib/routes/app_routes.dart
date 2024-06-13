@@ -33,5 +33,6 @@ abstract class Routes {
 
   static const saved = '/saved';
   static const chat_list = '/chat_list';
+  static const chat_screen_view = '/chat_screen';
 
 }

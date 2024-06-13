@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:medics/routes/app_pages.dart';
 import 'package:zego_zimkit/zego_zimkit.dart';
 
 import '../../config/app_assets.dart';
@@ -12,7 +13,6 @@ class ChatListView extends GetView<ChatListController> {
   const ChatListView({super.key});
 
   // final String userName;
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -129,8 +129,9 @@ class ChatListView extends GetView<ChatListController> {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: InkWell(
         onTap: () {
+          Get.toNamed(Routes.chat_screen_view, arguments: conversation);
           // ZIMKit().deleteConversation(conversation.id, conversation.type);
-          controller.openChat(context, conversation);
+          // controller.openChat(context, conversation);
         },
         child: Row(
           children: [
@@ -205,34 +206,34 @@ class ChatListView extends GetView<ChatListController> {
       ),
     );
   }
+}
 
-  Widget defaultLastMessageTimeBuilder(DateTime? messageTime) {
-    if (messageTime == null) {
-      return const SizedBox.shrink();
-    }
-
-    final now = DateTime.now();
-    final duration = DateTime.now().difference(messageTime);
-
-    late String timeStr;
-
-    if (duration.inMinutes < 1) {
-      timeStr = 'just now';
-    } else if (duration.inHours < 1) {
-      timeStr = '${duration.inMinutes} mins ago';
-    } else if (duration.inDays < 1) {
-      timeStr = '${duration.inHours} hrs ago';
-    } else if (now.year == messageTime.year) {
-      timeStr =
-          '${messageTime.month}/${messageTime.day} ${messageTime.hour}:${messageTime.minute}';
-    } else {
-      timeStr =
-          ' ${messageTime.year}/${messageTime.month}/${messageTime.day} ${messageTime.hour}:${messageTime.minute}';
-    }
-
-    return Opacity(
-      opacity: 0.64,
-      child: Text(timeStr, maxLines: 1, overflow: TextOverflow.clip),
-    );
+Widget defaultLastMessageTimeBuilder(DateTime? messageTime) {
+  if (messageTime == null) {
+    return const SizedBox.shrink();
   }
+
+  final now = DateTime.now();
+  final duration = DateTime.now().difference(messageTime);
+
+  late String timeStr;
+
+  if (duration.inMinutes < 1) {
+    timeStr = 'just now';
+  } else if (duration.inHours < 1) {
+    timeStr = '${duration.inMinutes} mins ago';
+  } else if (duration.inDays < 1) {
+    timeStr = '${duration.inHours} hrs ago';
+  } else if (now.year == messageTime.year) {
+    timeStr =
+        '${messageTime.month}/${messageTime.day} ${messageTime.hour}:${messageTime.minute}';
+  } else {
+    timeStr =
+        ' ${messageTime.year}/${messageTime.month}/${messageTime.day} ${messageTime.hour}:${messageTime.minute}';
+  }
+
+  return Opacity(
+    opacity: 0.64,
+    child: Text(timeStr, maxLines: 1, overflow: TextOverflow.clip),
+  );
 }

@@ -40,7 +40,7 @@ class ChatView extends StatelessWidget {
       backgroundColor: whiteColor,
       body: Column(
         children: [
-          _buildConsultationStartView(),
+          buildConsultationStartView(),
           Expanded(
             child: Obx(
               () => ListView.builder(
@@ -60,38 +60,7 @@ class ChatView extends StatelessWidget {
     );
   }
 
-  Widget _buildConsultationStartView() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: colorSecondary, width: 1)),
-        padding: const EdgeInsets.all(16),
-        child: const Column(
-          children: [
-            Text(
-              'Consultation Start',
-              style: TextStyle(
-                color: colorPrimary,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-            ),
-            SizedBox(height: 4),
-            Text(
-              'You can consult your problem to the doctor',
-              style: TextStyle(
-                  fontSize: 14, fontWeight: FontWeight.w500, color: colorGray),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+
 
   Widget _buildMessageItem(ChatMessage message) {
     return Align(
@@ -246,4 +215,36 @@ class ChatView extends StatelessWidget {
       ),
     );
   }
+}
+Widget buildConsultationStartView() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+    child: Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: colorSecondary, width: 1)),
+      padding: const EdgeInsets.all(16),
+      child: const Column(
+        children: [
+          Text(
+            'Consultation Start',
+            style: TextStyle(
+              color: colorPrimary,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
+          SizedBox(height: 4),
+          Text(
+            'You can consult your problem to the doctor',
+            style: TextStyle(
+                fontSize: 14, fontWeight: FontWeight.w500, color: colorGray),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    ),
+  );
 }

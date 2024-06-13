@@ -14,4 +14,5 @@ class ChatListController extends BaseController {
   void showNewChatDialog(BuildContext context) {
     ZIMKit().showDefaultNewPeerChatDialog(context);
   }
+
 }

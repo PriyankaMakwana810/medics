@@ -19,6 +19,7 @@ class MyApp extends GetView {
       debugShowCheckedModeBanner: false,
       title: AppStrings.appName,
       theme: ThemeData(
+        colorScheme: ColorScheme(brightness: Brightness.light, primary: colorPrimary, onPrimary: colorOnPrimary, secondary: colorSecondary, onSecondary: textColor, error: Colors.red, onError: Colors.white , surface: whiteColor, onSurface: blackColor),
           primarySwatch: appColor,
           highlightColor: Colors.transparent,
           splashFactory: NoSplash.splashFactory,
