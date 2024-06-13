@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:medics/config/app_strings.dart';
+import 'package:zego_zimkit/zego_zimkit.dart';
 
 import 'app/app.dart';
 
@@ -13,6 +15,10 @@ void main() async {
     statusBarIconBrightness: Brightness.dark,
     systemNavigationBarIconBrightness: Brightness.dark,
   ));
+  ZIMKit().init(
+    appID: AppStrings.appID, // your appid
+    appSign: AppStrings.appSign, // your appSign
+  );
   runApp(const MyApp());
 }
 

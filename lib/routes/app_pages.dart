@@ -76,12 +76,12 @@ class AppPages {
         transition: Transition.fadeIn),
     GetPage(
         name: Routes.change_password,
-        page: () => const ChangePasswordView(),
+        page: () => ChangePasswordView(),
         binding: ResetPasswordBinding(),
         transition: Transition.fadeIn),
     GetPage(
         name: Routes.home,
-        page: () => const HomeView(),
+        page: () => HomeView(),
         binding: HomeBinding(),
         transition: Transition.fadeIn),
     GetPage(

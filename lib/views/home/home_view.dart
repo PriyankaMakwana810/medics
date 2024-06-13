@@ -18,7 +18,7 @@ class HomeView extends GetView<HomeController> {
     ProfileView(),
   ];
 
-  const HomeView({super.key});
+  HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,8 @@ class HomeView extends GetView<HomeController> {
                     ),
                     BottomNavigationBarItem(
                         icon: SvgPicture.asset(SVGAssets.schedule),
-                        activeIcon: SvgPicture.asset(SVGAssets.schedule_selected),
+                        activeIcon: SvgPicture.asset(
+                            SVGAssets.schedule_selected),
                         label: 'Schedule'),
                     BottomNavigationBarItem(
                       icon: SvgPicture.asset(SVGAssets.profile),

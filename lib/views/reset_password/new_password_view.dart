@@ -13,8 +13,7 @@ import '../../styles/text_style.dart';
 
 class ChangePasswordView extends StatelessWidget {
   final ResetPasswordController controller = Get.put(ResetPasswordController());
-
-  const ChangePasswordView({super.key});
+  ChangePasswordView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +106,7 @@ class ChangePasswordView extends StatelessWidget {
                         icon: controller.isConfirmPasswordVisible.value
                             ? SvgPicture.asset(SVGAssets.v_ic_password_hide)
                             : const Icon(Icons.visibility_outlined,
-                            color: textColorDisable, size: 26),
+                                color: textColorDisable, size: 26),
                         /*Icon(controller.isPasswordVisible.value
                             ? Icons.visibility
                             : Icons.visibility_off),*/
