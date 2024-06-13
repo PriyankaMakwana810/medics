@@ -32,5 +32,6 @@ abstract class Routes {
   static const profile = '/profile';
 
   static const saved = '/saved';
+  static const chat_list = '/chat_list';
 
 }

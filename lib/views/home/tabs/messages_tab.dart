@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:medics/styles/color_constants.dart';
 import 'package:medics/styles/text_style.dart';
+import 'package:zego_zimkit/zego_zimkit.dart';
 
 import '../../../config/app_assets.dart';
 import '../../../models/message.dart';
@@ -76,7 +77,15 @@ class MessagesView extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           shape: const CircleBorder(),
-          onPressed: () {},
+          onPressed: () {
+            ZIMKit().connectUser(id: '987654321', name: 'priyanka', avatarUrl: AppAssets.drGerty);
+            // ZIMKit().connectUser(id: '123456789',name: 'dr. Marcus',avatarUrl: AppAssets.drMarcus);
+            // ZIMKit().connectUser(id: '23456789',name: 'Dr. Alysa Hana ',avatarUrl: AppAssets.drGerty);
+            // ZIMKit().connectUser(id: '3456789',name: 'Dr. Maria Elena',avatarUrl: AppAssets.drMaria);
+            // ZIMKit().connectUser(id: '456789',name: 'Dr. Marcus Horizon',avatarUrl: AppAssets.drMarcus);
+
+            Get.toNamed(Routes.chat_list);
+          },
           backgroundColor: colorPrimary,
           child: SvgPicture.asset(SVGAssets.icon_chat_filled),
         ),
@@ -105,7 +114,7 @@ class MessagesView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: InkWell(
-        onTap: onTap,
+        onTap: () => onTap(),
         child: Row(
           children: [
             CircleAvatar(

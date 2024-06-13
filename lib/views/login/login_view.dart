@@ -4,6 +4,7 @@ import 'package:medics/config/app_assets.dart';
 import 'package:medics/styles/color_constants.dart';
 import 'package:medics/utils/utility.dart';
 import 'package:medics/views/login/login_controller.dart';
+import 'package:zego_zimkit/zego_zimkit.dart';
 
 import '../../config/app_dimention.dart';
 import '../../config/app_strings.dart';
@@ -85,7 +86,9 @@ class LoginView extends GetView<LoginController> {
                                 message:
                                     'Once again you login successfully\n into medidoc app',
                                 buttonText: 'Go to Home',
-                                onPressed: () {
+                                onPressed: () async{
+                                  await ZIMKit().connectUser(id: '987654321', name: 'priyanka');
+                                  // await ZIMKit().connectUser(id: '123456789',name: 'dr. Marcus');
                                   controller.onHomeClick();
                                 },
                               );

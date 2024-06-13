@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart'; // Add this import for date formatting
 import 'package:medics/controller/base_controller.dart';
 import 'package:medics/models/medicine.dart';
+import 'package:zego_zimkit/zego_zimkit.dart';
 
 import '../../config/app_preferences.dart';
 import '../../database/database_helper.dart';
@@ -50,6 +51,7 @@ class HomeController extends BaseController {
   @override
   void onInit() {
     super.onInit();
+    // ZIMKit().connectUser(id: '987654321', name: 'priyanka');
     loadDoctorData();
     loadArticleData();
     generateCurrentWeekDates();
