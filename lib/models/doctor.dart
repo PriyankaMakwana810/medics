@@ -4,13 +4,15 @@ class Doctor {
   final String image;
   final String rate;
   final String distance;
+  final String userId;
 
   Doctor(
       {required this.name,
       required this.designation,
       required this.image,
       required this.rate,
-      required this.distance});
+      required this.distance,
+      required this.userId});
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
     return Doctor(
@@ -18,7 +20,9 @@ class Doctor {
         designation: json['designation'],
         image: json['image'],
         rate: json['rate'],
-        distance: json['distance']);
+        distance: json['distance'],
+        userId: json['userId'],
+    );
   }
 
   Map<String, dynamic> toJson() => {
@@ -27,5 +31,7 @@ class Doctor {
         'image': image,
         'rate': rate,
         'distance': distance,
+        'userId': userId,
+
       };
 }

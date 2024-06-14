@@ -78,11 +78,13 @@ class MessagesView extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           shape: const CircleBorder(),
           onPressed: () {
-            ZIMKit().connectUser(id: '987654321', name: 'priyanka', avatarUrl: AppAssets.drGerty);
-            // ZIMKit().connectUser(id: '123456789',name: 'dr. Marcus',avatarUrl: AppAssets.drMarcus);
-            // ZIMKit().connectUser(id: '23456789',name: 'Dr. Alysa Hana ',avatarUrl: AppAssets.drGerty);
+            // ZIMKit().connectUser(id: '987654321', name: 'priyanka', avatarUrl: AppAssets.profileImage);
+            // ZIMKit().connectUser(id: '91',name: 'Dr. Alysa Hana ',avatarUrl: AppAssets.drDiandra);
             // ZIMKit().connectUser(id: '3456789',name: 'Dr. Maria Elena',avatarUrl: AppAssets.drMaria);
             // ZIMKit().connectUser(id: '456789',name: 'Dr. Marcus Horizon',avatarUrl: AppAssets.drMarcus);
+            // ZIMKit().connectUser(id: '92',name: 'Dr. Stefi Jessi',avatarUrl: AppAssets.drStefi);
+            // ZIMKit().connectUser(id: '789',name: 'Dr. Gerty Cori',avatarUrl: AppAssets.drGerty);
+            ZIMKit().connectUser(id: '56789',name: 'Priyanka Makwana',avatarUrl: AppAssets.profileImage);
 
             Get.toNamed(Routes.chat_list);
           },

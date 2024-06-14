@@ -4,34 +4,39 @@
     "designation": "Cardiologist",
     "image": "assets/images/dr_marcus.png",
     "rate": "4.7",
-    "distance": "800m away"
+    "distance": "800m away",
+    "userId": "456789"
   },
   {
     "name": "Dr. Maria Elena",
     "designation": "Psychologist",
     "image": "assets/images/dr_maria.png",
     "rate": "4.9",
-    "distance": "1.5km away"
+    "distance": "1.5km away",
+    "userId": "3456789"
   },
   {
     "name": "Dr. Stefi Jessi",
     "designation": "Orthopedist",
     "image": "assets/images/dr_stefi.png",
     "rate": "4.7",
-    "distance": "2km away"
+    "distance": "2km away",
+    "userId": "92"
   },
   {
     "name": "Dr. Gerty Cori",
     "designation": "Orthopedist",
     "image": "assets/images/dr_gerty.png",
     "rate": "4.2",
-    "distance": "1km away"
+    "distance": "1km away",
+    "userId": "789"
   },
   {
-    "name": "Dr. Diandra",
+    "name": "Dr. Alysa Hana",
     "designation": "Psychologist",
     "image": "assets/images/dr_diandra.png",
     "rate": "4.2",
-    "distance": "800m away"
+    "distance": "800m away",
+    "userId": "91"
   }
 ]

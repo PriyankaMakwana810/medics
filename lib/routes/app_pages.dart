@@ -119,10 +119,10 @@ class AppPages {
         page: () => ChatListView(),
         binding: ChatListBinding(),
         transition: Transition.fadeIn),
-    GetPage(
-        name: Routes.chat_screen_view,
-        page: () => ChatScreenView(),
-        binding: ChatListBinding(),
-        transition: Transition.fadeIn),
+    // GetPage(
+        // name: Routes.chat_screen_view,
+        // page: () => ChatScreenView(),
+        // binding: ChatListBinding(),
+        // transition: Transition.fadeIn),
   ];
 }

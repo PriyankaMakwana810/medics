@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:medics/routes/app_pages.dart';
+import 'package:medics/custom_widgets/custom_dialogs.dart';
+import 'package:medics/views/home/home_controller.dart';
+import 'package:medics/views/zegoChat/chat_screen_view.dart';
 import 'package:zego_zimkit/zego_zimkit.dart';
 
 import '../../config/app_assets.dart';
+import '../../custom_widgets/button.dart';
 import '../../styles/color_constants.dart';
 import '../../styles/text_style.dart';
 import 'chat_list_controller.dart';
 
 class ChatListView extends GetView<ChatListController> {
-  const ChatListView({super.key});
+  ChatListView({super.key});
+
+  final HomeController homeController = Get.find();
 
   // final String userName;
   @override
@@ -77,7 +82,6 @@ class ChatListView extends GetView<ChatListController> {
                 ),
                 ZIMKitConversationListView(
                   filter: (context, conversationList) {
-                    // Only include peer-to-peer conversations (individual chats)
                     return conversationList.where((conversation) {
                       return conversation.value.type ==
                           ZIMConversationType.group;
@@ -112,6 +116,12 @@ class ChatListView extends GetView<ChatListController> {
         floatingActionButton: FloatingActionButton(
           shape: const CircleBorder(),
           onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return NewChatDialog();
+              },
+            );
             // controller.showNewChatDialog(context);
             // ZIMKit().showDefaultNewGroupChatDialog(context);
             // ZIMKit().createGroup();
@@ -129,16 +139,82 @@ class ChatListView extends GetView<ChatListController> {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: InkWell(
         onTap: () {
-          Get.toNamed(Routes.chat_screen_view, arguments: conversation);
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return ChatScreenView(
+                conversationID: conversation.id,
+                conversationType: conversation.type);
+            // ZIMKitMessageListPage(
+            // conversationID: userIDController.text,
+            // );
+          }));
+          // Get.toNamed(Routes.chat_screen_view, arguments: conversation);
           // ZIMKit().deleteConversation(conversation.id, conversation.type);
           // controller.openChat(context, conversation);
         },
+        onLongPress: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                backgroundColor: whiteColor,
+                title: const Text(
+                  'Confirm',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                content: const Text('Do you want to delete this conversation?',
+                    textAlign: TextAlign.center,
+                    style:
+                        const TextStyle(fontSize: 16, color: textColorDisable)),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Cancel',style: AppTextStyles.subTitle,),
+                  ),
+                  CustomButton(
+                    label: 'Ok',
+                    onPressed: () {
+                      ZIMKit().deleteConversation(
+                          conversation.id, conversation.type);
+                      Navigator.pop(context);
+                    },
+                  ),
+                  /*TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Cancel'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      ZIMKit()
+                          .deleteConversation(conversation.id, conversation.type);
+                      Navigator.pop(context);
+                    },
+                    child: const Text('OK'),
+                  ),*/
+                ],
+              );
+            },
+          );
+        },
         child: Row(
           children: [
-            CircleAvatar(
-              backgroundImage: AssetImage(conversation.avatarUrl),
-              radius: 25,
-            ),
+            conversation.type == ZIMConversationType.group
+                ? CircleAvatar(
+                    radius: 25,
+                    backgroundColor: colorPrimary,
+                    child: Text(
+                      conversation.name.isNotEmpty
+                          ? conversation.name[0]
+                          : conversation.id[0],
+                      style: TextStyle(color: colorSecondary, fontSize: 20),
+                    ))
+                : CircleAvatar(
+                    backgroundImage: AssetImage(conversation.avatarUrl),
+                    radius: 25,
+                  ),
             const SizedBox(width: 10),
             Expanded(
               child: Column(

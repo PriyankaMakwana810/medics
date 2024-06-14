@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/custom_widgets/button.dart';
 import 'package:medics/styles/color_constants.dart';
+import 'package:zego_zimkit/zego_zimkit.dart';
 
 import '../config/app_dimention.dart';
 import '../views/home/home_controller.dart';
 import '../views/top_doctors/doctor_details_view.dart';
+import '../views/zegoChat/chat_screen_view.dart';
 
 class SuccessDialog extends StatelessWidget {
   final String title;
@@ -227,7 +229,6 @@ class ChangeReasonDialog extends StatelessWidget {
                     value; // Update the reason text as the user types
               },
               cursorColor: colorPrimary,
-
               style: const TextStyle(
                   fontSize: Dimensions.fontSizeDefault,
                   color: textColor,
@@ -258,7 +259,6 @@ class ChangeReasonDialog extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -286,7 +286,117 @@ class ChangeReasonDialog extends StatelessWidget {
                     ),
                   ),
                 )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
+class NewChatDialog extends StatelessWidget {
+
+  const NewChatDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final HomeController controller = Get.find();
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      elevation: 0,
+      backgroundColor: whiteColor,
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Select Doctor you want to chat with:',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Obx(() {
+              return SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: List.generate(controller.doctors.length, (index) {
+                    final doctor = controller.doctors[index];
+                    return GestureDetector(
+                      onTap: () {
+                        controller.selectedDrChat(index);
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 5),
+                        width: MediaQuery.of(context).size.width / 1.5,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                                color: controller.selectedDrChat == index
+                                    ? colorPrimary
+                                    : colorSecondary,
+                                width: 1)),
+                        // padding: EdgeInsets.all(8.0),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 4),
+                          child: Row(
+                            // crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(50),
+                                child: Image.asset(doctor.image,
+                                    width: 50, height: 50, fit: BoxFit.cover),
+                              ),
+                              const SizedBox(width: 16),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(doctor.name,
+                                      style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold)),
+                                  Text(doctor.designation,
+                                      style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: colorGray)),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              );
+            }),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomButton(
+                  label: 'Confirm',
+                  onPressed: () {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                      return ChatScreenView(conversationID: controller.doctors[controller.selectedDrChat.value].userId);
+                      // return ZIMKitMessageListPage(
+                      //   conversationID: controller.doctors[controller.selectedDrChat.value].userId,
+                      // );
+                    }));
+                    // var doctor = homeController.doctors[homeController.selectedDrChat.value];
+                    // ZIMKitMessageListPage(conversationID: controller.doctors[controller.selectedDrChat.value].userId,);
+                    // Get.back();
+                  },
+                ),
               ],
             ),
           ],

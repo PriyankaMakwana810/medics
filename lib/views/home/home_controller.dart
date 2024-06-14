@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart'; // Add this import for date formatting
 import 'package:medics/controller/base_controller.dart';
 import 'package:medics/models/medicine.dart';
-import 'package:zego_zimkit/zego_zimkit.dart';
 
 import '../../config/app_preferences.dart';
 import '../../database/database_helper.dart';
@@ -47,6 +46,7 @@ class HomeController extends BaseController {
   var selectedDateIndex = 2.obs;
   var selectedTimeIndex = 3.obs;
   var reasonOfVisit = 'Chest Pain'.obs;
+  var selectedDrChat = 0.obs;
 
   @override
   void onInit() {
@@ -76,15 +76,18 @@ class HomeController extends BaseController {
     final data = await json.decode(response) as List;
     doctors.value = data.map((e) => Doctor.fromJson(e)).toList();
   }
+
   Future<void> loadArticleData() async {
     final String response =
-    await rootBundle.loadString('assets/data/article_data.json');
+        await rootBundle.loadString('assets/data/article_data.json');
     final data = await json.decode(response) as List;
     List<Article> jsonArticles = data.map((e) => Article.fromJson(e)).toList();
 
     // Load saved articles from database
     List<Article> savedArticles = await DatabaseHelper.getSavedArticles();
-    Map<int, Article> savedArticlesMap = {for (var article in savedArticles) article.id: article};
+    Map<int, Article> savedArticlesMap = {
+      for (var article in savedArticles) article.id: article
+    };
 
     articles.value = jsonArticles.map((article) {
       if (savedArticlesMap.containsKey(article.id)) {
@@ -93,25 +96,6 @@ class HomeController extends BaseController {
       return article;
     }).toList();
   }
-
-  /*Future<void> loadArticleData() async {
-    final String response =
-        await rootBundle.loadString('assets/data/article_data.json');
-    final data = await json.decode(response) as List;
-    List<Article> jsonArticles = data.map((e) => Article.fromJson(e)).toList();
-
-    // Load saved articles from database
-    List<Article> savedArticles = await DatabaseHelper.getSavedArticles();
-    Map<int, Article> savedArticlesMap = {for (var article in savedArticles) article.id: article};
-
-    articles.value = jsonArticles.map((article) {
-      if (savedArticlesMap.containsKey(article.id)) {
-        article.isSaved = true;
-      }
-      return article;
-    }).toList();
-
-  }*/
 
   Future<void> loadPharmacyData() async {
     final String response =
@@ -161,6 +145,10 @@ class HomeController extends BaseController {
 
   void selectTime(int index) {
     selectedTimeIndex.value = index;
+  }
+
+  void selectDoctorForChat(int index) {
+    selectedDrChat.value = index;
   }
 
   void onLogoutTap() {
