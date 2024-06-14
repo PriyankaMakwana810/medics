@@ -9,7 +9,6 @@ class ChatListController extends BaseController {
   @override
   void onInit() {
     super.onInit();
-    // ZIMKit().connectUser(id: '987654321', name: 'priyanka', avatarUrl: AppAssets.profileImage);
     // ZIMKit().connectUser(id: '91',name: 'Dr. Alysa Hana ',avatarUrl: AppAssets.drDiandra);
     // ZIMKit().connectUser(id: '3456789',name: 'Dr. Maria Elena',avatarUrl: AppAssets.drMaria);
     // ZIMKit().connectUser(id: '456789',name: 'Dr. Marcus Horizon',avatarUrl: AppAssets.drMarcus);
@@ -28,5 +27,4 @@ class ChatListController extends BaseController {
   void showNewChatDialog(BuildContext context) {
     ZIMKit().showDefaultNewPeerChatDialog(context);
   }
-
 }

@@ -7,6 +7,7 @@ import 'package:zego_zimkit/zego_zimkit.dart';
 
 import '../../config/app_assets.dart';
 import '../../custom_widgets/button.dart';
+import '../../custom_widgets/custom_dialogs.dart';
 import '../../styles/color_constants.dart';
 import '../../styles/text_style.dart';
 import 'chat_list_controller.dart';
@@ -117,14 +118,14 @@ class ChatListView extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           shape: const CircleBorder(),
           onPressed: () {
-            /*showDialog(
+            showDialog(
               context: context,
               builder: (BuildContext context) {
                 return NewChatDialog();
               },
-            );*/
+            );
             // controller.showNewChatDialog(context);
-            ZIMKit().showDefaultNewGroupChatDialog(context);
+            // ZIMKit().showDefaultNewGroupChatDialog(context);
             // ZIMKit().createGroup();
           },
           backgroundColor: colorPrimary,

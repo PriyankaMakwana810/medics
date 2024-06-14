@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:medics/utils/utility.dart';
+import 'package:medics/views/zegoChat/audio_call_view.dart';
 import 'package:zego_zimkit/zego_zimkit.dart';
 
 import '../../config/app_assets.dart';
 import '../../config/app_dimention.dart';
 import '../../styles/color_constants.dart';
 import '../../styles/text_style.dart';
+import 'call_view.dart';
 
 class ChatScreenView extends StatelessWidget {
   const ChatScreenView(
@@ -35,11 +37,19 @@ class ChatScreenView extends StatelessWidget {
             actions: [
               IconButton(
                 icon: SvgPicture.asset(SVGAssets.icon_phone),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return AudioCallView(callID: 'one2oneAudio',);
+                  }));
+                },
               ),
               IconButton(
                 icon: SvgPicture.asset(SVGAssets.icon_video),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CallPage(callID: 'one2one',);
+                  }));
+                },
               ),
               IconButton(
                 icon: SvgPicture.asset(SVGAssets.icon_more),

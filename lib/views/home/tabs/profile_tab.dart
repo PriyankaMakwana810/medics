@@ -57,7 +57,7 @@ class ProfileView extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 28),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
