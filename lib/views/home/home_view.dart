@@ -7,13 +7,15 @@ import 'package:medics/views/home/tabs/dashboard_Tab.dart';
 import 'package:medics/views/home/tabs/messages_tab.dart';
 import 'package:medics/views/home/tabs/profile_tab.dart';
 import 'package:medics/views/home/tabs/schedule_tab.dart';
+import 'package:medics/views/zegoChat/chat_list.dart';
 
 import '../../styles/color_constants.dart';
 
 class HomeView extends GetView<HomeController> {
   final List<Widget> _pages = [
     DashboardView(),
-    MessagesView(),
+    // MessagesView(),
+    ChatListView(),
     ScheduleView(),
     ProfileView(),
   ];

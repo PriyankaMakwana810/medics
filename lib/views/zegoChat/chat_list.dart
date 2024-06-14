@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:medics/custom_widgets/custom_dialogs.dart';
 import 'package:medics/views/home/home_controller.dart';
 import 'package:medics/views/zegoChat/chat_screen_view.dart';
 import 'package:zego_zimkit/zego_zimkit.dart';
@@ -12,8 +11,10 @@ import '../../styles/color_constants.dart';
 import '../../styles/text_style.dart';
 import 'chat_list_controller.dart';
 
-class ChatListView extends GetView<ChatListController> {
+class ChatListView extends StatelessWidget {
   ChatListView({super.key});
+
+  final ChatListController controller = Get.put(ChatListController());
 
   final HomeController homeController = Get.find();
 
@@ -116,14 +117,14 @@ class ChatListView extends GetView<ChatListController> {
         floatingActionButton: FloatingActionButton(
           shape: const CircleBorder(),
           onPressed: () {
-            showDialog(
+            /*showDialog(
               context: context,
               builder: (BuildContext context) {
                 return NewChatDialog();
               },
-            );
+            );*/
             // controller.showNewChatDialog(context);
-            // ZIMKit().showDefaultNewGroupChatDialog(context);
+            ZIMKit().showDefaultNewGroupChatDialog(context);
             // ZIMKit().createGroup();
           },
           backgroundColor: colorPrimary,
@@ -172,7 +173,10 @@ class ChatListView extends GetView<ChatListController> {
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('Cancel',style: AppTextStyles.subTitle,),
+                    child: const Text(
+                      'Cancel',
+                      style: AppTextStyles.subTitle,
+                    ),
                   ),
                   CustomButton(
                     label: 'Ok',
@@ -182,18 +186,6 @@ class ChatListView extends GetView<ChatListController> {
                       Navigator.pop(context);
                     },
                   ),
-                  /*TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text('Cancel'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      ZIMKit()
-                          .deleteConversation(conversation.id, conversation.type);
-                      Navigator.pop(context);
-                    },
-                    child: const Text('OK'),
-                  ),*/
                 ],
               );
             },

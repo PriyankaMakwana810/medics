@@ -85,7 +85,6 @@ class MessagesView extends StatelessWidget {
             // ZIMKit().connectUser(id: '92',name: 'Dr. Stefi Jessi',avatarUrl: AppAssets.drStefi);
             // ZIMKit().connectUser(id: '789',name: 'Dr. Gerty Cori',avatarUrl: AppAssets.drGerty);
             ZIMKit().connectUser(id: '56789',name: 'Priyanka Makwana',avatarUrl: AppAssets.profileImage);
-
             Get.toNamed(Routes.chat_list);
           },
           backgroundColor: colorPrimary,
