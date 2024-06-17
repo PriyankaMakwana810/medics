@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:medics/utils/utility.dart';
@@ -6,6 +7,7 @@ import 'package:zego_zimkit/zego_zimkit.dart';
 
 import '../../config/app_assets.dart';
 import '../../config/app_dimention.dart';
+import '../../custom_widgets/button.dart';
 import '../../styles/color_constants.dart';
 import '../../styles/text_style.dart';
 import 'call_view.dart';
@@ -39,7 +41,9 @@ class ChatScreenView extends StatelessWidget {
                 icon: SvgPicture.asset(SVGAssets.icon_phone),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return AudioCallView(callID: 'one2oneAudio',);
+                    return AudioCallView(
+                      callID: 'one2oneAudio',
+                    );
                   }));
                 },
               ),
@@ -47,28 +51,70 @@ class ChatScreenView extends StatelessWidget {
                 icon: SvgPicture.asset(SVGAssets.icon_video),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return CallPage(callID: 'one2one',);
+                    return CallPage(
+                      callID: 'one2one',
+                    );
                   }));
                 },
               ),
-              IconButton(
+              /* IconButton(
                 icon: SvgPicture.asset(SVGAssets.icon_more),
                 onPressed: () {},
-              ),
+              ),*/
             ],
           );
         },
         messageItemBuilder: (context, message, defaultWidget) {
           if (message.type == ZIMMessageType.text) {
-            return Theme(
-              data: ThemeData(primaryColor: colorPrimary),
-              child: Container(
-                alignment: message.isMine
-                    ? Alignment.centerRight
-                    : Alignment.centerLeft,
-                child: message.isMine
-                    ? localMessage(context, message)
-                    : remoteMessage(context, message, conversation),
+            return InkWell(
+              onLongPress: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      backgroundColor: whiteColor,
+                      title: const Text(
+                        'Confirm',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      content: const Text('Do you want to delete this Message?',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              fontSize: 16, color: textColorDisable)),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text(
+                            'Cancel',
+                            style: AppTextStyles.subTitle,
+                          ),
+                        ),
+                        CustomButton(
+                          label: 'Ok',
+                          onPressed: () {
+                            ZIMKit().deleteMessage([message]);
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: Theme(
+                data: ThemeData(primaryColor: colorPrimary),
+                child: Container(
+                  alignment: message.isMine
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
+                  child: message.isMine
+                      ? localMessage(context, message)
+                      : remoteMessage(context, message, conversation),
+                ),
               ),
             );
           } else {
@@ -81,6 +127,7 @@ class ChatScreenView extends StatelessWidget {
           fontWeight: FontWeight.w500,
           letterSpacing: 1.2,
         ),),*/
+        onMessageItemLongPress: _onMessageItemLongPress,
         messageInputContainerPadding:
             const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         messageListBackgroundBuilder: (context, defaultWidget) {
@@ -219,6 +266,48 @@ class ChatScreenView extends StatelessWidget {
           ],
         )
       ],
+    );
+  }
+
+  Future<void> _onMessageItemLongPress(
+    BuildContext context,
+    LongPressStartDetails details,
+    ZIMKitMessage message,
+    Function defaultAction,
+  ) async {
+    showCupertinoDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: const Text('Confirme'),
+          content: const Text('Delete or recall this message?'),
+          actions: [
+            CupertinoDialogAction(
+              onPressed: Navigator.of(context).pop,
+              child: const Text('Cancel'),
+            ),
+            CupertinoDialogAction(
+              onPressed: () {
+                ZIMKit().deleteMessage([message]);
+                Navigator.pop(context);
+              },
+              child: const Text('Delete'),
+            ),
+            CupertinoDialogAction(
+              onPressed: () {
+                ZIMKit().recallMessage(message).catchError((error) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(error.toString())),
+                  );
+                });
+                Navigator.pop(context);
+              },
+              child: const Text('Recall'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

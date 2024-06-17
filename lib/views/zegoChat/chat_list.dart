@@ -222,7 +222,7 @@ class ChatListView extends StatelessWidget {
                   ),
                   Text(
                     conversation.lastMessage?.toStringValue() ??
-                        'no last message ',
+                        ' ',
                     style: const TextStyle(
                       fontSize: 14,
                       color: colorGray,
@@ -232,6 +232,7 @@ class ChatListView extends StatelessWidget {
                 ],
               ),
             ),
+            conversation.lastMessage != null && conversation.lastMessage != ''?
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -252,7 +253,7 @@ class ChatListView extends StatelessWidget {
                     color: colorGray,
                   ),
               ],
-            ),
+            ):SizedBox(),
           ],
         ),
       ),
