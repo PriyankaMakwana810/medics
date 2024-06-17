@@ -82,11 +82,11 @@ class ChatScreenView extends StatelessWidget {
           letterSpacing: 1.2,
         ),),*/
         messageInputContainerPadding:
-            EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         messageListBackgroundBuilder: (context, defaultWidget) {
           return const ColoredBox(color: Colors.white);
         },
-        inputDecoration: InputDecoration(
+        inputDecoration: const InputDecoration(
           hintText: 'Type message..',
           border: InputBorder.none,
           focusedBorder: InputBorder.none,
@@ -97,30 +97,10 @@ class ChatScreenView extends StatelessWidget {
         // showPickMediaButton: true,
         showMoreButton: false,
         showRecordButton: false,
-        // inputDecoration: InputDecoration(
-        //   hintText: "Type message...",
-        //   contentPadding: const EdgeInsets.symmetric(
-        //       vertical: Dimensions.kPaddingSizeDefault,
-        //       horizontal: Dimensions.kPaddingSizeLarge),
-        //   hintStyle: const TextStyle(
-        //       fontSize: Dimensions.fontSizeDefault, color: textColorDisable),
-        //   border: OutlineInputBorder(
-        //     borderSide: const BorderSide(color: colorSecondary),
-        //     borderRadius: BorderRadius.circular(30),
-        //   ),
-        //   focusedBorder: OutlineInputBorder(
-        //     borderRadius: BorderRadius.circular(30),
-        //     borderSide: const BorderSide(color: colorPrimary),
-        //   ),
-        //   enabledBorder: OutlineInputBorder(
-        //     borderRadius: BorderRadius.circular(30),
-        //     borderSide: const BorderSide(color: colorSecondary),
-        //   ),
-        // ),
         conversationID: conversation.id,
         conversationType: conversation.type,
         // inputBackgroundDecoration: BoxDecoration(color: Colors.white),
-        messageInputContainerDecoration: BoxDecoration(color: whiteColor),
+        messageInputContainerDecoration: const BoxDecoration(color: whiteColor),
         messageInputKeyboardType: TextInputType.text,
         messageInputMaxLines: 1,
         messageInputMinLines: 1,
@@ -138,9 +118,9 @@ class ChatScreenView extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           // width: Dimensions.screenWidth/1.5,
           constraints: BoxConstraints(maxWidth: Dimensions.screenWidth / 1.4),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: colorPrimary,
-            borderRadius: const BorderRadius.only(
+            borderRadius: BorderRadius.only(
                 topRight: Radius.zero,
                 topLeft: Radius.circular(10),
                 bottomLeft: Radius.circular(10),
@@ -152,7 +132,7 @@ class ChatScreenView extends StatelessWidget {
               // if (!message.isSentByMe) const SizedBox(height: 5),
               Text(
                 message.textContent!.text,
-                style: TextStyle(
+                style: const TextStyle(
                   color: whiteColor,
                 ),
               ),
@@ -213,9 +193,9 @@ class ChatScreenView extends StatelessWidget {
               // width: Dimensions.screenWidth/1.5,
               constraints:
                   BoxConstraints(maxWidth: Dimensions.screenWidth / 1.4),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: colorSecondary,
-                borderRadius: const BorderRadius.only(
+                borderRadius: BorderRadius.only(
                     topRight: Radius.circular(10),
                     topLeft: Radius.zero,
                     bottomLeft: Radius.circular(10),
@@ -227,7 +207,7 @@ class ChatScreenView extends StatelessWidget {
                   // if (!message.isSentByMe) const SizedBox(height: 5),
                   Text(
                     message.textContent!.text,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: color5555,
                     ),
                   ),
