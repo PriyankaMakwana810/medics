@@ -21,6 +21,34 @@ class HomeController extends BaseController {
   var currentIndex = 0;
   var isAboutTextExpanded = false.obs;
 
+  var selectedDoctors = <int>[].obs;
+  var groupMembers = <String>[].obs;
+
+  bool isDoctorSelected(int index) {
+    // selectedDoctor = List.empty() as Rxn<Doctor>;
+    return selectedDoctors.contains(index);
+  }
+
+  void toggleDoctorSelection(int index) {
+    if (selectedDoctors.contains(index)) {
+      selectedDoctors.remove(index);
+      groupMembers.remove(doctors[index].userId); // Select
+      // Deselect
+    } else {
+      selectedDoctors.add(index);
+      groupMembers.add(doctors[index].userId); // Select
+    }
+    update(); // Notify GetX to update the UI
+  }
+
+  List<String> getSelectedGroupMembers() {
+    return groupMembers;
+  }
+
+  List<Doctor> getSelectedDoctors() {
+    return selectedDoctors.map((index) => doctors[index]).toList();
+  }
+
   void onSignUpButtonTap() async {
     // await appPreferences.setOnboardDetails(true);
     Get.toNamed(Routes.sign_up);

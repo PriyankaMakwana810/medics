@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:medics/utils/utility.dart';
@@ -7,7 +6,7 @@ import 'package:zego_zimkit/zego_zimkit.dart';
 
 import '../../config/app_assets.dart';
 import '../../config/app_dimention.dart';
-import '../../custom_widgets/button.dart';
+import '../../custom_widgets/custom_dialogs.dart';
 import '../../styles/color_constants.dart';
 import '../../styles/text_style.dart';
 import 'call_view.dart';
@@ -23,7 +22,6 @@ class ChatScreenView extends StatelessWidget {
 
   /// this page's conversationType
   final ZIMConversationType conversationType;
-
 
   // final String userName;
   @override
@@ -66,42 +64,20 @@ class ChatScreenView extends StatelessWidget {
           );
         },
         messageItemBuilder: (context, message, defaultWidget) {
-          if (message.type == ZIMMessageType.text && conversationType == ZIMConversationType.peer) {
+          if (message.type == ZIMMessageType.text &&
+              conversationType == ZIMConversationType.peer) {
             return InkWell(
               onLongPress: () {
                 showDialog(
                   context: context,
                   builder: (context) {
-                    return AlertDialog(
-                      backgroundColor: whiteColor,
-                      title: const Text(
-                        'Confirm',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      content: const Text('Do you want to delete this Message?',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              fontSize: 16, color: textColorDisable)),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: const Text(
-                            'Cancel',
-                            style: AppTextStyles.subTitle,
-                          ),
-                        ),
-                        CustomButton(
-                          label: 'Ok',
-                          onPressed: () {
-                            ZIMKit().deleteMessage([message]);
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ],
+                    return DeleteCustomDialog(
+                      onPressed: () {
+                        ZIMKit().deleteMessage([message]);
+                        Navigator.pop(context);
+                      },
+                      description:
+                          'Are you sure you want to delete this Message?',
                     );
                   },
                 );
@@ -118,16 +94,39 @@ class ChatScreenView extends StatelessWidget {
                 ),
               ),
             );
+          } else if (conversationType == ZIMConversationType.group) {
+            return InkWell(
+              onLongPress: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return DeleteCustomDialog(
+                      onPressed: () {
+                        ZIMKit().deleteMessage([message]);
+                        Navigator.pop(context);
+                      },
+                      description:
+                          'Are you sure you want to delete this Message?',
+                    );
+                  },
+                );
+              },
+              child: Theme(
+                data: ThemeData(primaryColor: colorPrimary),
+                child: Container(
+                  alignment: message.isMine
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
+                  child: message.isMine
+                      ? localMessage(context, message)
+                      : remoteGroupMessage(context, message, conversation),
+                ),
+              ),
+            );
           } else {
             return defaultWidget;
           }
         },
-        /*sendButtonWidget: Text("send",style: TextStyle(
-          fontSize: 14,
-          color: textColor,
-          fontWeight: FontWeight.w500,
-          letterSpacing: 1.2,
-        ),),*/
         onMessageItemLongPress: _onMessageItemLongPress,
         messageInputContainerPadding:
             const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -271,13 +270,123 @@ class ChatScreenView extends StatelessWidget {
     );
   }
 
+  Widget remoteGroupMessage(BuildContext context, ZIMKitMessage message,
+      ZIMKitConversation conversation) {
+    print(message.info.timestamp);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: FutureBuilder(
+                future: ZIMKit().queryGroupMemberInfo(
+                    message.info.conversationID, message.info.senderUserID),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final userInfo = snapshot.data! as ZIMGroupMemberInfo;
+                    return Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: AssetImage(userInfo.userAvatarUrl),
+                          radius: 20,
+                        ),
+                        const SizedBox(width: 10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              userInfo.memberNickname.isNotEmpty
+                                  ? userInfo.memberNickname
+                                  : userInfo.userName,
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              Utility.readTimestamp(message.info.timestamp),
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: textColorDisable,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    );
+                    // return Text(
+                    //   userInfo.memberNickname.isNotEmpty
+                    //       ? userInfo.memberNickname
+                    //       : userInfo.userName,
+                    //   textAlign: TextAlign.left,
+                    //   style: TextStyle(
+                    //       color: Theme.of(context)
+                    //           .textTheme
+                    //           .bodyLarge!
+                    //           .color
+                    //           ?.withOpacity(0.6)),
+                    // );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              padding: const EdgeInsets.all(10),
+              // width: Dimensions.screenWidth/1.5,
+              constraints:
+                  BoxConstraints(maxWidth: Dimensions.screenWidth / 1.4),
+              decoration: const BoxDecoration(
+                color: colorSecondary,
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(10),
+                    topLeft: Radius.zero,
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // if (!message.isSentByMe) const SizedBox(height: 5),
+                  Text(
+                    message.textContent!.text,
+                    style: const TextStyle(
+                      color: color5555,
+                    ),
+                  ),
+                  // if (message.isSentByMe) SvgPicture.asset(SVGAssets.icon_read)
+                  // Icon(Icons.check, size: 14, color: whiteColor)
+                ],
+              ),
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
   Future<void> _onMessageItemLongPress(
     BuildContext context,
     LongPressStartDetails details,
     ZIMKitMessage message,
     Function defaultAction,
   ) async {
-    showCupertinoDialog(
+    DeleteCustomDialog(
+      onPressed: () {
+        ZIMKit().deleteMessage([message]);
+        Navigator.pop(context);
+      },
+      description: 'Are you sure you want to delete this Message?',
+    );
+    /*showCupertinoDialog(
       context: context,
       barrierDismissible: true,
       builder: (context) {
@@ -310,6 +419,6 @@ class ChatScreenView extends StatelessWidget {
           ],
         );
       },
-    );
+    );*/
   }
 }

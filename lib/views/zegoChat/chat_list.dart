@@ -6,7 +6,6 @@ import 'package:medics/views/zegoChat/chat_screen_view.dart';
 import 'package:zego_zimkit/zego_zimkit.dart';
 
 import '../../config/app_assets.dart';
-import '../../custom_widgets/button.dart';
 import '../../custom_widgets/custom_dialogs.dart';
 import '../../styles/color_constants.dart';
 import '../../styles/text_style.dart';
@@ -33,7 +32,22 @@ class ChatListView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text('Messages', style: AppTextStyles.heading1),
-                SvgPicture.asset(SVGAssets.icon_search_large),
+                IconButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return ShowNewGroupChatDialog();
+                        },
+                      );
+
+                      // showNewGroupChatDialog(context);
+                      // ZIMKit().showDefaultNewGroupChatDialog(context);
+                    },
+                    icon: Icon(
+                      Icons.group_add_rounded,
+                      size: 30,
+                    )),
               ],
             ),
           ),
@@ -154,7 +168,14 @@ class ChatListView extends StatelessWidget {
           // controller.openChat(context, conversation);
         },
         onLongPress: () {
-          showDialog(
+          DeleteCustomDialog(
+            onPressed: () {
+              ZIMKit().deleteConversation(conversation.id, conversation.type);
+              Navigator.pop(context);
+            },
+            description: 'Are you sure you want to delete this Conversation?',
+          );
+          /*showDialog(
             context: context,
             builder: (context) {
               return AlertDialog(
@@ -190,7 +211,7 @@ class ChatListView extends StatelessWidget {
                 ],
               );
             },
-          );
+          );*/
         },
         child: Row(
           children: [
@@ -221,8 +242,7 @@ class ChatListView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    conversation.lastMessage?.toStringValue() ??
-                        ' ',
+                    conversation.lastMessage?.toStringValue() ?? ' ',
                     style: const TextStyle(
                       fontSize: 14,
                       color: colorGray,
@@ -232,28 +252,29 @@ class ChatListView extends StatelessWidget {
                 ],
               ),
             ),
-            conversation.lastMessage != null && conversation.lastMessage != ''?
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                defaultLastMessageTimeBuilder(
-                    DateTime.fromMillisecondsSinceEpoch(
-                  conversation.lastMessage!.info.timestamp,
-                )),
-                if (conversation.unreadMessageCount != 0)
-                  const Icon(
-                    Icons.circle,
-                    size: 10,
-                    color: colorPrimary,
-                  ),
-                if (conversation.unreadMessageCount == 0)
-                  const Icon(
-                    Icons.done_all,
-                    size: 14,
-                    color: colorGray,
-                  ),
-              ],
-            ):SizedBox(),
+            conversation.lastMessage != null && conversation.lastMessage != ''
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      defaultLastMessageTimeBuilder(
+                          DateTime.fromMillisecondsSinceEpoch(
+                        conversation.lastMessage!.info.timestamp,
+                      )),
+                      if (conversation.unreadMessageCount != 0)
+                        const Icon(
+                          Icons.circle,
+                          size: 10,
+                          color: colorPrimary,
+                        ),
+                      if (conversation.unreadMessageCount == 0)
+                        const Icon(
+                          Icons.done_all,
+                          size: 14,
+                          color: colorGray,
+                        ),
+                    ],
+                  )
+                : SizedBox(),
           ],
         ),
       ),

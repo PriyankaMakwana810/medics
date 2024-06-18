@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:medics/config/app_strings.dart';
 import 'package:medics/routes/app_pages.dart';
 import 'package:medics/views/splash/splash_binding.dart';
-import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 import '../config/app_assets.dart';
 import '../main.dart';
