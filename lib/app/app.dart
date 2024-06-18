@@ -7,6 +7,7 @@ import 'package:medics/views/splash/splash_binding.dart';
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 import '../config/app_assets.dart';
+import '../main.dart';
 import '../styles/color_constants.dart';
 
 class MyApp extends GetView {
@@ -15,7 +16,6 @@ class MyApp extends GetView {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     // final navigatorKey = GlobalKey<NavigatorState>();
     // ZegoUIKitPrebuiltCallInvitationService().setNavigatorKey(navigatorKey);
 
@@ -23,16 +23,26 @@ class MyApp extends GetView {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: AppStrings.appName,
-      // navigatorKey: navigatorKey,
+      navigatorKey: navigatorKey,
       theme: ThemeData(
-        colorScheme: ColorScheme(brightness: Brightness.light, primary: colorPrimary, onPrimary: colorOnPrimary, secondary: colorSecondary, onSecondary: textColor, error: Colors.red, onError: Colors.white , surface: whiteColor, onSurface: blackColor),
+          colorScheme: ColorScheme(
+              brightness: Brightness.light,
+              primary: colorPrimary,
+              onPrimary: colorOnPrimary,
+              secondary: colorSecondary,
+              onSecondary: textColor,
+              error: Colors.red,
+              onError: Colors.white,
+              surface: whiteColor,
+              onSurface: blackColor),
           primarySwatch: appColor,
           highlightColor: Colors.transparent,
           splashFactory: NoSplash.splashFactory,
           primaryColor: colorPrimary,
           useMaterial3: true,
           hoverColor: Colors.transparent,
-          appBarTheme: const AppBarTheme(surfaceTintColor: whiteColor,backgroundColor: whiteColor),
+          appBarTheme: const AppBarTheme(
+              surfaceTintColor: whiteColor, backgroundColor: whiteColor),
           actionIconTheme: ActionIconThemeData(
             backButtonIconBuilder: (context) =>
                 SvgPicture.asset(SVGAssets.back_icon),

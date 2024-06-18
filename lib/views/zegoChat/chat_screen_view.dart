@@ -24,6 +24,7 @@ class ChatScreenView extends StatelessWidget {
   /// this page's conversationType
   final ZIMConversationType conversationType;
 
+
   // final String userName;
   @override
   Widget build(BuildContext context) {
@@ -65,7 +66,7 @@ class ChatScreenView extends StatelessWidget {
           );
         },
         messageItemBuilder: (context, message, defaultWidget) {
-          if (message.type == ZIMMessageType.text) {
+          if (message.type == ZIMMessageType.text && conversationType == ZIMConversationType.peer) {
             return InkWell(
               onLongPress: () {
                 showDialog(
@@ -194,6 +195,7 @@ class ChatScreenView extends StatelessWidget {
 
   Widget remoteMessage(BuildContext context, ZIMKitMessage message,
       ZIMKitConversation conversation) {
+    print(message.info.timestamp);
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,

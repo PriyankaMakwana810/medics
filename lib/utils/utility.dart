@@ -37,10 +37,19 @@ class Utility {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
+  static String convertTimestampToDate(int timestamp) {
+    // Convert milliseconds to DateTime
+    DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp);
+
+    // Format the date as a readable string
+    String formattedDate = DateFormat('yyyy-MM-dd HH:mm').format(date);
+
+    return formattedDate;
+  }
   static String readTimestamp(int timestamp) {
     var now = DateTime.now();
     var format = DateFormat('HH:mm a');
-    var date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+    var date = DateTime.fromMillisecondsSinceEpoch(timestamp);
     var diff = now.difference(date);
     var time = '';
 
@@ -50,17 +59,21 @@ class Utility {
         diff.inHours > 0 && diff.inDays == 0) {
       time = format.format(date);
     } else if (diff.inDays > 0 && diff.inDays < 7) {
-      if (diff.inDays == 1) {
-        time = diff.inDays.toString() + ' DAY AGO';
+      time = DateFormat('yyyy-MM-dd HH:mm').format(date);
+      // return formattedDate;
+      /*if (diff.inDays == 1) {
+        time = '${diff.inDays} Day Ago ${format.format(date)}';
       } else {
-        time = diff.inDays.toString() + ' DAYS AGO';
-      }
+        time = '${diff.inDays} Days Ago ${format.format(date)}';
+      }*/
     } else {
-      if (diff.inDays == 7) {
-        time = (diff.inDays / 7).floor().toString() + ' WEEK AGO';
+      time = DateFormat('yyyy-MM-dd HH:mm').format(date);
+
+      /*if (diff.inDays == 7) {
+        time = '${(diff.inDays / 7).floor()} Week Ago ${format.format(date)}';
       } else {
-        time = (diff.inDays / 7).floor().toString() + ' WEEKS AGO';
-      }
+        time = '${(diff.inDays / 7).floor()} Weeks Ago ${format.format(date)}';
+      }*/
     }
     return time;
   }
