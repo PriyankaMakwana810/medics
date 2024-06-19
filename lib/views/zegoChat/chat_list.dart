@@ -6,6 +6,7 @@ import 'package:medics/views/zegoChat/chat_screen_view.dart';
 import 'package:zego_zimkit/zego_zimkit.dart';
 
 import '../../config/app_assets.dart';
+import '../../custom_widgets/button.dart';
 import '../../custom_widgets/custom_dialogs.dart';
 import '../../styles/color_constants.dart';
 import '../../styles/text_style.dart';
@@ -139,7 +140,7 @@ class ChatListView extends StatelessWidget {
               },
             );
             // controller.showNewChatDialog(context);
-            // ZIMKit().showDefaultNewGroupChatDialog(context);
+            // ZIMKit().showDefaultNewGroupChatDialog(conte
             // ZIMKit().createGroup();
           },
           backgroundColor: colorPrimary,
@@ -168,14 +169,14 @@ class ChatListView extends StatelessWidget {
           // controller.openChat(context, conversation);
         },
         onLongPress: () {
-          DeleteCustomDialog(
+          /*DeleteCustomDialog(
             onPressed: () {
               ZIMKit().deleteConversation(conversation.id, conversation.type);
               Navigator.pop(context);
             },
             description: 'Are you sure you want to delete this Conversation?',
-          );
-          /*showDialog(
+          );*/
+          showDialog(
             context: context,
             builder: (context) {
               return AlertDialog(
@@ -211,7 +212,7 @@ class ChatListView extends StatelessWidget {
                 ],
               );
             },
-          );*/
+          );
         },
         child: Row(
           children: [

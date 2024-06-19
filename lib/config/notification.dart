@@ -119,7 +119,17 @@ class NotificationManager {
           .then((ZIMUserFullInfo zimResult) {
         senderName = zimResult.baseInfo.userName;
       });
-
+      /*if (messages.type == ZIMConversationType.group) {
+        ZIM
+            .getInstance()!
+            .queryGroupInfo(message.info.conversationID)
+            .then((ZIMGroupInfoQueriedResult? zimResult) {
+          if (zimResult != null) {
+            senderName = zimResult.groupInfo.name;
+          }
+        });
+        // senderName = messages
+      }*/
       await flutterLocalNotificationsPlugin.show(
         notificationID,
         senderName,

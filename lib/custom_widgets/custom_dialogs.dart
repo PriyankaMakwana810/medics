@@ -159,95 +159,39 @@ class DeleteCustomDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-      child: AlertDialog(
-        backgroundColor: whiteColor,
-        title: const Text(
-          'Confirm Delete',
+    return AlertDialog(
+      backgroundColor: whiteColor,
+      title: const Text(
+        'Confirm Delete',
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      content: Text(description,
           textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
+          style: const TextStyle(fontSize: 16, color: textColorDisable)),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text(
+            'Cancel',
+            style: AppTextStyles.subTitle,
           ),
         ),
-        content: Text(description,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 16, color: textColorDisable)),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text(
-              'Cancel',
-              style: AppTextStyles.subTitle,
-            ),
-          ),
-          CustomButton(
-            label: 'Delete',
-            onPressed: onPressed,
-            // onPressed: () {
-            //   ZIMKit().deleteMessage([message]);
-            //   Navigator.pop(context);
-            // },
-          ),
-        ],
-      ),
+        CustomButton(
+          label: 'Delete',
+          onPressed: onPressed,
+          // onPressed: () {
+          //   ZIMKit().deleteMessage([message]);
+          //   Navigator.pop(context);
+          // },
+        ),
+      ],
     );
   }
 
-  Widget _buildChild(BuildContext context) => Container(
-        height: 400,
-        padding: const EdgeInsets.all(25),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              height: 100,
-              width: 100,
-              decoration: const BoxDecoration(
-                  color: headerBackground, shape: BoxShape.circle),
-              child: const Icon(
-                Icons.logout_outlined,
-                color: colorPrimary,
-                size: 50,
-              ),
-            ),
-            const SizedBox(height: 30),
-            const Text(
-              'Are you sure to log out of your Account?',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 24),
-            CustomButton(label: 'Log Out', onPressed: onPressed),
-            const SizedBox(height: 10),
-            TextButton(
-              onPressed: () {
-                // Navigator.of(context).pop();
-                Get.back(closeOverlays: true);
-              },
-              child: const Text(
-                'Cancle',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 18,
-                    color: colorPrimary,
-                    fontWeight: FontWeight.w600),
-              ),
-            )
-          ],
-        ),
-      );
 }
 
 class DateTimeSelectionDialog extends StatelessWidget {

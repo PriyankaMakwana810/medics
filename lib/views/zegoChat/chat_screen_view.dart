@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:medics/config/app_strings.dart';
 import 'package:medics/utils/utility.dart';
-import 'package:medics/views/zegoChat/audio_call_view.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import 'package:zego_zimkit/zego_zimkit.dart';
 
 import '../../config/app_assets.dart';
@@ -10,6 +11,7 @@ import '../../custom_widgets/custom_dialogs.dart';
 import '../../styles/color_constants.dart';
 import '../../styles/text_style.dart';
 import 'call_view.dart';
+import 'chatting_page_actions.dart';
 
 class ChatScreenView extends StatelessWidget {
   const ChatScreenView(
@@ -35,32 +37,49 @@ class ChatScreenView extends StatelessWidget {
             title: Text(
                 conversation.name.isEmpty ? conversationID : conversation.name,
                 style: AppTextStyles.appBarStyle),
-            actions: [
-              IconButton(
-                icon: SvgPicture.asset(SVGAssets.icon_phone),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return AudioCallView(
-                      callID: 'one2oneAudio',
-                    );
-                  }));
-                },
-              ),
-              IconButton(
-                icon: SvgPicture.asset(SVGAssets.icon_video),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return CallPage(
-                      callID: 'one2one',
-                    );
-                  }));
-                },
-              ),
-              /* IconButton(
-                icon: SvgPicture.asset(SVGAssets.icon_more),
-                onPressed: () {},
-              ),*/
-            ],
+            actions: demoAppBarActions(
+              context,
+              conversationID,
+              conversationType,
+            ),
+            // actions: [
+            //   IconButton(
+            //     icon: SvgPicture.asset(SVGAssets.icon_phone),
+            //     onPressed: () {
+            //       ZegoSendCallInvitationButton(
+            //         resourceID: AppStrings.resourceId,
+            //         invitees: [
+            //           ZegoUIKitUser(
+            //             id: conversationID,
+            //             name: ZIMKit().getConversation(conversationID,ZIMConversationType.peer).value.name,
+            //           )
+            //         ],
+            //         isVideoCall: false,
+            //       );
+            //       /*Navigator.push(context, MaterialPageRoute(builder: (context) {
+            //         return const AudioCallView(
+            //           callID: 'one2oneAudio',
+            //         );
+            //       }));*/
+            //     },
+            //   ),
+            //   conversationType == ZIMConversationType.peer
+            //       ? IconButton(
+            //           icon: SvgPicture.asset(SVGAssets.icon_video),
+            //           onPressed: () {
+            //             Navigator.push(context,
+            //                 MaterialPageRoute(builder: (context) {
+            //               return const CallPage(
+            //                 callID: 'one2one',
+            //               );
+            //             }));
+            //           },
+            //         )
+            //       : IconButton(
+            //           icon: SvgPicture.asset(SVGAssets.icon_more),
+            //           onPressed: () {},
+            //         )
+            // ],
           );
         },
         messageItemBuilder: (context, message, defaultWidget) {
@@ -320,18 +339,6 @@ class ChatScreenView extends StatelessWidget {
                         )
                       ],
                     );
-                    // return Text(
-                    //   userInfo.memberNickname.isNotEmpty
-                    //       ? userInfo.memberNickname
-                    //       : userInfo.userName,
-                    //   textAlign: TextAlign.left,
-                    //   style: TextStyle(
-                    //       color: Theme.of(context)
-                    //           .textTheme
-                    //           .bodyLarge!
-                    //           .color
-                    //           ?.withOpacity(0.6)),
-                    // );
                   } else {
                     return const SizedBox.shrink();
                   }

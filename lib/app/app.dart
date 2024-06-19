@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:medics/config/app_strings.dart';
 import 'package:medics/routes/app_pages.dart';
 import 'package:medics/views/splash/splash_binding.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 import '../config/app_assets.dart';
 import '../main.dart';
@@ -16,15 +17,14 @@ class MyApp extends GetView {
   @override
   Widget build(BuildContext context) {
     // final navigatorKey = GlobalKey<NavigatorState>();
-    // ZegoUIKitPrebuiltCallInvitationService().setNavigatorKey(navigatorKey);
-
+    ZegoUIKitPrebuiltCallInvitationService().setNavigatorKey(navigatorKey);
     // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: whiteColor));
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: AppStrings.appName,
       navigatorKey: navigatorKey,
       theme: ThemeData(
-          colorScheme: ColorScheme(
+          colorScheme: const ColorScheme(
               brightness: Brightness.light,
               primary: colorPrimary,
               onPrimary: colorOnPrimary,
@@ -51,5 +51,6 @@ class MyApp extends GetView {
       initialRoute: Routes.splash,
       getPages: AppPages.routes,
     );
+
   }
 }
