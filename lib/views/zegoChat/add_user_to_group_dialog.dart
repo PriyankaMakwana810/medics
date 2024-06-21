@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -61,6 +60,7 @@ void showDefaultAddUserToGroupDialog(BuildContext context, String groupID) {
     });
   });
 }
+
 void showDefaultRemoveUserFromGroupDialog(
     BuildContext context, String groupID) {
   final groupUsersController = TextEditingController();
@@ -119,11 +119,10 @@ void showDefaultRemoveUserFromGroupDialog(
   });
 }
 
-
 Future<dynamic> showDefaultGroupMemberListDialog(
-    BuildContext context,
-    String groupID,
-    ) {
+  BuildContext context,
+  String groupID,
+) {
   final title = Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -148,9 +147,9 @@ Future<dynamic> showDefaultGroupMemberListDialog(
   );
 
   Widget memberAvatar(
-      ZIMGroupMemberInfo memberItem,
-      String memberItemName,
-      ) {
+    ZIMGroupMemberInfo memberItem,
+    String memberItemName,
+  ) {
     return CircleAvatar(
       backgroundImage: AssetImage(memberItem.memberAvatarUrl),
       radius: 20,
@@ -169,9 +168,9 @@ Future<dynamic> showDefaultGroupMemberListDialog(
   }
 
   Widget memberInfo(
-      ZIMGroupMemberInfo memberItem,
-      String memberItemName,
-      ) {
+    ZIMGroupMemberInfo memberItem,
+    String memberItemName,
+  ) {
     final memberItemIsMe =
         memberItem.userID == ZIMKit().currentUser()!.baseInfo.userID;
 
@@ -195,8 +194,8 @@ Future<dynamic> showDefaultGroupMemberListDialog(
   }
 
   Widget memberMenu(
-      ZIMGroupMemberInfo memberItem,
-      ) {
+    ZIMGroupMemberInfo memberItem,
+  ) {
     final memberItemIsMe =
         memberItem.userID == ZIMKit().currentUser()!.baseInfo.userID;
 
@@ -292,10 +291,10 @@ Future<dynamic> showDefaultGroupMemberListDialog(
   final memberList = ValueListenableBuilder(
     valueListenable: ZIMKit().queryGroupMemberList(groupID),
     builder: (
-        BuildContext context,
-        List<ZIMGroupMemberInfo> memberList,
-        Widget? child,
-        ) {
+      BuildContext context,
+      List<ZIMGroupMemberInfo> memberList,
+      Widget? child,
+    ) {
       return Expanded(
         child: Container(
           padding: const EdgeInsets.all(10),

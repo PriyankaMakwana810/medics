@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medics/config/app_strings.dart';
@@ -7,7 +9,6 @@ import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 import 'package:zego_zimkit/zego_zimkit.dart';
 
 import 'app/app.dart';
-import 'config/app_assets.dart';
 import 'config/notification.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -36,14 +37,14 @@ void main() async {
       ),
     ), // your appSign
   );
+  ZegoUIKitPrebuiltCallInvitationService().setNavigatorKey(navigatorKey);
+
   ZegoUIKit().initLog().then((value) {
     /// style of offline call
     ZegoUIKitPrebuiltCallInvitationService().useSystemCallingUI(
       [ZegoUIKitSignalingPlugin()],
     );
     runApp(const MyApp());
-
-    // runApp(const ZIMKitDemo());
   });
   NotificationManager().init();
 }
@@ -104,15 +105,18 @@ void onUserLogin(String id, String name) {
     userName: name,
     plugins: [ZegoUIKitSignalingPlugin()],
     config: ZegoCallInvitationConfig(
-      canInvitingInCalling: true,
+      canInvitingInCalling: false,
     ),
     notificationConfig: ZegoCallInvitationNotificationConfig(
       androidNotificationConfig: ZegoCallAndroidNotificationConfig(
+        showFullScreen: true,
+
         /// call notification
         channelID: 'ZegoUIKit',
         channelName: 'Call Notifications',
         sound: 'call',
         icon: 'call',
+
         /// message notification
         messageChannelID: 'ZIM Message',
         messageChannelName: 'Message',
@@ -121,14 +125,38 @@ void onUserLogin(String id, String name) {
       ),
     ),
     requireConfig: (ZegoCallInvitationData data) {
-      final config = ZegoCallInvitationType.videoCall == data.type
+      final config = (data.invitees.length > 1)
+          ? ZegoCallInvitationType.videoCall == data.type
+              ? ZegoUIKitPrebuiltCallConfig.groupVideoCall()
+              : ZegoUIKitPrebuiltCallConfig.groupVoiceCall()
+          : ZegoCallInvitationType.videoCall == data.type
+              ? ZegoUIKitPrebuiltCallConfig.oneOnOneVideoCall()
+              : ZegoUIKitPrebuiltCallConfig.oneOnOneVoiceCall();
+      /*final config = ZegoCallInvitationType.videoCall == data.type
           ? ZegoUIKitPrebuiltCallConfig.groupVideoCall()
-          : ZegoUIKitPrebuiltCallConfig.groupVoiceCall();
+          : ZegoUIKitPrebuiltCallConfig.groupVoiceCall();*/
 
-      config.audioVideoView.useVideoViewAspectFill = true;
+      // config.audioVideoView.useVideoViewAspectFill = true;
+      /*config.audioVideoView = ZegoCallAudioVideoViewConfig(
+        backgroundBuilder: (BuildContext context, Size size,
+            ZegoUIKitUser? user, Map extraInfo) {
+          return user != null
+              ? ImageFiltered(
+                  imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                  child: CircleAvatar(
+                      radius: 25,
+                      backgroundColor: colorPrimary,
+                      child: Text(
+                        user.name.isNotEmpty ? user.name[0] : user.id[0],
+                        style: TextStyle(color: colorSecondary, fontSize: 20),
+                      )),
+                )
+              : const SizedBox();
+        },
+      );
       config.topMenuBar.extendButtons = [
         sendCallingInvitationButton,
-      ];
+      ];*/
       return config;
     },
   );

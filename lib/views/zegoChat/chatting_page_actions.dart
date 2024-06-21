@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:medics/config/app_strings.dart';
-
 import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 import 'package:zego_zimkit/zego_zimkit.dart';
 
 import '../../styles/color_constants.dart';
 import 'add_user_to_group_dialog.dart';
-
 
 List<Widget>? demoAppBarActions(
   BuildContext context,
@@ -81,14 +79,14 @@ class _GroupPageCallButtonState extends State<GroupPageCallButton> {
             showCallingInvitationListSheet(
               context,
               avatarBuilder: (context, size, user, extraInfo) {
-              return CircleAvatar(
-                  radius: 25,
-                  backgroundColor: colorPrimary,
-                  child: Text(
-                    user!.name.isNotEmpty ? user.name[0] : user.id[0],
-                    style: TextStyle(color: colorSecondary, fontSize: 20),
-                  ));
-            },
+                return CircleAvatar(
+                    radius: 25,
+                    backgroundColor: colorPrimary,
+                    child: Text(
+                      user!.name.isNotEmpty ? user.name[0] : user.id[0],
+                      style: TextStyle(color: colorSecondary, fontSize: 20),
+                    ));
+              },
               waitingSelectUsers: members
                   .where((member) =>
                       member.userID != ZIMKit().currentUser()!.baseInfo.userID)
