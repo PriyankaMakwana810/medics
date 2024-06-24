@@ -191,7 +191,6 @@ class DeleteCustomDialog extends StatelessWidget {
       ],
     );
   }
-
 }
 
 class DateTimeSelectionDialog extends StatelessWidget {
@@ -578,7 +577,9 @@ class ShowNewGroupChatDialog extends StatelessWidget {
                               color: isSelected ? colorPrimary : whiteColor,
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
-                                color: isSelected ? Colors.transparent : chipBorder,
+                                color: isSelected
+                                    ? Colors.transparent
+                                    : chipBorder,
                               ),
                             ),
                             // margin: const EdgeInsets.only(bottom: 10),

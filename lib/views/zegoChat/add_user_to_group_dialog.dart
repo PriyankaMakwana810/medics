@@ -1,121 +1,239 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:medics/views/zegoChat/chat_screen_view.dart';
+import 'package:get/get.dart';
+import 'package:medics/utils/utility.dart';
 import 'package:zego_zimkit/zego_zimkit.dart';
 
+import '../../custom_widgets/button.dart';
+import '../../styles/color_constants.dart';
+import '../home/home_controller.dart';
+
 void showDefaultAddUserToGroupDialog(BuildContext context, String groupID) {
-  final groupUsersController = TextEditingController();
-  Timer.run(() {
-    showDialog<bool>(
-      useRootNavigator: false,
-      context: context,
-      builder: (context) {
-        return StatefulBuilder(builder: (context, setState) {
-          return AlertDialog(
-            title: const Text('Add User'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  maxLines: 3,
-                  controller: groupUsersController,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'User IDs',
-                    hintText: 'separate by comma, e.g. 123,987,229',
+  final HomeController controller = Get.find();
+  showDialog<bool>(
+    useRootNavigator: false,
+    context: context,
+    builder: (context) {
+      return StatefulBuilder(builder: (context, setState) {
+        return Dialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          elevation: 0,
+          backgroundColor: whiteColor,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Add User to Group',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Select Doctor you want to Add to Group:',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Obx(
+                    () {
+                      return Wrap(
+                        alignment: WrapAlignment.start,
+                        runSpacing: 8,
+                        spacing: 8,
+                        children: List.generate(
+                          controller.doctors.length,
+                          (index) {
+                            final doctor = controller.doctors[index];
+                            final isSelected =
+                                controller.isDoctorSelectedForAddGroup(index);
+                            return GestureDetector(
+                              onTap: () {
+                                controller
+                                    .toggleDoctorSelectionForAddGroup(index);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: isSelected ? colorPrimary : whiteColor,
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                    color: isSelected
+                                        ? Colors.transparent
+                                        : chipBorder,
+                                  ),
+                                ),
+                                // margin: const EdgeInsets.only(bottom: 10),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 5, vertical: 5),
+                                child: Text(
+                                  doctor.name,
+                                  style: TextStyle(
+                                    color: isSelected ? whiteColor : textColor,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomButton(
+                        label: 'Confirm',
+                        onPressed: () {
+                          // Get.back();
+                          ZIMKit()
+                              .addUersToGroup(groupID, controller.groupMembers)
+                              .then((int? errorCode) {
+                            if (errorCode != 0) {
+                              Utility.snackBar(
+                                  "$errorCode Something Went Wrong", context);
+                              debugPrint('addUersToGroup faild');
+                            } else {
+                              Utility.snackBar("Added Successfully", context);
+                            }
+                            Navigator.of(context).pop(true);
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                },
-                child: const Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        });
-      },
-    ).then((bool? ok) {
-      if (ok != true) return;
-      if (groupUsersController.text.isNotEmpty) {
-        ZIMKit()
-            .addUersToGroup(groupID, groupUsersController.text.split(','))
-            .then((int? errorCode) {
-          if (errorCode != 0) {
-            debugPrint('addUersToGroup faild');
-          }
-        });
-      }
-    });
-  });
+          ),
+        );
+      });
+    },
+  );
 }
 
 void showDefaultRemoveUserFromGroupDialog(
     BuildContext context, String groupID) {
+  final HomeController controller = Get.find();
   final groupUsersController = TextEditingController();
   Timer.run(() {
     showDialog<bool>(
       useRootNavigator: false,
       context: context,
       builder: (context) {
-        return StatefulBuilder(builder: (context, setState) {
-          return AlertDialog(
-            title: const Text('Remove User'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  maxLines: 3,
-                  controller: groupUsersController,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'User IDs',
-                    hintText: 'separate by comma, e.g. 123,987,229',
-                  ),
+          return Dialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            elevation: 0,
+            backgroundColor: whiteColor,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Remove User',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      'Select Doctor you want to remove from Group:',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Obx(
+                      () {
+                        return Wrap(
+                          alignment: WrapAlignment.start,
+                          runSpacing: 8,
+                          spacing: 8,
+                          children: List.generate(
+                            controller.doctors.length,
+                            (index) {
+                              final doctor = controller.doctors[index];
+                              final isSelected =
+                                  controller.isDoctorSelectedForAddGroup(index);
+                              return GestureDetector(
+                                onTap: () {
+                                  controller
+                                      .toggleDoctorSelectionForAddGroup(index);
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color:
+                                        isSelected ? colorPrimary : whiteColor,
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color: isSelected
+                                          ? Colors.transparent
+                                          : chipBorder,
+                                    ),
+                                  ),
+                                  // margin: const EdgeInsets.only(bottom: 10),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 5),
+                                  child: Text(
+                                    doctor.name,
+                                    style: TextStyle(
+                                      color:
+                                          isSelected ? whiteColor : textColor,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomButton(
+                          label: 'Confirm',
+                          onPressed: () {
+                            // Get.back();
+                            ZIMKit()
+                                .removeUesrsFromGroup(
+                                    groupID, controller.groupMembers)
+                                .then((int? errorCode) {
+                              if (errorCode != 0) {
+                                Utility.snackBar(
+                                    "$errorCode Something Went Wrong", context);
+                                debugPrint('remove User failed faild');
+                              } else {
+                                Utility.snackBar(
+                                    "Removed Successfully", context);
+                              }
+                              Navigator.of(context).pop(true);
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                },
-                child: const Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
-                child: const Text('OK'),
-              ),
-            ],
           );
-        });
       },
-    ).then((bool? ok) {
-      if (ok != true) return;
-      if (groupUsersController.text.isNotEmpty) {
-        ZIMKit()
-            .removeUesrsFromGroup(groupID, groupUsersController.text.split(','))
-            .then((int? errorCode) {
-          if (errorCode != 0) {
-            debugPrint('addUersToGroup faild');
-          }
-        });
-      }
-    });
+    );
   });
 }
 
@@ -128,17 +246,13 @@ Future<dynamic> showDefaultGroupMemberListDialog(
     children: [
       const SizedBox.shrink(),
       const SizedBox.shrink(),
-      ValueListenableBuilder(
-          valueListenable: ZIMKit().queryGroupMemberCount(groupID),
-          builder: (BuildContext context, int groupMemberCount, Widget? _) {
-            return Text(
-              'Member List($groupMemberCount)',
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
-              ),
-            );
-          }),
+      Text(
+        'Member List',
+        style: const TextStyle(
+          fontSize: 22,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
       IconButton(
         icon: const Icon(Icons.close),
         onPressed: () => Navigator.of(context).pop(),
@@ -154,17 +268,6 @@ Future<dynamic> showDefaultGroupMemberListDialog(
       backgroundImage: AssetImage(memberItem.memberAvatarUrl),
       radius: 20,
     );
-    /*CachedNetworkImage(
-      width: 60,
-      height: 60,
-      imageUrl: memberItem.memberAvatarUrl.isEmpty
-          ? 'https://robohash.org/${memberItem.userID}.png?set=set4'
-          : memberItem.memberAvatarUrl,
-      fit: BoxFit.cover,
-      progressIndicatorBuilder: (__, _, ___) => CircleAvatar(
-        child: Text(memberItemName[0]),
-      ),
-    );*/
   }
 
   Widget memberInfo(
@@ -262,7 +365,7 @@ Future<dynamic> showDefaultGroupMemberListDialog(
                       ),
                     ),
                   ],
-                  PopupMenuItem(
+/*                  PopupMenuItem(
                     child: const ListTile(
                       leading: Icon(Icons.chat),
                       title: Text('Private Chat'),
@@ -278,7 +381,7 @@ Future<dynamic> showDefaultGroupMemberListDialog(
                         }),
                       );
                     },
-                  ),
+                  ),*/
                 ];
               },
             );
@@ -339,10 +442,14 @@ Future<dynamic> showDefaultGroupMemberListDialog(
     context: context,
     builder: (context) {
       return Container(
-        color: Colors.white,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+        ),
         height: MediaQuery.of(context).size.height,
         width: double.infinity,
-        padding: const EdgeInsets.all(5),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

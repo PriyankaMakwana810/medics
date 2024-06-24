@@ -41,11 +41,8 @@ class ChatListView extends StatelessWidget {
                           return ShowNewGroupChatDialog();
                         },
                       );
-
-                      // showNewGroupChatDialog(context);
-                      // ZIMKit().showDefaultNewGroupChatDialog(context);
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.group_add_rounded,
                       size: 30,
                     )),

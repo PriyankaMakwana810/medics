@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart'; // Add this import for date formatting
 import 'package:medics/controller/base_controller.dart';
 import 'package:medics/models/medicine.dart';
+import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 
 import '../../config/app_preferences.dart';
 import '../../database/database_helper.dart';
@@ -23,12 +24,44 @@ class HomeController extends BaseController {
 
   var selectedDoctors = <int>[].obs;
   var groupMembers = <String>[].obs;
+  var selectedDoctorIndex = (-1).obs;
+  var selectedDoctorForRemoval = (-1).obs;
+  var groupMembersInfo = <ZIMGroupMemberInfo>[].obs;
 
+
+  bool isDoctorSelectedForAddGroup(int index) {
+    return selectedDoctorIndex.value == index;
+  }
+  void toggleDoctorSelectionForAddGroup(int index) {
+    if (selectedDoctorIndex.value == index) {
+      selectedDoctorIndex.value = -1;
+      groupMembers.clear(); // Deselect
+    } else {
+      selectedDoctorIndex.value = index;
+      groupMembers.assignAll([doctors[index].userId]); // Select
+    }
+    update(); // Notify GetX to update the UI
+  }
+  bool isDoctorSelectedForRemoval(int index) {
+    return selectedDoctorForRemoval.value == index;
+  }
   bool isDoctorSelected(int index) {
-    // selectedDoctor = List.empty() as Rxn<Doctor>;
     return selectedDoctors.contains(index);
   }
-
+  void toggleDoctorSelectionForRemoval(int index) {
+    if (selectedDoctorForRemoval.value == index) {
+      selectedDoctorForRemoval.value = -1;
+    } else {
+      selectedDoctorForRemoval.value = index;
+    }
+    update(); // Notify GetX to update the UI
+  }
+  List<String> getSelectedGroupMembers() {
+    if (selectedDoctorForRemoval.value != -1) {
+      return [groupMembersInfo[selectedDoctorForRemoval.value].userID];
+    }
+    return [];
+  }
   void toggleDoctorSelection(int index) {
     if (selectedDoctors.contains(index)) {
       selectedDoctors.remove(index);
@@ -41,8 +74,8 @@ class HomeController extends BaseController {
     update(); // Notify GetX to update the UI
   }
 
-  List<String> getSelectedGroupMembers() {
-    return groupMembers;
+  void setGroupMembers(List<ZIMGroupMemberInfo> members) {
+    groupMembersInfo.assignAll(members);
   }
 
   List<Doctor> getSelectedDoctors() {
@@ -79,7 +112,6 @@ class HomeController extends BaseController {
   @override
   void onInit() {
     super.onInit();
-    // ZIMKit().connectUser(id: '987654321', name: 'priyanka');
     loadDoctorData();
     loadArticleData();
     generateCurrentWeekDates();
