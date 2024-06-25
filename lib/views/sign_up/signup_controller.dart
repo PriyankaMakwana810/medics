@@ -1,13 +1,28 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:medics/controller/base_controller.dart';
 
 import '../../routes/app_pages.dart';
 
 class SignUpController extends BaseController {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   var name = ''.obs;
   var email = ''.obs;
   var password = ''.obs;
   var isAgreed = false.obs;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  var user = Rxn<User>();
+
+  @override
+  void onInit() {
+    user.bindStream(_auth.authStateChanges());
+    super.onInit();
+  }
+
 
   void setEmail(String value) {
     email.value = value;
@@ -19,6 +34,7 @@ class SignUpController extends BaseController {
     }
     return null;
   }
+
 
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
@@ -40,7 +56,26 @@ class SignUpController extends BaseController {
 
   void onLoginButtonTap() async {
     // await appPreferences.setOnboardDetails(true);
+
     Get.offNamed(Routes.login);
+  }
+  // Register with Email and Password
+  Future<bool> register(String email, String password) async {
+    try {
+      await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      Get.snackbar("Success", "Account created successfully");
+      return true;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        Get.snackbar("weak-password",'The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        Get.snackbar('email-already-in-use','The account already exists for that email.');
+      }
+      return false;
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+      return false;
+    }
   }
 
   void toggleAgreement(bool? value) {

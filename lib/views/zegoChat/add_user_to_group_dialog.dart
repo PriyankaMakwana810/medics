@@ -129,109 +129,106 @@ void showDefaultRemoveUserFromGroupDialog(
       useRootNavigator: false,
       context: context,
       builder: (context) {
-          return Dialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            elevation: 0,
-            backgroundColor: whiteColor,
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Remove User',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+        return Dialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          elevation: 0,
+          backgroundColor: whiteColor,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Remove User',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(height: 20),
-                    const Text(
-                      'Select Doctor you want to remove from Group:',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Select Doctor you want to remove from Group:',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(height: 20),
-                    Obx(
-                      () {
-                        return Wrap(
-                          alignment: WrapAlignment.start,
-                          runSpacing: 8,
-                          spacing: 8,
-                          children: List.generate(
-                            controller.doctors.length,
-                            (index) {
-                              final doctor = controller.doctors[index];
-                              final isSelected =
-                                  controller.isDoctorSelectedForAddGroup(index);
-                              return GestureDetector(
-                                onTap: () {
-                                  controller
-                                      .toggleDoctorSelectionForAddGroup(index);
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color:
-                                        isSelected ? colorPrimary : whiteColor,
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                      color: isSelected
-                                          ? Colors.transparent
-                                          : chipBorder,
-                                    ),
-                                  ),
-                                  // margin: const EdgeInsets.only(bottom: 10),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 5),
-                                  child: Text(
-                                    doctor.name,
-                                    style: TextStyle(
-                                      color:
-                                          isSelected ? whiteColor : textColor,
-                                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Obx(
+                    () {
+                      return Wrap(
+                        alignment: WrapAlignment.start,
+                        runSpacing: 8,
+                        spacing: 8,
+                        children: List.generate(
+                          controller.doctors.length,
+                          (index) {
+                            final doctor = controller.doctors[index];
+                            final isSelected =
+                                controller.isDoctorSelectedForAddGroup(index);
+                            return GestureDetector(
+                              onTap: () {
+                                controller
+                                    .toggleDoctorSelectionForAddGroup(index);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: isSelected ? colorPrimary : whiteColor,
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                    color: isSelected
+                                        ? Colors.transparent
+                                        : chipBorder,
                                   ),
                                 ),
-                              );
-                            },
-                          ),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomButton(
-                          label: 'Confirm',
-                          onPressed: () {
-                            // Get.back();
-                            ZIMKit()
-                                .removeUesrsFromGroup(
-                                    groupID, controller.groupMembers)
-                                .then((int? errorCode) {
-                              if (errorCode != 0) {
-                                Utility.snackBar(
-                                    "$errorCode Something Went Wrong", context);
-                                debugPrint('remove User failed faild');
-                              } else {
-                                Utility.snackBar(
-                                    "Removed Successfully", context);
-                              }
-                              Navigator.of(context).pop(true);
-                            });
+                                // margin: const EdgeInsets.only(bottom: 10),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 5, vertical: 5),
+                                child: Text(
+                                  doctor.name,
+                                  style: TextStyle(
+                                    color: isSelected ? whiteColor : textColor,
+                                  ),
+                                ),
+                              ),
+                            );
                           },
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomButton(
+                        label: 'Confirm',
+                        onPressed: () {
+                          // Get.back();
+                          ZIMKit()
+                              .removeUesrsFromGroup(
+                                  groupID, controller.groupMembers)
+                              .then((int? errorCode) {
+                            if (errorCode != 0) {
+                              Utility.snackBar(
+                                  "$errorCode Something Went Wrong", context);
+                              debugPrint('remove User failed faild');
+                            } else {
+                              Utility.snackBar("Removed Successfully", context);
+                            }
+                            Navigator.of(context).pop(true);
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-          );
+          ),
+        );
       },
     );
   });

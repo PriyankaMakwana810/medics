@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medics/config/app_strings.dart';
@@ -15,6 +14,9 @@ final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      // options: DefaultFirebaseOptions.currentPlatform,
+      );
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
@@ -23,7 +25,6 @@ void main() async {
     statusBarIconBrightness: Brightness.dark,
     systemNavigationBarIconBrightness: Brightness.dark,
   ));
-  // ZIMKit().connectUser(id: '56789', name: 'Priyanka Makwana', avatarUrl: AppAssets.profileImage);
   ZIMKit().init(
     appID: AppStrings.appID, // your appid
     appSign: AppStrings.appSign,
@@ -55,6 +56,7 @@ void onUserLogin(String id, String name) {
     builder: (context, snapshot) {
       return ValueListenableBuilder(
           valueListenable:
+
               /// '#' is removed when send call invitation
               ZIMKit().queryGroupMemberList('#${ZegoUIKit().getRoom().id}'),
           builder: (context, List<ZIMGroupMemberInfo> members, _) {
@@ -132,38 +134,12 @@ void onUserLogin(String id, String name) {
           : ZegoCallInvitationType.videoCall == data.type
               ? ZegoUIKitPrebuiltCallConfig.oneOnOneVideoCall()
               : ZegoUIKitPrebuiltCallConfig.oneOnOneVoiceCall();
-      /*final config = ZegoCallInvitationType.videoCall == data.type
-          ? ZegoUIKitPrebuiltCallConfig.groupVideoCall()
-          : ZegoUIKitPrebuiltCallConfig.groupVoiceCall();*/
 
-      // config.audioVideoView.useVideoViewAspectFill = true;
-      /*config.audioVideoView = ZegoCallAudioVideoViewConfig(
-        backgroundBuilder: (BuildContext context, Size size,
-            ZegoUIKitUser? user, Map extraInfo) {
-          return user != null
-              ? ImageFiltered(
-                  imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                  child: CircleAvatar(
-                      radius: 25,
-                      backgroundColor: colorPrimary,
-                      child: Text(
-                        user.name.isNotEmpty ? user.name[0] : user.id[0],
-                        style: TextStyle(color: colorSecondary, fontSize: 20),
-                      )),
-                )
-              : const SizedBox();
-        },
-      );
-      config.topMenuBar.extendButtons = [
-        sendCallingInvitationButton,
-      ];*/
       return config;
     },
   );
 }
 
 void onUserLogout() {
-  /// de-initialization ZegoUIKitPrebuiltCallInvitationService
-  /// when app's user is logged out
   ZegoUIKitPrebuiltCallInvitationService().uninit();
 }

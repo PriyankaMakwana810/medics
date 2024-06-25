@@ -42,7 +42,7 @@ class LoginView extends GetView<LoginController> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CustomTextField(
-                      controller: TextEditingController(),
+                      controller: controller.emailController,
                       hintText: 'Enter Your Email',
                       icon: SVGAssets.v_ic_email,
                       keyboardType: TextInputType.emailAddress,
@@ -50,7 +50,7 @@ class LoginView extends GetView<LoginController> {
                     ),
                     const SizedBox(height: 16.0),
                     CustomTextField(
-                      controller: TextEditingController(),
+                      controller: controller.passwordController,
                       hintText: 'Enter Your Password',
                       icon: SVGAssets.v_ic_password,
                       isPassword: true,
@@ -76,23 +76,33 @@ class LoginView extends GetView<LoginController> {
                       label: AppStrings.login,
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          // Handle login
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return SuccessDialog(
-                                title: 'Yeay! Welcome Back',
-                                message:
-                                    'Once again you login successfully\n into medidoc app',
-                                buttonText: 'Go to Home',
-                                onPressed: () async{
-                                  // await ZIMKit().connectUser(id: '987654321', name: 'priyanka');
-                                  // await ZIMKit().connectUser(id: '123456789',name: 'dr. Marcus');
-                                  controller.onHomeClick();
-                                },
-                              );
+                          controller
+                              .login(controller.emailController.text,
+                                  controller.passwordController.text)
+                              .then(
+                            (value) {
+                              if (value == true) {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return SuccessDialog(
+                                      title: 'Yeay! Welcome Back',
+                                      message:
+                                          'Once again you login successfully\n into medidoc app',
+                                      buttonText: 'Go to Home',
+                                      onPressed: () async {
+                                        // onUserLogin('56789', 'Priyanka Makwana');
+                                        // onUserLogin(, name)
+                                        controller.onHomeClick();
+                                      },
+                                    );
+                                  },
+                                );
+                              }
                             },
                           );
+                          // Handle login
+
                           // Utility.snackBar("Logged in Successfully!", context);
                         }
                       },
@@ -131,9 +141,11 @@ class LoginView extends GetView<LoginController> {
                     CustomOutlinedIconButton(
                       label: "Sign in with Google",
                       icon: SVGAssets.v_ic_google,
-                      onPressed: () {
-                        Utility.snackBar("Signed in with Google", context);
-                      },
+                      onPressed: controller.onGoogleLoginTap
+                         /* () {
+                        controller.onGoogleLoginTap();
+                        // Utility.snackBar("Signed in with Google", context);
+                      }*/,
                     ),
                     const SizedBox(height: 8.0),
                     CustomOutlinedIconButton(

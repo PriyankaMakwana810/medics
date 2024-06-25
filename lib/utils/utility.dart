@@ -11,7 +11,6 @@ void printf(dynamic value) {
 
 class Utility {
   static bool isShowing = false;
-
   static bool isEmpty(String? string) {
     return string == null || string.isEmpty;
   }

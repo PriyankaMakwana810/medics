@@ -42,7 +42,7 @@ class SignUpView extends GetView<SignUpController> {
                     children: [
                       const SizedBox(height: 20.0),
                       CustomTextField(
-                        controller: TextEditingController(),
+                        controller: controller.nameController,
                         hintText: 'Enter Your Name',
                         icon: SVGAssets.v_ic_user,
                         keyboardType: TextInputType.text,
@@ -50,7 +50,7 @@ class SignUpView extends GetView<SignUpController> {
                       ),
                       const SizedBox(height: 16.0),
                       CustomTextField(
-                        controller: TextEditingController(),
+                        controller: controller.emailController,
                         hintText: 'Enter Your Email',
                         icon: SVGAssets.v_ic_email,
                         keyboardType: TextInputType.emailAddress,
@@ -58,7 +58,7 @@ class SignUpView extends GetView<SignUpController> {
                       ),
                       const SizedBox(height: 16.0),
                       CustomTextField(
-                        controller: TextEditingController(),
+                        controller: controller.passwordController,
                         hintText: 'Enter Your Password',
                         icon: SVGAssets.v_ic_password,
                         isPassword: true,
@@ -120,20 +120,31 @@ class SignUpView extends GetView<SignUpController> {
                         label: AppStrings.signUp,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return SuccessDialog(
-                                  title: 'Success',
-                                  message:
-                                      'Your account has been successfully registered',
-                                  buttonText: 'Login',
-                                  onPressed: () {
-                                    controller.onLoginButtonTap();
-                                  },
-                                );
-                              },
-                            );
+                            if (controller.isAgreed.isTrue) {
+                              controller
+                                  .register(controller.emailController.text,
+                                      controller.passwordController.text)
+                                  .then(
+                                (value) {
+                                  if (true) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return SuccessDialog(
+                                          title: 'Success',
+                                          message:
+                                              'Your account has been successfully registered',
+                                          buttonText: 'Login',
+                                          onPressed: () {
+                                            controller.onLoginButtonTap();
+                                          },
+                                        );
+                                      },
+                                    );
+                                  }
+                                },
+                              );
+                            }
                           }
                         },
                       ),

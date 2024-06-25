@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medics/controller/base_controller.dart';
 
 import '../../config/app_preferences.dart';
@@ -6,6 +9,11 @@ import '../../routes/app_pages.dart';
 
 class LoginController extends BaseController {
   AppPreferences appPreferences = AppPreferences();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  var user = Rxn<User>();
 
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
@@ -14,6 +22,32 @@ class LoginController extends BaseController {
       return 'Please enter a valid email';
     }
     return null;
+  }
+
+// Sign in with Email and Password
+  Future<bool> login(String email, String password) async {
+    try {
+      final userCredential = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      user.value = userCredential.user;
+      return true;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        Get.snackbar('user-not-found', 'No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        Get.snackbar(
+            'user-not-found', 'Wrong password provided for that user.');
+      }
+      return false;
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+      return false;
+    }
+  }
+
+  // Sign out
+  Future<void> signOut() async {
+    await _auth.signOut();
   }
 
   String? validatePassword(String? value) {
@@ -30,6 +64,21 @@ class LoginController extends BaseController {
     // Get.toNamed(Routes.login);
   }
 
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
   void onSignUpButtonTap() async {
     Get.toNamed(Routes.sign_up);
   }
@@ -40,7 +89,14 @@ class LoginController extends BaseController {
 
   void onGoogleLoginTap() async {
     // await appPreferences.setOnboardDetails(true);
-    Get.toNamed(Routes.login);
+    // var googleUser = signInWithGoogle();
+    signInWithGoogle().then(
+      (value) {
+        user.value = value.user;
+        Get.toNamed(Routes.home);
+      },
+    );
+    // Get.toNamed(Routes.login);
   }
 
   void onHomeClick() async {
