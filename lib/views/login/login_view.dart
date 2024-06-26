@@ -142,10 +142,11 @@ class LoginView extends GetView<LoginController> {
                       label: "Sign in with Google",
                       icon: SVGAssets.v_ic_google,
                       onPressed: controller.onGoogleLoginTap
-                         /* () {
+                      /* () {
                         controller.onGoogleLoginTap();
                         // Utility.snackBar("Signed in with Google", context);
-                      }*/,
+                      }*/
+                      ,
                     ),
                     const SizedBox(height: 8.0),
                     CustomOutlinedIconButton(
@@ -158,13 +159,14 @@ class LoginView extends GetView<LoginController> {
                     ),
                     const SizedBox(height: 8.0),
                     CustomOutlinedIconButton(
-                      label: "Sign in with Facebook",
-                      icon: SVGAssets.v_ic_facebook,
-                      onPressed: () {
+                        label: "Sign in with Facebook",
+                        icon: SVGAssets.v_ic_facebook,
+                        onPressed: controller.onFacebookLoginTap
+                        /*onPressed: () {
                         Utility.snackBar("Signed in with Facebook", context);
                         // Handle Google Sign In
-                      },
-                    ),
+                      },*/
+                        ),
                   ],
                 ),
               ),

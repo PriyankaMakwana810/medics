@@ -12,7 +12,20 @@
           "package_name": "com.example.medics"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1095048207862-ro03nf8huc1ji3gu9k4fk0d2ivk14hql.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.medics",
+            "certificate_hash": "bb47f069322d5d74b98e435f79e9c1a33d585870"
+          }
+        },
+        {
+          "client_id": "1095048207862-t0e1akerae4f2kv68qsfaftnv3pn32ql.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCi7N-psKVQt9HHiDLL66KwZ5PlAciXwCA"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1095048207862-co6ovi9ua4b616s2lr5ugseao52lk5mm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

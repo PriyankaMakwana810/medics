@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:medics/controller/base_controller.dart';
@@ -79,6 +80,16 @@ class LoginController extends BaseController {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
+  Future<UserCredential> signInWithFacebook() async {
+    // Trigger the sign-in flow
+    final LoginResult loginResult = await FacebookAuth.instance.login();
+    // Create a credential from the access token
+    final OAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
+    // Once signed in, return the UserCredential
+    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+  }
+
   void onSignUpButtonTap() async {
     Get.toNamed(Routes.sign_up);
   }
@@ -93,7 +104,8 @@ class LoginController extends BaseController {
     signInWithGoogle().then(
       (value) {
         user.value = value.user;
-        Get.toNamed(Routes.home);
+        // Get.toNamed(Routes.home);
+        onHomeClick();
       },
     );
     // Get.toNamed(Routes.login);
@@ -106,7 +118,14 @@ class LoginController extends BaseController {
 
   void onFacebookLoginTap() async {
     // await appPreferences.setOnboardDetails(true);
-    Get.toNamed(Routes.sign_up);
+    signInWithFacebook().then(
+          (value) {
+        user.value = value.user;
+        onHomeClick();
+        // Get.toNamed(Routes.home);
+      },
+    );
+    // Get.toNamed(Routes.sign_up);
   }
 
   void onAppleLoginTap() async {
