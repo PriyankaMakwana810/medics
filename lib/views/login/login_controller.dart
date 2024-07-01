@@ -22,6 +22,7 @@ class LoginController extends BaseController {
     } else if (!GetUtils.isEmail(value)) {
       return 'Please enter a valid email';
     }
+
     return null;
   }
 
